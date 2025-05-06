@@ -1,0 +1,102 @@
+/anaconda3/bin/python /Users/lvao513/Desktop/陆金所/代码仓库/sqlreview/test/BY_ID.py
+/*@ files=LOAN_REPORT.xml namespace=LOAN_REPORT id=findOrderedLoansWithSource  @*/
+        select /*+index(l,IFK_LOAN_LOANEE)*/
+        l.id id,
+        l.loan_request_code,
+        l.start_at,
+        l.SCHEDULED_END_AT,
+        l.interest_rate,
+        l.IS_SUPERVISE,
+        l.applied_amount,
+        l.LOAN_CAPITAL_TYPE,
+        nvl((
+        select /*+leading(rp,rr) index(rp,IFK_REPAYMENT_PLAN_LOAN_ID) index(rr,IDX_REPREC_PLAN_ID)*/
+        sum(nvl(rr.principal,0)+nvl(rr.interest,0)+nvl(rr.overdue_penal_value,0)+nvl(rr.insurance_fee,0)+nvl(rr.penal_value,0)+nvl(rr.insurance_mgmt_fee,0)
+        )
+        from repayment_plans rp,repayment_records rr where rr.repayment_plan_id = rp.id and rr.status = 'DONE'
+        and rp.loan_id = l.id),0) total_Amount,
+        l.loan_source_type,
+        (select /*+index(rp,IFK_REPAYMENT_PLAN_LOAN_ID)*/ nvl(max(rp.plan_number),0) from repayment_plans rp where rp.loan_id = l.id and rp.status in
+/*iterate  property='pstatuses' close=')' conjunction=',' open='('*/
+ (
+            :P_pstatuses
+         ,
+            :P_pstatuses
+         ,
+            :P_pstatuses
+         )
+        ) paid_num_of_instalments,
+        l.num_of_instalments,
+        l.status,
+        0 as UNPAID_AMOUNT,
+        decode(status,
+        'SIGNED',
+        1,
+        'OVERDUE',
+        1,
+        'COMPENSATE',
+        1,
+        'PAID',
+        2,
+        'PREPAID',
+        2,
+        'TRANSFER',
+        2,
+        'COMP_DONE',
+        2,
+        'ALLOCATED',
+        9,
+        9) status_num,
+        l.source,
+        l.biz_flag
+        from loans l
+        where l.loanee_user_id = :P_loaneeId
+        and l.loan_source_type in
+/*iterate  property='sourceType' close=')' conjunction=',' open='('*/
+ (
+            :P_sourceType
+         ,
+            :P_sourceType
+         ,
+            :P_sourceType
+         )
+        and l.source = :P_source
+        and (l.biz_flag is null or (l.biz_flag is not null and
+        l.status not in ('PAID', 'PREPAID', 'COMP_DONE')))
+        order by status_num
+Plan hash value: 463458278
+
+-------------------------------------------------------------------------------------------------------------
+| Id  | Operation                      | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT               |                            |     1 |    93 |     7  (15)| 00:00:01 |
+|   1 |  SORT AGGREGATE                |                            |     1 |    50 |            |          |
+|   2 |   NESTED LOOPS                 |                            |    36 |  1800 |   139   (0)| 00:00:02 |
+|   3 |    NESTED LOOPS                |                            |    36 |  1800 |   139   (0)| 00:00:02 |
+|   4 |     TABLE ACCESS BY INDEX ROWID| REPAYMENT_PLANS            |    35 |   490 |     7   (0)| 00:00:01 |
+|*  5 |      INDEX RANGE SCAN          | IFK_REPAYMENT_PLAN_LOAN_ID |    35 |       |     4   (0)| 00:00:01 |
+|*  6 |     INDEX RANGE SCAN           | IDX_REPREC_PLAN_ID         |     1 |       |     3   (0)| 00:00:01 |
+|*  7 |    TABLE ACCESS BY INDEX ROWID | REPAYMENT_RECORDS          |     1 |    36 |     5   (0)| 00:00:01 |
+|   8 |  SORT AGGREGATE                |                            |     1 |    17 |            |          |
+|*  9 |   TABLE ACCESS BY INDEX ROWID  | REPAYMENT_PLANS            |     6 |   102 |     7   (0)| 00:00:01 |
+|* 10 |    INDEX RANGE SCAN            | IFK_REPAYMENT_PLAN_LOAN_ID |    35 |       |     4   (0)| 00:00:01 |
+|  11 |  SORT ORDER BY                 |                            |     1 |    93 |     7  (15)| 00:00:01 |
+|* 12 |   TABLE ACCESS BY INDEX ROWID  | LOANS                      |     1 |    93 |     6   (0)| 00:00:01 |
+|* 13 |    INDEX RANGE SCAN            | IFK_LOAN_LOANEE            |     2 |       |     3   (0)| 00:00:01 |
+-------------------------------------------------------------------------------------------------------------
+
+Predicate Information (identified by operation id):
+---------------------------------------------------
+
+   5 - access("RP"."LOAN_ID"=:B1)
+   6 - access("RR"."REPAYMENT_PLAN_ID"="RP"."ID")
+   7 - filter("RR"."STATUS"='DONE')
+   9 - filter("RP"."STATUS"=:P_PSTATUSES)
+  10 - access("RP"."LOAN_ID"=:B1)
+  12 - filter(("L"."BIZ_FLAG" IS NULL OR "L"."BIZ_FLAG" IS NOT NULL AND "L"."STATUS"<>'PREPAID' AND
+              "L"."STATUS"<>'PAID' AND "L"."STATUS"<>'COMP_DONE') AND "L"."SOURCE"=:P_SOURCE AND
+              "L"."LOAN_SOURCE_TYPE"=:P_SOURCETYPE)
+  13 - access("L"."LOANEE_USER_ID"=TO_NUMBER(:P_LOANEEID))
+
+PASS
+('建议:\n\t以LOANS为驱动表\n\t表LOANS和表REPAYMENT_PLANS关联使用nest loop\n\t表REPAYMENT_PLANS(别名RP)和REPAYMENT_RECORDS(别名RR)无更好链接优化建议\n加入hint:\n\t第1个SELECT加入:/*+leading(L RP RR) use_nl(L RP)*/\n', "select /*+ leading(L RP RR) use_nl(L RP)*/\n  \n        l.id id,\n \n        l.loan_request_code,\n \n        l.start_at,\n \n        l.SCHEDULED_END_AT,\n \n        l.interest_rate,\n \n        l.IS_SUPERVISE,\n \n        l.applied_amount,\n \n        l.LOAN_CAPITAL_TYPE,\n \n        nvl\n(\n( \n        select\n  \n        sum\n(nvl\n(rr.principal,\n0)+nvl\n(rr.interest,\n0)+nvl\n(rr.overdue_penal_value,\n0)+nvl\n(rr.insurance_fee,\n0)+nvl\n(rr.penal_value,\n0)+nvl\n(rr.insurance_mgmt_fee,\n0) \n        ) \n        \nfrom repayment_plans rp,\nrepayment_records rr \nwhere rr.repayment_plan_id = rp.id \nand rr.status = 'DONE' \n        \nand rp.loan_id = l.id),\n0) total_Amount,\n \n        l.loan_source_type,\n \n        \n(select\n  nvl\n(max\n(rp.plan_number),\n0) \nfrom repayment_plans rp \nwhere rp.loan_id = l.id \nand rp.status in \n  \n \n(  \n            :P_pstatuses \n         ,\n  \n            :P_pstatuses \n         ,\n  \n            :P_pstatuses \n         ) \n        ) paid_num_of_instalments,\n \n        l.num_of_instalments,\n \n        l.status,\n \n        0 as UNPAID_AMOUNT,\n \n        decode\n(status,\n \n        'SIGNED',\n \n        1,\n \n        'OVERDUE',\n \n        1,\n \n        'COMPENSATE',\n \n        1,\n \n        'PAID',\n \n        2,\n \n        'PREPAID',\n \n        2,\n \n        'TRANSFER',\n \n        2,\n \n        'COMP_DONE',\n \n        2,\n \n        'ALLOCATED',\n \n        9,\n \n        9) status_num,\n \n        l.source,\n \n        l.biz_flag \n        \nfrom loans l \n        \nwhere l.loanee_user_id = :P_loaneeId \n        \nand l.loan_source_type in \n  \n \n(  \n            :P_sourceType \n         ,\n  \n            :P_sourceType \n         ,\n  \n            :P_sourceType \n         ) \n        \nand l.source = :P_source \n        \nand \n(l.biz_flag is null or \n(l.biz_flag is not null \nand \n        l.status not in \n('PAID',\n 'PREPAID',\n 'COMP_DONE'))) \n        order by status_num")

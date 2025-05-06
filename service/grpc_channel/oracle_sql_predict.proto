@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package OracleSQLPredict;
+
+// The request message .
+//message OracleSQLPredictRequest {
+//    string rpc_sequence = 1;                // rpc sequence
+//    string sql_sequence = 2;                // SQL unique sequence
+//    string tenant = 3;                      // 租户CODE
+//    string host = 4;                        // IP
+//    int32 port = 5;                         // PORT
+//    string username = 6;                    // USERNAME
+//    string passwd = 7;                      // PASSWD
+//    string instance_name = 8;               // 实例名
+//    string schema = 9;                      // schema name
+//    string sql_text = 10;                   // sql文本
+//    string addition_json_string = 11;       // 附加的请求信息, 以JSON.dumps传入
+//}
+//
+//message OracleSQLPredictResponse {
+//    string rpc_sequence = 1;                // rpc sequence
+//    string ai_result = 2;                   // AI 结果
+//    string ai_recommend = 3;                // AI 推荐建议
+//    string message = 4;                     // 消息内容
+//    string addition_json_string = 10;       // 附加的返回信息, 以JSON.dumps传入
+//}
+//
+//service OracleSQLPredictRequester {
+//    // Sends a requesting
+//    rpc SQLPredict (OracleSQLPredictRequest) returns (OracleSQLPredictResponse) {}
+//}
+
+message OracleSQLPredictRequest {
+    string rpc_sequence = 1;                // rpc sequence
+    string sql_sequence = 2;                // SQL unique sequence
+    string userid = 3;                      // 用户ID
+    string tenant = 4;                      // 租户CODE
+    string profile_name = 5;                // profile name
+    string schema = 6;                      // schema name
+    string sql_text = 7;                    // sql文本
+    string addition_json_string = 8;        // 附加的请求信息, 以JSON.dumps传入
+}
+
+message OracleSQLPredictResponse {
+    string rpc_sequence = 1;                // rpc sequence
+    string ai_result = 2;                   // AI 结果
+    string ai_recommend = 3;                // AI 推荐建议
+    string message = 4;                     // 消息内容
+    string addition_json_string = 10;       // 附加的返回信息, 以JSON.dumps传入
+}
+
+service OracleSQLPredictRequester {
+    // Sends a requesting
+    rpc SQLPredict (OracleSQLPredictRequest) returns (OracleSQLPredictResponse) {}
+}

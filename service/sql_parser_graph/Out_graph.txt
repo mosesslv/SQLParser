@@ -1,0 +1,7739 @@
+0
+	type:STRUCT
+	name:SELECT
+	keyword:SELECT
+	statement:SELECT
+	level:0
+	as_name:DUMMY
+	from:None
+	parents:set()
+	children:{632, 627, 622}
+
+1
+	type:STRUCT
+	name:*
+	keyword:SELECT
+	statement:SELECT
+	level:0
+	as_name:DUMMY
+	from:None
+	parents:set()
+	children:set()
+
+2
+	type:STRUCT
+	name:FROM
+	keyword:FROM
+	statement:FROM
+	level:0
+	as_name:DUMMY
+	from:None
+	parents:set()
+	children:set()
+
+3
+	type:VIEW
+	name:( 
+SELECT  SUM((CC1403497422)) T4 ,  SUM((CC1397497310)) T5 ,  SUM((CC1603603611)) T6 ,  SUM((CC1597603499)) T7 , 
+SUM((C1948592346)) T8 ,  SUM((C1954592458)) T9 ,  SUM((C2041963219)) T2 ,  SUM((CC24877953)) T3 FROM  ( 
+SELECT  *  FROM  ( 
+SELECT  *  FROM  ( 
+SELECT "获客渠道" C807349589 , "申请笔数" C2041963219 , "申请提款笔数" CC1603603611 , 
+"推荐人所属支行名称" C1557163809 , "业务子类型" CC816450280 , "机构名称" CC1548889882 , 
+"渠道来源" C397943381 , "申请金额" C2047963331 , (IS_HEKH) C1933911260 , "申请提款金额" CC1597603499 , 
+"一类户成功还款笔数" C1038155204 , "分行" CC2125023795 , "贷款用途" CC1120841952 , "KB码分类" CC1935613902 , 
+"推荐人编码" C1070234612 , "推荐人名称" C1059662620 , (OUTERID) CC1283978621 , "二类户成功还款笔数" CC703931720 , 
+"二类户成功提款笔数" C1771041456 , (OUTERSOURCE) CC580097661 , "机构编码" CC1538317890 , "贷款期限" CC1124245349 , 
+"一类户成功提款笔数" CC781838916 , "推荐人所属支行编码" C1567735801 , "成功提款金额" C1954592458 , (CID) C762083051 , 
+"统计口径" C21383184 , "推荐人代码" C1058376833 , "贷款城市" CC1128460264 , "分行编码" CC2006216510 , 
+"渠道来源编码" C203684682 , "子产品分类" C517742450 , "审批笔数" CC24877953 , "区域" CC2125112114 , 
+"业务品种" C941837056 , "审批通过笔数" CC1403497422 , "方案编号" CC1888320445 , "切换日期" C2001817886 , 
+"统计日期" C25873751 , "获客渠道编码" CC1493940662 , "审批通过金额" CC1397497310 , "成功提款笔数" C1948592346 , 
+"切换维度" C2007915462 FROM  ( 
+SELECT 
+  DATA_TYPE               AS "统计口径" 
+  ,CASE WHEN '6'=1 THEN COALESCE(CITY_DESC_CN,'未知') 
+        WHEN '6'=2 THEN COALESCE(BRANCH03_NAME,'未知') 
+          WHEN '6'=3 THEN COALESCE(CHANNEL_SOURCE,'未知') 
+      WHEN '6'=4 THEN COALESCE(SOURCE,'未知') 
+      WHEN '6'=5 THEN COALESCE(OUTERSOURCE,'未知') 
+      WHEN '6'=6 THEN COALESCE(OUTERID,'未知') 
+      WHEN '6'=7 THEN COALESCE(CID,'未知') 
+      WHEN '6'=8 THEN COALESCE(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知') 
+      END AS "切换维度" 
+    ,CASE WHEN '1'=1 THEN  DATA_DATE 
+          ELSE TO_CHAR( TO_DATE(('2019-12-12') ,'YYYY-MM-DD'),'YYYYMMDD')||'-'||TO_CHAR( TO_DATE( ('2019-12-13'),'YYYY-MM-DD'),'YYYYMMDD') 
+           END AS "切换日期" 
+  ,TO_DATE(DATA_DATE,'YYYY-MM-DD')              AS "统计日期" 
+  ,JJ_CHANNEL             AS "KB码分类" 
+  ,REC_NO                 AS "推荐人代码" 
+  ,CHANNEL_SOURCE         AS "渠道来源编码" 
+  ,CHANNEL_SOURCE_NAME    AS "渠道来源" 
+  ,SOURCE                 AS "获客渠道编码" 
+  ,SOURCE_NAME            AS "获客渠道" 
+  ,CITY_DESC_CN           AS "贷款城市" 
+  ,ORG_ID                 AS "机构编码" 
+  ,ORG_NAME               AS "机构名称" 
+  ,BRANCH03_NO            AS "分行编码" 
+  ,BRANCH03_NAME          AS "分行" 
+  ,BRANCH02_NAME          AS "区域" 
+  ,BUSINESSTYPE           AS "业务品种" 
+  ,BUSINESSSUBTYPE        AS "业务子类型" 
+  ,SCHEMENO               AS "方案编号" 
+  ,PURPOSE_NAME           AS "贷款用途" 
+  ,LOANTERM               AS "贷款期限" 
+  ,SQ_NUM                 AS "申请笔数" 
+  ,SQ_AMT                 AS "申请金额" 
+  ,SP_NUM                 AS "审批笔数" 
+  ,SP_TG_NUM              AS "审批通过笔数" 
+  ,SP_TG_AMT              AS "审批通过金额" 
+  ,SQ_TK_NUM              AS "申请提款笔数" 
+  ,SQ_TK_AMT              AS "申请提款金额" 
+  ,TK_NUM                 AS "成功提款笔数" 
+  ,TK_AMT                 AS "成功提款金额" 
+ 
+    ,CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END  "推荐人编码" 
+    ,SALERNAME  "推荐人名称" 
+    ,SALERNAME_BRANCH03_NO     "推荐人所属支行编码" 
+    ,SALERNAME_BRANCH03_NAME   "推荐人所属支行名称" 
+ 
+  ,YLH_TK_NUM "一类户成功提款笔数" 
+    ,ELH_TK_NUM "二类户成功提款笔数" 
+    ,YLH_HK_NUM "一类户成功还款笔数" 
+    ,ELH_HK_NUM "二类户成功还款笔数" 
+ 
+  ,OUTERSOURCE -- "获客路径" 
+    ,OUTERID -- "外媒参数一级渠道" 
+    ,CID -- "外媒参数二级渠道" 
+ 
+  ,IS_HEKH -- "是否核额客户" 
+  ,PRODUCT_NAME "子产品分类" 
+FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ 
+WHERE DATA_DT = (SELECT MAX(DATA_DT) FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ) 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD')>=TO_DATE(('2019-12-12'),'YYYY-MM-DD') 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD') <=TO_DATE(('2019-12-13'),'YYYY-MM-DD')) T_T1150656837 )  T_T1396198938 )  T_T1396198938 
+ 
+WHERE  (  (C21383184) IN ('企划口径') ) )  T_T_T1396198938  INNER JOIN   (  SELECT  SUM((C2041963219)) C_2 ,  SUM((CC24877953)) C_3 ,  SUM((CC1403497422)) C_4 ,  SUM((CC1397497310)) C_5 ,  SUM((CC1603603611)) C_6 ,  SUM((CC1597603499)) C_7 ,  SUM((C1948592346)) C_8 ,  SUM((C1954592458)) C_9,(C2001817886) C2001817886__TABLECOL_ , (C2007915462) C2007915462__TABLECOL_ FROM  (  SELECT "申请笔数" C2041963219 , "申请提款笔数" CC1603603611 , "申请提款金额" CC1597603499 , "成功提款金额" C1954592458 , "统计口径" C21383184 , "审批笔数" CC24877953 , "审批通过笔数" CC1403497422 , "切换日期" C2001817886 , "审批通过金额" CC1397497310 , "成功提款笔数" C1948592346 , "切换维度" C2007915462 FROM  ( SELECT 
+  DATA_TYPE               AS "统计口径" 
+  ,CASE WHEN '6'=1 THEN COALESCE(CITY_DESC_CN,'未知') 
+        WHEN '6'=2 THEN COALESCE(BRANCH03_NAME,'未知') 
+          WHEN '6'=3 THEN COALESCE(CHANNEL_SOURCE,'未知') 
+      WHEN '6'=4 THEN COALESCE(SOURCE,'未知') 
+      WHEN '6'=5 THEN COALESCE(OUTERSOURCE,'未知') 
+      WHEN '6'=6 THEN COALESCE(OUTERID,'未知') 
+      WHEN '6'=7 THEN COALESCE(CID,'未知') 
+      WHEN '6'=8 THEN COALESCE(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知') 
+      END AS "切换维度" 
+    ,CASE WHEN '1'=1 THEN  DATA_DATE 
+          ELSE TO_CHAR( TO_DATE( 
+ ('2019-12-12') 
+ , 
+ 'YYYY-MM-DD' 
+ 
+),'YYYYMMDD')||'-'||TO_CHAR( TO_DATE( 
+ ('2019-12-13') 
+ , 
+ 'YYYY-MM-DD' 
+ 
+),'YYYYMMDD') END AS "切换日期" 
+  ,TO_DATE(DATA_DATE,'YYYY-MM-DD')              AS "统计日期" 
+  ,JJ_CHANNEL             AS "KB码分类" 
+  ,REC_NO                 AS "推荐人代码" 
+  ,CHANNEL_SOURCE         AS "渠道来源编码" 
+  ,CHANNEL_SOURCE_NAME    AS "渠道来源" 
+  ,SOURCE                 AS "获客渠道编码" 
+  ,SOURCE_NAME            AS "获客渠道" 
+  ,CITY_DESC_CN           AS "贷款城市" 
+  ,ORG_ID                 AS "机构编码" 
+  ,ORG_NAME               AS "机构名称" 
+  ,BRANCH03_NO            AS "分行编码" 
+  ,BRANCH03_NAME          AS "分行" 
+  ,BRANCH02_NAME          AS "区域" 
+  ,BUSINESSTYPE           AS "业务品种" 
+  ,BUSINESSSUBTYPE        AS "业务子类型" 
+  ,SCHEMENO               AS "方案编号" 
+  ,PURPOSE_NAME           AS "贷款用途" 
+  ,LOANTERM               AS "贷款期限" 
+  ,SQ_NUM                 AS "申请笔数" 
+  ,SQ_AMT                 AS "申请金额" 
+  ,SP_NUM                 AS "审批笔数" 
+  ,SP_TG_NUM              AS "审批通过笔数" 
+  ,SP_TG_AMT              AS "审批通过金额" 
+  ,SQ_TK_NUM              AS "申请提款笔数" 
+  ,SQ_TK_AMT              AS "申请提款金额" 
+  ,TK_NUM                 AS "成功提款笔数" 
+  ,TK_AMT                 AS "成功提款金额" 
+    ,CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END  "推荐人编码" 
+    ,SALERNAME  "推荐人名称" 
+    ,SALERNAME_BRANCH03_NO     "推荐人所属支行编码" 
+    ,SALERNAME_BRANCH03_NAME   "推荐人所属支行名称" 
+  ,YLH_TK_NUM "一类户成功提款笔数" 
+    ,ELH_TK_NUM "二类户成功提款笔数" 
+    ,YLH_HK_NUM "一类户成功还款笔数" 
+    ,ELH_HK_NUM "二类户成功还款笔数" 
+  ,OUTERSOURCE -- "获客路径" 
+    ,OUTERID -- "外媒参数一级渠道" 
+    ,CID -- "外媒参数二级渠道" 
+  ,IS_HEKH -- "是否核额客户" 
+  ,PRODUCT_NAME "子产品分类" 
+FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ 
+WHERE DATA_DT = (SELECT MAX(DATA_DT) FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ) 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD')>=   TO_DATE(('2019-12-12'),'YYYY-MM-DD') 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD') <=   TO_DATE( ('2019-12-13'),'YYYY-MM-DD'))  T_T1150656837 )  T_T1150656837 
+WHERE  (  (C21383184) IN ('企划口径') ) 
+GROUP BY (C2001817886) , (C2007915462)   )  T_T_2571410 
+ON T_T_T1396198938.C2001817886  =  T_T_2571410.C2001817886__TABLECOL_ 
+AND T_T_T1396198938.C2007915462  =  T_T_2571410.C2007915462__TABLECOL_   )
+	keyword:FROM
+	statement:FROM
+	level:0
+	as_name:T_2571410
+	from:DUMMY
+	parents:set()
+	children:{641, 4, 5, 6, 14, 15, 23, 24, 32, 33, 41, 42, 50, 51, 59, 60, 68, 69, 77, 78, 351, 352, 633, 635, 637, 639}
+
+4
+	type:STRUCT
+	name:(
+	keyword:
+	statement:FROM
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+5
+	type:STRUCT
+	name:SELECT
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+6
+	type:COL
+	name:SUM((CC1403497422))
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:T4
+	from:T_T_T1396198938
+	parents:{3, 78}
+	children:{7}
+
+7
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:None
+	from:None
+	parents:{6}
+	children:{8, 9, 13}
+
+8
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{7}
+	children:set()
+
+9
+	type:SUB
+	name:(CC1403497422)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:DUMMY
+	parents:{7}
+	children:{10, 11, 12}
+
+10
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{9}
+	children:set()
+
+11
+	type:COL
+	name:CC1403497422
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:T_T_T1396198938
+	parents:{9, 78}
+	children:set()
+
+12
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{9}
+	children:set()
+
+13
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{7}
+	children:set()
+
+14
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+15
+	type:COL
+	name:SUM((CC1397497310))
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:T5
+	from:T_T_T1396198938
+	parents:{3, 78}
+	children:{16}
+
+16
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:None
+	from:None
+	parents:{15}
+	children:{17, 18, 22}
+
+17
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{16}
+	children:set()
+
+18
+	type:SUB
+	name:(CC1397497310)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:DUMMY
+	parents:{16}
+	children:{19, 20, 21}
+
+19
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{18}
+	children:set()
+
+20
+	type:COL
+	name:CC1397497310
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:T_T_T1396198938
+	parents:{18, 78}
+	children:set()
+
+21
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{18}
+	children:set()
+
+22
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{16}
+	children:set()
+
+23
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+24
+	type:COL
+	name:SUM((CC1603603611))
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:T6
+	from:T_T_T1396198938
+	parents:{3, 78}
+	children:{25}
+
+25
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:None
+	from:None
+	parents:{24}
+	children:{26, 27, 31}
+
+26
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{25}
+	children:set()
+
+27
+	type:SUB
+	name:(CC1603603611)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:DUMMY
+	parents:{25}
+	children:{28, 29, 30}
+
+28
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{27}
+	children:set()
+
+29
+	type:COL
+	name:CC1603603611
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:T_T_T1396198938
+	parents:{27, 78}
+	children:set()
+
+30
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{27}
+	children:set()
+
+31
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{25}
+	children:set()
+
+32
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+33
+	type:COL
+	name:SUM((CC1597603499))
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:T7
+	from:T_T_T1396198938
+	parents:{3, 78}
+	children:{34}
+
+34
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:None
+	from:None
+	parents:{33}
+	children:{40, 35, 36}
+
+35
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{34}
+	children:set()
+
+36
+	type:SUB
+	name:(CC1597603499)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:DUMMY
+	parents:{34}
+	children:{37, 38, 39}
+
+37
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{36}
+	children:set()
+
+38
+	type:COL
+	name:CC1597603499
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:T_T_T1396198938
+	parents:{36, 78}
+	children:set()
+
+39
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{36}
+	children:set()
+
+40
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{34}
+	children:set()
+
+41
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+42
+	type:COL
+	name:SUM((C1948592346))
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:T8
+	from:T_T_T1396198938
+	parents:{3, 78}
+	children:{43}
+
+43
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:None
+	from:None
+	parents:{42}
+	children:{49, 44, 45}
+
+44
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{43}
+	children:set()
+
+45
+	type:SUB
+	name:(C1948592346)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:DUMMY
+	parents:{43}
+	children:{48, 46, 47}
+
+46
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{45}
+	children:set()
+
+47
+	type:COL
+	name:C1948592346
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:T_T_T1396198938
+	parents:{45, 78}
+	children:set()
+
+48
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{45}
+	children:set()
+
+49
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{43}
+	children:set()
+
+50
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+51
+	type:COL
+	name:SUM((C1954592458))
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:T9
+	from:T_T_T1396198938
+	parents:{3, 78}
+	children:{52}
+
+52
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:None
+	from:None
+	parents:{51}
+	children:{58, 53, 54}
+
+53
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{52}
+	children:set()
+
+54
+	type:SUB
+	name:(C1954592458)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:DUMMY
+	parents:{52}
+	children:{56, 57, 55}
+
+55
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{54}
+	children:set()
+
+56
+	type:COL
+	name:C1954592458
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:T_T_T1396198938
+	parents:{78, 54}
+	children:set()
+
+57
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{54}
+	children:set()
+
+58
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{52}
+	children:set()
+
+59
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+60
+	type:COL
+	name:SUM((C2041963219))
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:T2
+	from:T_T_T1396198938
+	parents:{3, 78}
+	children:{61}
+
+61
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:None
+	from:None
+	parents:{60}
+	children:{67, 62, 63}
+
+62
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{61}
+	children:set()
+
+63
+	type:SUB
+	name:(C2041963219)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:DUMMY
+	parents:{61}
+	children:{64, 65, 66}
+
+64
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{63}
+	children:set()
+
+65
+	type:COL
+	name:C2041963219
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:T_T_T1396198938
+	parents:{78, 63}
+	children:set()
+
+66
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{63}
+	children:set()
+
+67
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{61}
+	children:set()
+
+68
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+69
+	type:COL
+	name:SUM((CC24877953))
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:T3
+	from:T_T_T1396198938
+	parents:{3, 78}
+	children:{70}
+
+70
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:1
+	as_name:None
+	from:None
+	parents:{69}
+	children:{72, 76, 71}
+
+71
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{70}
+	children:set()
+
+72
+	type:SUB
+	name:(CC24877953)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:DUMMY
+	parents:{70}
+	children:{73, 74, 75}
+
+73
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{72}
+	children:set()
+
+74
+	type:COL
+	name:CC24877953
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:T_T_T1396198938
+	parents:{72, 78}
+	children:set()
+
+75
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{72}
+	children:set()
+
+76
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{70}
+	children:set()
+
+77
+	type:STRUCT
+	name:FROM
+	keyword:FROM
+	statement:FROM
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+78
+	type:VIEW
+	name:( 
+SELECT  *  FROM  ( 
+SELECT  *  FROM  ( 
+SELECT "获客渠道" C807349589 , "申请笔数" C2041963219 , "申请提款笔数" CC1603603611 , 
+"推荐人所属支行名称" C1557163809 , "业务子类型" CC816450280 , "机构名称" CC1548889882 , 
+"渠道来源" C397943381 , "申请金额" C2047963331 , (IS_HEKH) C1933911260 , "申请提款金额" CC1597603499 , 
+"一类户成功还款笔数" C1038155204 , "分行" CC2125023795 , "贷款用途" CC1120841952 , "KB码分类" CC1935613902 , 
+"推荐人编码" C1070234612 , "推荐人名称" C1059662620 , (OUTERID) CC1283978621 , "二类户成功还款笔数" CC703931720 , 
+"二类户成功提款笔数" C1771041456 , (OUTERSOURCE) CC580097661 , "机构编码" CC1538317890 , "贷款期限" CC1124245349 , 
+"一类户成功提款笔数" CC781838916 , "推荐人所属支行编码" C1567735801 , "成功提款金额" C1954592458 , (CID) C762083051 , 
+"统计口径" C21383184 , "推荐人代码" C1058376833 , "贷款城市" CC1128460264 , "分行编码" CC2006216510 , 
+"渠道来源编码" C203684682 , "子产品分类" C517742450 , "审批笔数" CC24877953 , "区域" CC2125112114 , 
+"业务品种" C941837056 , "审批通过笔数" CC1403497422 , "方案编号" CC1888320445 , "切换日期" C2001817886 , 
+"统计日期" C25873751 , "获客渠道编码" CC1493940662 , "审批通过金额" CC1397497310 , "成功提款笔数" C1948592346 , 
+"切换维度" C2007915462 FROM  ( 
+SELECT 
+  DATA_TYPE               AS "统计口径" 
+  ,CASE WHEN '6'=1 THEN COALESCE(CITY_DESC_CN,'未知') 
+        WHEN '6'=2 THEN COALESCE(BRANCH03_NAME,'未知') 
+          WHEN '6'=3 THEN COALESCE(CHANNEL_SOURCE,'未知') 
+      WHEN '6'=4 THEN COALESCE(SOURCE,'未知') 
+      WHEN '6'=5 THEN COALESCE(OUTERSOURCE,'未知') 
+      WHEN '6'=6 THEN COALESCE(OUTERID,'未知') 
+      WHEN '6'=7 THEN COALESCE(CID,'未知') 
+      WHEN '6'=8 THEN COALESCE(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知') 
+      END AS "切换维度" 
+    ,CASE WHEN '1'=1 THEN  DATA_DATE 
+          ELSE TO_CHAR( TO_DATE(('2019-12-12') ,'YYYY-MM-DD'),'YYYYMMDD')||'-'||TO_CHAR( TO_DATE( ('2019-12-13'),'YYYY-MM-DD'),'YYYYMMDD') 
+           END AS "切换日期" 
+  ,TO_DATE(DATA_DATE,'YYYY-MM-DD')              AS "统计日期" 
+  ,JJ_CHANNEL             AS "KB码分类" 
+  ,REC_NO                 AS "推荐人代码" 
+  ,CHANNEL_SOURCE         AS "渠道来源编码" 
+  ,CHANNEL_SOURCE_NAME    AS "渠道来源" 
+  ,SOURCE                 AS "获客渠道编码" 
+  ,SOURCE_NAME            AS "获客渠道" 
+  ,CITY_DESC_CN           AS "贷款城市" 
+  ,ORG_ID                 AS "机构编码" 
+  ,ORG_NAME               AS "机构名称" 
+  ,BRANCH03_NO            AS "分行编码" 
+  ,BRANCH03_NAME          AS "分行" 
+  ,BRANCH02_NAME          AS "区域" 
+  ,BUSINESSTYPE           AS "业务品种" 
+  ,BUSINESSSUBTYPE        AS "业务子类型" 
+  ,SCHEMENO               AS "方案编号" 
+  ,PURPOSE_NAME           AS "贷款用途" 
+  ,LOANTERM               AS "贷款期限" 
+  ,SQ_NUM                 AS "申请笔数" 
+  ,SQ_AMT                 AS "申请金额" 
+  ,SP_NUM                 AS "审批笔数" 
+  ,SP_TG_NUM              AS "审批通过笔数" 
+  ,SP_TG_AMT              AS "审批通过金额" 
+  ,SQ_TK_NUM              AS "申请提款笔数" 
+  ,SQ_TK_AMT              AS "申请提款金额" 
+  ,TK_NUM                 AS "成功提款笔数" 
+  ,TK_AMT                 AS "成功提款金额" 
+ 
+    ,CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END  "推荐人编码" 
+    ,SALERNAME  "推荐人名称" 
+    ,SALERNAME_BRANCH03_NO     "推荐人所属支行编码" 
+    ,SALERNAME_BRANCH03_NAME   "推荐人所属支行名称" 
+ 
+  ,YLH_TK_NUM "一类户成功提款笔数" 
+    ,ELH_TK_NUM "二类户成功提款笔数" 
+    ,YLH_HK_NUM "一类户成功还款笔数" 
+    ,ELH_HK_NUM "二类户成功还款笔数" 
+ 
+  ,OUTERSOURCE -- "获客路径" 
+    ,OUTERID -- "外媒参数一级渠道" 
+    ,CID -- "外媒参数二级渠道" 
+ 
+  ,IS_HEKH -- "是否核额客户" 
+  ,PRODUCT_NAME "子产品分类" 
+FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ 
+WHERE DATA_DT = (SELECT MAX(DATA_DT) FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ) 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD')>=TO_DATE(('2019-12-12'),'YYYY-MM-DD') 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD') <=TO_DATE(('2019-12-13'),'YYYY-MM-DD')) T_T1150656837 )  T_T1396198938 )  T_T1396198938 
+ 
+WHERE  (  (C21383184) IN ('企划口径') ) )
+	keyword:FROM
+	statement:FROM
+	level:1
+	as_name:T_T_T1396198938
+	from:DUMMY
+	parents:{3}
+	children:{6, 11, 15, 20, 24, 29, 33, 38, 42, 47, 51, 56, 60, 65, 69, 74, 79, 80, 81, 82, 83, 337, 338, 350, 634, 638}
+
+79
+	type:STRUCT
+	name:(
+	keyword:
+	statement:FROM
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{78}
+	children:set()
+
+80
+	type:STRUCT
+	name:SELECT
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{78}
+	children:set()
+
+81
+	type:STRUCT
+	name:*
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{78}
+	children:set()
+
+82
+	type:STRUCT
+	name:FROM
+	keyword:FROM
+	statement:FROM
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{78}
+	children:set()
+
+83
+	type:VIEW
+	name:( 
+SELECT  *  FROM  ( 
+SELECT "获客渠道" C807349589 , "申请笔数" C2041963219 , "申请提款笔数" CC1603603611 , 
+"推荐人所属支行名称" C1557163809 , "业务子类型" CC816450280 , "机构名称" CC1548889882 , 
+"渠道来源" C397943381 , "申请金额" C2047963331 , (IS_HEKH) C1933911260 , "申请提款金额" CC1597603499 , 
+"一类户成功还款笔数" C1038155204 , "分行" CC2125023795 , "贷款用途" CC1120841952 , "KB码分类" CC1935613902 , 
+"推荐人编码" C1070234612 , "推荐人名称" C1059662620 , (OUTERID) CC1283978621 , "二类户成功还款笔数" CC703931720 , 
+"二类户成功提款笔数" C1771041456 , (OUTERSOURCE) CC580097661 , "机构编码" CC1538317890 , "贷款期限" CC1124245349 , 
+"一类户成功提款笔数" CC781838916 , "推荐人所属支行编码" C1567735801 , "成功提款金额" C1954592458 , (CID) C762083051 , 
+"统计口径" C21383184 , "推荐人代码" C1058376833 , "贷款城市" CC1128460264 , "分行编码" CC2006216510 , 
+"渠道来源编码" C203684682 , "子产品分类" C517742450 , "审批笔数" CC24877953 , "区域" CC2125112114 , 
+"业务品种" C941837056 , "审批通过笔数" CC1403497422 , "方案编号" CC1888320445 , "切换日期" C2001817886 , 
+"统计日期" C25873751 , "获客渠道编码" CC1493940662 , "审批通过金额" CC1397497310 , "成功提款笔数" C1948592346 , 
+"切换维度" C2007915462 FROM  ( 
+SELECT 
+  DATA_TYPE               AS "统计口径" 
+  ,CASE WHEN '6'=1 THEN COALESCE(CITY_DESC_CN,'未知') 
+        WHEN '6'=2 THEN COALESCE(BRANCH03_NAME,'未知') 
+          WHEN '6'=3 THEN COALESCE(CHANNEL_SOURCE,'未知') 
+      WHEN '6'=4 THEN COALESCE(SOURCE,'未知') 
+      WHEN '6'=5 THEN COALESCE(OUTERSOURCE,'未知') 
+      WHEN '6'=6 THEN COALESCE(OUTERID,'未知') 
+      WHEN '6'=7 THEN COALESCE(CID,'未知') 
+      WHEN '6'=8 THEN COALESCE(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知') 
+      END AS "切换维度" 
+    ,CASE WHEN '1'=1 THEN  DATA_DATE 
+          ELSE TO_CHAR( TO_DATE(('2019-12-12') ,'YYYY-MM-DD'),'YYYYMMDD')||'-'||TO_CHAR( TO_DATE( ('2019-12-13'),'YYYY-MM-DD'),'YYYYMMDD') 
+           END AS "切换日期" 
+  ,TO_DATE(DATA_DATE,'YYYY-MM-DD')              AS "统计日期" 
+  ,JJ_CHANNEL             AS "KB码分类" 
+  ,REC_NO                 AS "推荐人代码" 
+  ,CHANNEL_SOURCE         AS "渠道来源编码" 
+  ,CHANNEL_SOURCE_NAME    AS "渠道来源" 
+  ,SOURCE                 AS "获客渠道编码" 
+  ,SOURCE_NAME            AS "获客渠道" 
+  ,CITY_DESC_CN           AS "贷款城市" 
+  ,ORG_ID                 AS "机构编码" 
+  ,ORG_NAME               AS "机构名称" 
+  ,BRANCH03_NO            AS "分行编码" 
+  ,BRANCH03_NAME          AS "分行" 
+  ,BRANCH02_NAME          AS "区域" 
+  ,BUSINESSTYPE           AS "业务品种" 
+  ,BUSINESSSUBTYPE        AS "业务子类型" 
+  ,SCHEMENO               AS "方案编号" 
+  ,PURPOSE_NAME           AS "贷款用途" 
+  ,LOANTERM               AS "贷款期限" 
+  ,SQ_NUM                 AS "申请笔数" 
+  ,SQ_AMT                 AS "申请金额" 
+  ,SP_NUM                 AS "审批笔数" 
+  ,SP_TG_NUM              AS "审批通过笔数" 
+  ,SP_TG_AMT              AS "审批通过金额" 
+  ,SQ_TK_NUM              AS "申请提款笔数" 
+  ,SQ_TK_AMT              AS "申请提款金额" 
+  ,TK_NUM                 AS "成功提款笔数" 
+  ,TK_AMT                 AS "成功提款金额" 
+ 
+    ,CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END  "推荐人编码" 
+    ,SALERNAME  "推荐人名称" 
+    ,SALERNAME_BRANCH03_NO     "推荐人所属支行编码" 
+    ,SALERNAME_BRANCH03_NAME   "推荐人所属支行名称" 
+ 
+  ,YLH_TK_NUM "一类户成功提款笔数" 
+    ,ELH_TK_NUM "二类户成功提款笔数" 
+    ,YLH_HK_NUM "一类户成功还款笔数" 
+    ,ELH_HK_NUM "二类户成功还款笔数" 
+ 
+  ,OUTERSOURCE -- "获客路径" 
+    ,OUTERID -- "外媒参数一级渠道" 
+    ,CID -- "外媒参数二级渠道" 
+ 
+  ,IS_HEKH -- "是否核额客户" 
+  ,PRODUCT_NAME "子产品分类" 
+FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ 
+WHERE DATA_DT = (SELECT MAX(DATA_DT) FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ) 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD')>=TO_DATE(('2019-12-12'),'YYYY-MM-DD') 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD') <=TO_DATE(('2019-12-13'),'YYYY-MM-DD')) T_T1150656837 )  T_T1396198938 )
+	keyword:FROM
+	statement:FROM
+	level:2
+	as_name:T_T1396198938
+	from:DUMMY
+	parents:{78}
+	children:{387, 391, 396, 400, 405, 409, 414, 418, 423, 427, 429, 432, 434, 336, 84, 85, 86, 87, 88, 342, 355, 614, 360, 364, 369, 625, 373, 630, 378, 382}
+
+84
+	type:STRUCT
+	name:(
+	keyword:
+	statement:FROM
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{83}
+	children:set()
+
+85
+	type:STRUCT
+	name:SELECT
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{83}
+	children:set()
+
+86
+	type:STRUCT
+	name:*
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{83}
+	children:set()
+
+87
+	type:STRUCT
+	name:FROM
+	keyword:FROM
+	statement:FROM
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{83}
+	children:set()
+
+88
+	type:VIEW
+	name:( 
+SELECT "获客渠道" C807349589 , "申请笔数" C2041963219 , "申请提款笔数" CC1603603611 , 
+"推荐人所属支行名称" C1557163809 , "业务子类型" CC816450280 , "机构名称" CC1548889882 , 
+"渠道来源" C397943381 , "申请金额" C2047963331 , (IS_HEKH) C1933911260 , "申请提款金额" CC1597603499 , 
+"一类户成功还款笔数" C1038155204 , "分行" CC2125023795 , "贷款用途" CC1120841952 , "KB码分类" CC1935613902 , 
+"推荐人编码" C1070234612 , "推荐人名称" C1059662620 , (OUTERID) CC1283978621 , "二类户成功还款笔数" CC703931720 , 
+"二类户成功提款笔数" C1771041456 , (OUTERSOURCE) CC580097661 , "机构编码" CC1538317890 , "贷款期限" CC1124245349 , 
+"一类户成功提款笔数" CC781838916 , "推荐人所属支行编码" C1567735801 , "成功提款金额" C1954592458 , (CID) C762083051 , 
+"统计口径" C21383184 , "推荐人代码" C1058376833 , "贷款城市" CC1128460264 , "分行编码" CC2006216510 , 
+"渠道来源编码" C203684682 , "子产品分类" C517742450 , "审批笔数" CC24877953 , "区域" CC2125112114 , 
+"业务品种" C941837056 , "审批通过笔数" CC1403497422 , "方案编号" CC1888320445 , "切换日期" C2001817886 , 
+"统计日期" C25873751 , "获客渠道编码" CC1493940662 , "审批通过金额" CC1397497310 , "成功提款笔数" C1948592346 , 
+"切换维度" C2007915462 FROM  ( 
+SELECT 
+  DATA_TYPE               AS "统计口径" 
+  ,CASE WHEN '6'=1 THEN COALESCE(CITY_DESC_CN,'未知') 
+        WHEN '6'=2 THEN COALESCE(BRANCH03_NAME,'未知') 
+          WHEN '6'=3 THEN COALESCE(CHANNEL_SOURCE,'未知') 
+      WHEN '6'=4 THEN COALESCE(SOURCE,'未知') 
+      WHEN '6'=5 THEN COALESCE(OUTERSOURCE,'未知') 
+      WHEN '6'=6 THEN COALESCE(OUTERID,'未知') 
+      WHEN '6'=7 THEN COALESCE(CID,'未知') 
+      WHEN '6'=8 THEN COALESCE(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知') 
+      END AS "切换维度" 
+    ,CASE WHEN '1'=1 THEN  DATA_DATE 
+          ELSE TO_CHAR( TO_DATE(('2019-12-12') ,'YYYY-MM-DD'),'YYYYMMDD')||'-'||TO_CHAR( TO_DATE( ('2019-12-13'),'YYYY-MM-DD'),'YYYYMMDD') 
+           END AS "切换日期" 
+  ,TO_DATE(DATA_DATE,'YYYY-MM-DD')              AS "统计日期" 
+  ,JJ_CHANNEL             AS "KB码分类" 
+  ,REC_NO                 AS "推荐人代码" 
+  ,CHANNEL_SOURCE         AS "渠道来源编码" 
+  ,CHANNEL_SOURCE_NAME    AS "渠道来源" 
+  ,SOURCE                 AS "获客渠道编码" 
+  ,SOURCE_NAME            AS "获客渠道" 
+  ,CITY_DESC_CN           AS "贷款城市" 
+  ,ORG_ID                 AS "机构编码" 
+  ,ORG_NAME               AS "机构名称" 
+  ,BRANCH03_NO            AS "分行编码" 
+  ,BRANCH03_NAME          AS "分行" 
+  ,BRANCH02_NAME          AS "区域" 
+  ,BUSINESSTYPE           AS "业务品种" 
+  ,BUSINESSSUBTYPE        AS "业务子类型" 
+  ,SCHEMENO               AS "方案编号" 
+  ,PURPOSE_NAME           AS "贷款用途" 
+  ,LOANTERM               AS "贷款期限" 
+  ,SQ_NUM                 AS "申请笔数" 
+  ,SQ_AMT                 AS "申请金额" 
+  ,SP_NUM                 AS "审批笔数" 
+  ,SP_TG_NUM              AS "审批通过笔数" 
+  ,SP_TG_AMT              AS "审批通过金额" 
+  ,SQ_TK_NUM              AS "申请提款笔数" 
+  ,SQ_TK_AMT              AS "申请提款金额" 
+  ,TK_NUM                 AS "成功提款笔数" 
+  ,TK_AMT                 AS "成功提款金额" 
+ 
+    ,CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END  "推荐人编码" 
+    ,SALERNAME  "推荐人名称" 
+    ,SALERNAME_BRANCH03_NO     "推荐人所属支行编码" 
+    ,SALERNAME_BRANCH03_NAME   "推荐人所属支行名称" 
+ 
+  ,YLH_TK_NUM "一类户成功提款笔数" 
+    ,ELH_TK_NUM "二类户成功提款笔数" 
+    ,YLH_HK_NUM "一类户成功还款笔数" 
+    ,ELH_HK_NUM "二类户成功还款笔数" 
+ 
+  ,OUTERSOURCE -- "获客路径" 
+    ,OUTERID -- "外媒参数一级渠道" 
+    ,CID -- "外媒参数二级渠道" 
+ 
+  ,IS_HEKH -- "是否核额客户" 
+  ,PRODUCT_NAME "子产品分类" 
+FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ 
+WHERE DATA_DT = (SELECT MAX(DATA_DT) FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ) 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD')>=TO_DATE(('2019-12-12'),'YYYY-MM-DD') 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD') <=TO_DATE(('2019-12-13'),'YYYY-MM-DD')) T_T1150656837 )
+	keyword:FROM
+	statement:FROM
+	level:3
+	as_name:T_T1396198938
+	from:DUMMY
+	parents:{83}
+	children:{89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 130, 131, 132, 133, 134, 135, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 335, 342, 440, 442, 444, 446, 448, 450, 452, 454, 456, 458, 460}
+
+89
+	type:STRUCT
+	name:(
+	keyword:
+	statement:FROM
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+90
+	type:STRUCT
+	name:SELECT
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+91
+	type:COL
+	name:"获客渠道"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C807349589
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+92
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+93
+	type:COL
+	name:"申请笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C2041963219
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+94
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+95
+	type:COL
+	name:"申请提款笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1603603611
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+96
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+97
+	type:COL
+	name:"推荐人所属支行名称"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C1557163809
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+98
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+99
+	type:COL
+	name:"业务子类型"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC816450280
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+100
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+101
+	type:COL
+	name:"机构名称"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1548889882
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+102
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+103
+	type:COL
+	name:"渠道来源"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C397943381
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+104
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+105
+	type:COL
+	name:"申请金额"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C2047963331
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+106
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+107
+	type:COL
+	name:(IS_HEKH)
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C1933911260
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:{108, 109, 110}
+
+108
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{107}
+	children:set()
+
+109
+	type:COL
+	name:IS_HEKH
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:T_T1150656837
+	parents:{107, 189, 462, 437}
+	children:set()
+
+110
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{107}
+	children:set()
+
+111
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+112
+	type:COL
+	name:"申请提款金额"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1597603499
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+113
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+114
+	type:COL
+	name:"一类户成功还款笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C1038155204
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+115
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+116
+	type:COL
+	name:"分行"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC2125023795
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+117
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+118
+	type:COL
+	name:"贷款用途"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1120841952
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+119
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+120
+	type:COL
+	name:"KB码分类"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1935613902
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+121
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+122
+	type:COL
+	name:"推荐人编码"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C1070234612
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+123
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+124
+	type:COL
+	name:"推荐人名称"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C1059662620
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+125
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+126
+	type:COL
+	name:(OUTERID)
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1283978621
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:{128, 129, 127}
+
+127
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{126}
+	children:set()
+
+128
+	type:COL
+	name:OUTERID
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:T_T1150656837
+	parents:{462, 189, 126, 437}
+	children:set()
+
+129
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{126}
+	children:set()
+
+130
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+131
+	type:COL
+	name:"二类户成功还款笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC703931720
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+132
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+133
+	type:COL
+	name:"二类户成功提款笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C1771041456
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+134
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+135
+	type:COL
+	name:(OUTERSOURCE)
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC580097661
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:{136, 137, 138}
+
+136
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{135}
+	children:set()
+
+137
+	type:COL
+	name:OUTERSOURCE
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:T_T1150656837
+	parents:{437, 189, 462, 135}
+	children:set()
+
+138
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{135}
+	children:set()
+
+139
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+140
+	type:COL
+	name:"机构编码"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1538317890
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+141
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+142
+	type:COL
+	name:"贷款期限"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1124245349
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+143
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+144
+	type:COL
+	name:"一类户成功提款笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC781838916
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+145
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+146
+	type:COL
+	name:"推荐人所属支行编码"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C1567735801
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+147
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+148
+	type:COL
+	name:"成功提款金额"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C1954592458
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+149
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+150
+	type:COL
+	name:(CID)
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C762083051
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:{152, 153, 151}
+
+151
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{150}
+	children:set()
+
+152
+	type:COL
+	name:CID
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:T_T1150656837
+	parents:{462, 189, 150, 437}
+	children:set()
+
+153
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{150}
+	children:set()
+
+154
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+155
+	type:COL
+	name:"统计口径"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C21383184
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+156
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+157
+	type:COL
+	name:"推荐人代码"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C1058376833
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+158
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+159
+	type:COL
+	name:"贷款城市"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1128460264
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+160
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+161
+	type:COL
+	name:"分行编码"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC2006216510
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+162
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+163
+	type:COL
+	name:"渠道来源编码"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C203684682
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+164
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+165
+	type:COL
+	name:"子产品分类"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C517742450
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+166
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+167
+	type:COL
+	name:"审批笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC24877953
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+168
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+169
+	type:COL
+	name:"区域"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC2125112114
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+170
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+171
+	type:COL
+	name:"业务品种"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C941837056
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+172
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+173
+	type:COL
+	name:"审批通过笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1403497422
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+174
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+175
+	type:COL
+	name:"方案编号"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1888320445
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+176
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+177
+	type:COL
+	name:"切换日期"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C2001817886
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+178
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+179
+	type:COL
+	name:"统计日期"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C25873751
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+180
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+181
+	type:COL
+	name:"获客渠道编码"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1493940662
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+182
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+183
+	type:COL
+	name:"审批通过金额"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:CC1397497310
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+184
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+185
+	type:COL
+	name:"成功提款笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C1948592346
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+186
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+187
+	type:COL
+	name:"切换维度"
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:C2007915462
+	from:T_T1150656837
+	parents:{88, 189, 462, 437}
+	children:set()
+
+188
+	type:STRUCT
+	name:FROM
+	keyword:FROM
+	statement:FROM
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+189
+	type:VIEW
+	name:( 
+SELECT 
+  DATA_TYPE               AS "统计口径" 
+  ,CASE WHEN '6'=1 THEN COALESCE(CITY_DESC_CN,'未知') 
+        WHEN '6'=2 THEN COALESCE(BRANCH03_NAME,'未知') 
+          WHEN '6'=3 THEN COALESCE(CHANNEL_SOURCE,'未知') 
+      WHEN '6'=4 THEN COALESCE(SOURCE,'未知') 
+      WHEN '6'=5 THEN COALESCE(OUTERSOURCE,'未知') 
+      WHEN '6'=6 THEN COALESCE(OUTERID,'未知') 
+      WHEN '6'=7 THEN COALESCE(CID,'未知') 
+      WHEN '6'=8 THEN COALESCE(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知') 
+      END AS "切换维度" 
+    ,CASE WHEN '1'=1 THEN  DATA_DATE 
+          ELSE TO_CHAR( TO_DATE(('2019-12-12') ,'YYYY-MM-DD'),'YYYYMMDD')||'-'||TO_CHAR( TO_DATE( ('2019-12-13'),'YYYY-MM-DD'),'YYYYMMDD') 
+           END AS "切换日期" 
+  ,TO_DATE(DATA_DATE,'YYYY-MM-DD')              AS "统计日期" 
+  ,JJ_CHANNEL             AS "KB码分类" 
+  ,REC_NO                 AS "推荐人代码" 
+  ,CHANNEL_SOURCE         AS "渠道来源编码" 
+  ,CHANNEL_SOURCE_NAME    AS "渠道来源" 
+  ,SOURCE                 AS "获客渠道编码" 
+  ,SOURCE_NAME            AS "获客渠道" 
+  ,CITY_DESC_CN           AS "贷款城市" 
+  ,ORG_ID                 AS "机构编码" 
+  ,ORG_NAME               AS "机构名称" 
+  ,BRANCH03_NO            AS "分行编码" 
+  ,BRANCH03_NAME          AS "分行" 
+  ,BRANCH02_NAME          AS "区域" 
+  ,BUSINESSTYPE           AS "业务品种" 
+  ,BUSINESSSUBTYPE        AS "业务子类型" 
+  ,SCHEMENO               AS "方案编号" 
+  ,PURPOSE_NAME           AS "贷款用途" 
+  ,LOANTERM               AS "贷款期限" 
+  ,SQ_NUM                 AS "申请笔数" 
+  ,SQ_AMT                 AS "申请金额" 
+  ,SP_NUM                 AS "审批笔数" 
+  ,SP_TG_NUM              AS "审批通过笔数" 
+  ,SP_TG_AMT              AS "审批通过金额" 
+  ,SQ_TK_NUM              AS "申请提款笔数" 
+  ,SQ_TK_AMT              AS "申请提款金额" 
+  ,TK_NUM                 AS "成功提款笔数" 
+  ,TK_AMT                 AS "成功提款金额" 
+ 
+    ,CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END  "推荐人编码" 
+    ,SALERNAME  "推荐人名称" 
+    ,SALERNAME_BRANCH03_NO     "推荐人所属支行编码" 
+    ,SALERNAME_BRANCH03_NAME   "推荐人所属支行名称" 
+ 
+  ,YLH_TK_NUM "一类户成功提款笔数" 
+    ,ELH_TK_NUM "二类户成功提款笔数" 
+    ,YLH_HK_NUM "一类户成功还款笔数" 
+    ,ELH_HK_NUM "二类户成功还款笔数" 
+ 
+  ,OUTERSOURCE -- "获客路径" 
+    ,OUTERID -- "外媒参数一级渠道" 
+    ,CID -- "外媒参数二级渠道" 
+ 
+  ,IS_HEKH -- "是否核额客户" 
+  ,PRODUCT_NAME "子产品分类" 
+FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ 
+WHERE DATA_DT = (SELECT MAX(DATA_DT) FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ) 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD')>=TO_DATE(('2019-12-12'),'YYYY-MM-DD') 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD') <=TO_DATE(('2019-12-13'),'YYYY-MM-DD'))
+	keyword:FROM
+	statement:FROM
+	level:4
+	as_name:T_T1150656837
+	from:DUMMY
+	parents:{88}
+	children:{513, 515, 517, 519, 521, 523, 525, 527, 529, 531, 533, 535, 537, 539, 541, 543, 545, 547, 549, 551, 553, 555, 557, 561, 578, 595, 91, 93, 95, 97, 99, 101, 103, 105, 107, 109, 112, 114, 116, 118, 120, 122, 124, 126, 128, 131, 133, 135, 137, 140, 142, 144, 146, 148, 150, 152, 155, 157, 159, 161, 163, 165, 167, 169, 171, 173, 175, 177, 179, 181, 183, 185, 187, 190, 191, 192, 193, 194, 195, 196, 197, 198, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 289, 300, 302, 317, 319, 334, 465, 467, 469, 471, 474, 479, 481, 483, 485, 489, 491, 493, 495, 497, 499, 501, 503, 505, 507, 509, 511}
+
+190
+	type:STRUCT
+	name:(
+	keyword:
+	statement:FROM
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+191
+	type:STRUCT
+	name:SELECT
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+192
+	type:COL
+	name:DATA_TYPE
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:"统计口径"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+193
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+194
+	type:COL
+	name:CASE WHEN '6'=1 THEN COALESCE(CITY_DESC_CN,'未知') 
+        WHEN '6'=2 THEN COALESCE(BRANCH03_NAME,'未知') 
+          WHEN '6'=3 THEN COALESCE(CHANNEL_SOURCE,'未知') 
+      WHEN '6'=4 THEN COALESCE(SOURCE,'未知') 
+      WHEN '6'=5 THEN COALESCE(OUTERSOURCE,'未知') 
+      WHEN '6'=6 THEN COALESCE(OUTERID,'未知') 
+      WHEN '6'=7 THEN COALESCE(CID,'未知') 
+      WHEN '6'=8 THEN COALESCE(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知') 
+      END
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:"切换维度"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+195
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+196
+	type:COL
+	name:CASE WHEN '1'=1 THEN  DATA_DATE 
+          ELSE TO_CHAR( TO_DATE(('2019-12-12') ,'YYYY-MM-DD'),'YYYYMMDD')||'-'||TO_CHAR( TO_DATE( ('2019-12-13'),'YYYY-MM-DD'),'YYYYMMDD') 
+           END
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:"切换日期"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+197
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+198
+	type:COL
+	name:TO_DATE(DATA_DATE,'YYYY-MM-DD')
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:"统计日期"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:{199}
+
+199
+	type:FUNC
+	name:TO_DATE
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:None
+	from:None
+	parents:{198}
+	children:{200, 201, 202, 203, 204}
+
+200
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{199}
+	children:set()
+
+201
+	type:COL
+	name:DATA_DATE
+	keyword:
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{199, 298, 559, 571, 286}
+	children:set()
+
+202
+	type:STRUCT
+	name:,
+	keyword:
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{199}
+	children:set()
+
+203
+	type:VALUE
+	name:'YYYY-MM-DD'
+	keyword:
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{199}
+	children:set()
+
+204
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{199}
+	children:set()
+
+205
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+206
+	type:COL
+	name:JJ_CHANNEL
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:"KB码分类"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+207
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+208
+	type:COL
+	name:REC_NO
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:"推荐人代码"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+209
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+210
+	type:COL
+	name:CHANNEL_SOURCE
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:"渠道来源编码"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+211
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+212
+	type:COL
+	name:CHANNEL_SOURCE_NAME
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:"渠道来源"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+213
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+214
+	type:STRUCT
+	name:SOURCE
+	keyword:SOURCE
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+215
+	type:STRUCT
+	name:AS
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+216
+	type:COL
+	name:"获客渠道编码"
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+217
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+218
+	type:COL
+	name:SOURCE_NAME
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"获客渠道"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+219
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+220
+	type:COL
+	name:CITY_DESC_CN
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"贷款城市"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+221
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+222
+	type:COL
+	name:ORG_ID
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"机构编码"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+223
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+224
+	type:COL
+	name:ORG_NAME
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"机构名称"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+225
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+226
+	type:COL
+	name:BRANCH03_NO
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"分行编码"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+227
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+228
+	type:COL
+	name:BRANCH03_NAME
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"分行"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+229
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+230
+	type:COL
+	name:BRANCH02_NAME
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"区域"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+231
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+232
+	type:COL
+	name:BUSINESSTYPE
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"业务品种"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+233
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+234
+	type:COL
+	name:BUSINESSSUBTYPE
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"业务子类型"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+235
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+236
+	type:COL
+	name:SCHEMENO
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"方案编号"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+237
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+238
+	type:COL
+	name:PURPOSE_NAME
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"贷款用途"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+239
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+240
+	type:COL
+	name:LOANTERM
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"贷款期限"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+241
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+242
+	type:COL
+	name:SQ_NUM
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"申请笔数"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+243
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+244
+	type:COL
+	name:SQ_AMT
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"申请金额"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+245
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+246
+	type:COL
+	name:SP_NUM
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"审批笔数"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+247
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+248
+	type:COL
+	name:SP_TG_NUM
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"审批通过笔数"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+249
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+250
+	type:COL
+	name:SP_TG_AMT
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"审批通过金额"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+251
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+252
+	type:COL
+	name:SQ_TK_NUM
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"申请提款笔数"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+253
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+254
+	type:COL
+	name:SQ_TK_AMT
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"申请提款金额"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+255
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+256
+	type:COL
+	name:TK_NUM
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"成功提款笔数"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+257
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+258
+	type:COL
+	name:TK_AMT
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"成功提款金额"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+259
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+260
+	type:COL
+	name:CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"推荐人编码"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+261
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+262
+	type:COL
+	name:SALERNAME
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"推荐人名称"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+263
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+264
+	type:COL
+	name:SALERNAME_BRANCH03_NO
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"推荐人所属支行编码"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+265
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+266
+	type:COL
+	name:SALERNAME_BRANCH03_NAME
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"推荐人所属支行名称"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+267
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+268
+	type:COL
+	name:YLH_TK_NUM
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"一类户成功提款笔数"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+269
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+270
+	type:COL
+	name:ELH_TK_NUM
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"二类户成功提款笔数"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+271
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+272
+	type:COL
+	name:YLH_HK_NUM
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"一类户成功还款笔数"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+273
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+274
+	type:COL
+	name:ELH_HK_NUM
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"二类户成功还款笔数"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+275
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+276
+	type:COL
+	name:OUTERSOURCE
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:-- "获客路径" 
+    
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+277
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+278
+	type:COL
+	name:OUTERID
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:-- "外媒参数一级渠道" 
+    
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+279
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+280
+	type:COL
+	name:CID
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:-- "外媒参数二级渠道" 
+ 
+  
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+281
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+282
+	type:COL
+	name:IS_HEKH
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:-- "是否核额客户" 
+  
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+283
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+284
+	type:COL
+	name:PRODUCT_NAME
+	keyword:AS
+	statement:SELECT
+	level:5
+	as_name:"子产品分类"
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 189, 286}
+	children:set()
+
+285
+	type:STRUCT
+	name:FROM
+	keyword:FROM
+	statement:FROM
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+286
+	type:TAB
+	name:XJ_RPT_D_PAZDXE_KJHZ
+	keyword:FROM
+	statement:FROM
+	level:5
+	as_name:XJ_RPT_D_PAZDXE_KJHZ
+	from:BRRPSDATA
+	parents:{189}
+	children:{256, 258, 260, 262, 264, 266, 268, 270, 272, 274, 276, 278, 280, 282, 284, 288, 295, 305, 568, 192, 194, 322, 196, 198, 201, 206, 208, 210, 212, 216, 218, 220, 222, 224, 226, 228, 230, 232, 234, 236, 238, 240, 242, 244, 246, 248, 250, 252, 254}
+
+287
+	type:STRUCT
+	name:WHERE
+	keyword:WHERE
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+288
+	type:COL
+	name:DATA_DT
+	keyword:WHERE
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{289, 298, 559, 571, 286}
+	children:set()
+
+289
+	type:OPT
+	name:=
+	keyword:WHERE
+	statement:WHERE
+	level:5
+	as_name:None
+	from:None
+	parents:{189}
+	children:{288, 290}
+
+290
+	type:SUB
+	name:(SELECT MAX(DATA_DT) FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ)
+	keyword:WHERE
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:DUMMY
+	parents:{289}
+	children:{291, 292, 293, 297, 298, 299}
+
+291
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:6
+	as_name:DUMMY
+	from:None
+	parents:{290}
+	children:set()
+
+292
+	type:STRUCT
+	name:SELECT
+	keyword:SELECT
+	statement:SELECT
+	level:6
+	as_name:DUMMY
+	from:None
+	parents:{290}
+	children:set()
+
+293
+	type:FUNC
+	name:MAX
+	keyword:SELECT
+	statement:SELECT
+	level:6
+	as_name:None
+	from:None
+	parents:{290}
+	children:{296, 294, 295}
+
+294
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:6
+	as_name:DUMMY
+	from:None
+	parents:{293}
+	children:set()
+
+295
+	type:COL
+	name:DATA_DT
+	keyword:
+	statement:SELECT
+	level:6
+	as_name:DUMMY
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{293, 298, 559, 571, 286}
+	children:set()
+
+296
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:6
+	as_name:DUMMY
+	from:None
+	parents:{293}
+	children:set()
+
+297
+	type:STRUCT
+	name:FROM
+	keyword:FROM
+	statement:FROM
+	level:6
+	as_name:DUMMY
+	from:None
+	parents:{290}
+	children:set()
+
+298
+	type:TAB
+	name:XJ_RPT_D_PAZDXE_KJHZ
+	keyword:FROM
+	statement:FROM
+	level:6
+	as_name:XJ_RPT_D_PAZDXE_KJHZ
+	from:BRRPSDATA
+	parents:{290, 351}
+	children:{256, 258, 260, 262, 264, 266, 268, 270, 272, 274, 276, 278, 280, 282, 284, 288, 295, 305, 192, 194, 322, 196, 198, 201, 206, 208, 210, 212, 216, 218, 220, 222, 224, 226, 228, 230, 232, 234, 236, 238, 240, 242, 244, 246, 248, 250, 252, 254}
+
+299
+	type:STRUCT
+	name:)
+	keyword:FROM
+	statement:FROM
+	level:6
+	as_name:DUMMY
+	from:None
+	parents:{290}
+	children:set()
+
+300
+	type:STRUCT
+	name:AND
+	keyword:AND
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+301
+	type:FUNC
+	name:TO_DATE
+	keyword:AND
+	statement:WHERE
+	level:5
+	as_name:None
+	from:None
+	parents:{302}
+	children:{304, 305, 306, 307, 308}
+
+302
+	type:OPT
+	name:>=
+	keyword:AND
+	statement:WHERE
+	level:5
+	as_name:None
+	from:None
+	parents:{189}
+	children:{301, 303}
+
+303
+	type:FUNC
+	name:TO_DATE
+	keyword:AND
+	statement:WHERE
+	level:5
+	as_name:None
+	from:None
+	parents:{302}
+	children:{309, 310, 314, 315, 316}
+
+304
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{301}
+	children:set()
+
+305
+	type:COL
+	name:DATA_DATE
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 301, 559, 571, 286}
+	children:set()
+
+306
+	type:STRUCT
+	name:,
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{301}
+	children:set()
+
+307
+	type:VALUE
+	name:'YYYY-MM-DD'
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{301}
+	children:set()
+
+308
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{301}
+	children:set()
+
+309
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{303}
+	children:set()
+
+310
+	type:SUB
+	name:('2019-12-12')
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:DUMMY
+	parents:{303}
+	children:{312, 313, 311}
+
+311
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{310}
+	children:set()
+
+312
+	type:VALUE
+	name:'2019-12-12'
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{310}
+	children:set()
+
+313
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{310}
+	children:set()
+
+314
+	type:STRUCT
+	name:,
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{303}
+	children:set()
+
+315
+	type:VALUE
+	name:'YYYY-MM-DD'
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{303}
+	children:set()
+
+316
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{303}
+	children:set()
+
+317
+	type:STRUCT
+	name:AND
+	keyword:AND
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+318
+	type:FUNC
+	name:TO_DATE
+	keyword:AND
+	statement:WHERE
+	level:5
+	as_name:None
+	from:None
+	parents:{319}
+	children:{321, 322, 323, 324, 325}
+
+319
+	type:OPT
+	name:<=
+	keyword:AND
+	statement:WHERE
+	level:5
+	as_name:None
+	from:None
+	parents:{189}
+	children:{320, 318}
+
+320
+	type:FUNC
+	name:TO_DATE
+	keyword:AND
+	statement:WHERE
+	level:5
+	as_name:None
+	from:None
+	parents:{319}
+	children:{326, 327, 331, 332, 333}
+
+321
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{318}
+	children:set()
+
+322
+	type:COL
+	name:DATA_DATE
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:XJ_RPT_D_PAZDXE_KJHZ
+	parents:{298, 559, 571, 318, 286}
+	children:set()
+
+323
+	type:STRUCT
+	name:,
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{318}
+	children:set()
+
+324
+	type:VALUE
+	name:'YYYY-MM-DD'
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{318}
+	children:set()
+
+325
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{318}
+	children:set()
+
+326
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{320}
+	children:set()
+
+327
+	type:SUB
+	name:('2019-12-13')
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:DUMMY
+	parents:{320}
+	children:{328, 329, 330}
+
+328
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{327}
+	children:set()
+
+329
+	type:VALUE
+	name:'2019-12-13'
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{327}
+	children:set()
+
+330
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{327}
+	children:set()
+
+331
+	type:STRUCT
+	name:,
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{320}
+	children:set()
+
+332
+	type:VALUE
+	name:'YYYY-MM-DD'
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{320}
+	children:set()
+
+333
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{320}
+	children:set()
+
+334
+	type:STRUCT
+	name:)
+	keyword:FROM
+	statement:FROM
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{189}
+	children:set()
+
+335
+	type:STRUCT
+	name:)
+	keyword:FROM
+	statement:FROM
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{88}
+	children:set()
+
+336
+	type:STRUCT
+	name:)
+	keyword:FROM
+	statement:FROM
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{83}
+	children:set()
+
+337
+	type:STRUCT
+	name:WHERE
+	keyword:WHERE
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{78}
+	children:set()
+
+338
+	type:SUB
+	name:(  (C21383184) IN ('企划口径') )
+	keyword:WHERE
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{78}
+	children:{339, 340, 344, 345, 349}
+
+339
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{338}
+	children:set()
+
+340
+	type:SUB
+	name:(C21383184)
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{338}
+	children:{341, 342, 343}
+
+341
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{340}
+	children:set()
+
+342
+	type:COL
+	name:C21383184
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:T_T1396198938
+	parents:{88, 83, 340}
+	children:set()
+
+343
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{344, 340}
+	children:set()
+
+344
+	type:OPT
+	name:IN
+	keyword:IN
+	statement:WHERE
+	level:2
+	as_name:None
+	from:None
+	parents:{338}
+	children:{345, 343}
+
+345
+	type:SUB
+	name:('企划口径')
+	keyword:IN
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{344, 338}
+	children:{346, 347, 348}
+
+346
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{345}
+	children:set()
+
+347
+	type:VALUE
+	name:'企划口径'
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{345}
+	children:set()
+
+348
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{345}
+	children:set()
+
+349
+	type:STRUCT
+	name:)
+	keyword:IN
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{338}
+	children:set()
+
+350
+	type:STRUCT
+	name:)
+	keyword:FROM
+	statement:FROM
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{78}
+	children:set()
+
+351
+	type:JOIN
+	name:INNER JOIN
+	keyword:INNER JOIN
+	statement:FROM
+	level:1
+	as_name:None
+	from:None
+	parents:{3}
+	children:{352, 298}
+
+352
+	type:VIEW
+	name:(  SELECT  SUM((C2041963219)) C_2 ,  SUM((CC24877953)) C_3 ,  SUM((CC1403497422)) C_4 ,  SUM((CC1397497310)) C_5 ,  SUM((CC1603603611)) C_6 ,  SUM((CC1597603499)) C_7 ,  SUM((C1948592346)) C_8 ,  SUM((C1954592458)) C_9,(C2001817886) C2001817886__TABLECOL_ , (C2007915462) C2007915462__TABLECOL_ FROM  (  SELECT "申请笔数" C2041963219 , "申请提款笔数" CC1603603611 , "申请提款金额" CC1597603499 , "成功提款金额" C1954592458 , "统计口径" C21383184 , "审批笔数" CC24877953 , "审批通过笔数" CC1403497422 , "切换日期" C2001817886 , "审批通过金额" CC1397497310 , "成功提款笔数" C1948592346 , "切换维度" C2007915462 FROM  ( SELECT 
+  DATA_TYPE               AS "统计口径" 
+  ,CASE WHEN '6'=1 THEN COALESCE(CITY_DESC_CN,'未知') 
+        WHEN '6'=2 THEN COALESCE(BRANCH03_NAME,'未知') 
+          WHEN '6'=3 THEN COALESCE(CHANNEL_SOURCE,'未知') 
+      WHEN '6'=4 THEN COALESCE(SOURCE,'未知') 
+      WHEN '6'=5 THEN COALESCE(OUTERSOURCE,'未知') 
+      WHEN '6'=6 THEN COALESCE(OUTERID,'未知') 
+      WHEN '6'=7 THEN COALESCE(CID,'未知') 
+      WHEN '6'=8 THEN COALESCE(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知') 
+      END AS "切换维度" 
+    ,CASE WHEN '1'=1 THEN  DATA_DATE 
+          ELSE TO_CHAR( TO_DATE( 
+ ('2019-12-12') 
+ , 
+ 'YYYY-MM-DD' 
+ 
+),'YYYYMMDD')||'-'||TO_CHAR( TO_DATE( 
+ ('2019-12-13') 
+ , 
+ 'YYYY-MM-DD' 
+ 
+),'YYYYMMDD') END AS "切换日期" 
+  ,TO_DATE(DATA_DATE,'YYYY-MM-DD')              AS "统计日期" 
+  ,JJ_CHANNEL             AS "KB码分类" 
+  ,REC_NO                 AS "推荐人代码" 
+  ,CHANNEL_SOURCE         AS "渠道来源编码" 
+  ,CHANNEL_SOURCE_NAME    AS "渠道来源" 
+  ,SOURCE                 AS "获客渠道编码" 
+  ,SOURCE_NAME            AS "获客渠道" 
+  ,CITY_DESC_CN           AS "贷款城市" 
+  ,ORG_ID                 AS "机构编码" 
+  ,ORG_NAME               AS "机构名称" 
+  ,BRANCH03_NO            AS "分行编码" 
+  ,BRANCH03_NAME          AS "分行" 
+  ,BRANCH02_NAME          AS "区域" 
+  ,BUSINESSTYPE           AS "业务品种" 
+  ,BUSINESSSUBTYPE        AS "业务子类型" 
+  ,SCHEMENO               AS "方案编号" 
+  ,PURPOSE_NAME           AS "贷款用途" 
+  ,LOANTERM               AS "贷款期限" 
+  ,SQ_NUM                 AS "申请笔数" 
+  ,SQ_AMT                 AS "申请金额" 
+  ,SP_NUM                 AS "审批笔数" 
+  ,SP_TG_NUM              AS "审批通过笔数" 
+  ,SP_TG_AMT              AS "审批通过金额" 
+  ,SQ_TK_NUM              AS "申请提款笔数" 
+  ,SQ_TK_AMT              AS "申请提款金额" 
+  ,TK_NUM                 AS "成功提款笔数" 
+  ,TK_AMT                 AS "成功提款金额" 
+    ,CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END  "推荐人编码" 
+    ,SALERNAME  "推荐人名称" 
+    ,SALERNAME_BRANCH03_NO     "推荐人所属支行编码" 
+    ,SALERNAME_BRANCH03_NAME   "推荐人所属支行名称" 
+  ,YLH_TK_NUM "一类户成功提款笔数" 
+    ,ELH_TK_NUM "二类户成功提款笔数" 
+    ,YLH_HK_NUM "一类户成功还款笔数" 
+    ,ELH_HK_NUM "二类户成功还款笔数" 
+  ,OUTERSOURCE -- "获客路径" 
+    ,OUTERID -- "外媒参数一级渠道" 
+    ,CID -- "外媒参数二级渠道" 
+  ,IS_HEKH -- "是否核额客户" 
+  ,PRODUCT_NAME "子产品分类" 
+FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ 
+WHERE DATA_DT = (SELECT MAX(DATA_DT) FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ) 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD')>=   TO_DATE(('2019-12-12'),'YYYY-MM-DD') 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD') <=   TO_DATE( ('2019-12-13'),'YYYY-MM-DD'))  T_T1150656837 )  T_T1150656837 
+WHERE  (  (C21383184) IN ('企划口径') ) 
+GROUP BY (C2001817886) , (C2007915462)   )
+	keyword:INNER JOIN
+	statement:FROM
+	level:1
+	as_name:T_T_2571410
+	from:DUMMY
+	parents:{3, 351}
+	children:{640, 390, 391, 399, 400, 408, 409, 417, 418, 426, 427, 431, 432, 436, 437, 353, 354, 355, 609, 610, 363, 364, 622, 623, 627, 372, 373, 628, 632, 636, 381, 382}
+
+353
+	type:STRUCT
+	name:(
+	keyword:
+	statement:FROM
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+354
+	type:STRUCT
+	name:SELECT
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+355
+	type:COL
+	name:SUM((C2041963219))
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:C_2
+	from:DUMMY
+	parents:{352, 83, 437}
+	children:{356}
+
+356
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:None
+	from:None
+	parents:{355}
+	children:{362, 357, 358}
+
+357
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{356}
+	children:set()
+
+358
+	type:SUB
+	name:(C2041963219)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{356}
+	children:{360, 361, 359}
+
+359
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{358}
+	children:set()
+
+360
+	type:COL
+	name:C2041963219
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{83, 437, 358}
+	children:set()
+
+361
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{358}
+	children:set()
+
+362
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{356}
+	children:set()
+
+363
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+364
+	type:COL
+	name:SUM((CC24877953))
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:C_3
+	from:DUMMY
+	parents:{352, 83, 437}
+	children:{365}
+
+365
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:None
+	from:None
+	parents:{364}
+	children:{371, 366, 367}
+
+366
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{365}
+	children:set()
+
+367
+	type:SUB
+	name:(CC24877953)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{365}
+	children:{368, 369, 370}
+
+368
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{367}
+	children:set()
+
+369
+	type:COL
+	name:CC24877953
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{83, 437, 367}
+	children:set()
+
+370
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{367}
+	children:set()
+
+371
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{365}
+	children:set()
+
+372
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+373
+	type:COL
+	name:SUM((CC1403497422))
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:C_4
+	from:DUMMY
+	parents:{352, 83, 437}
+	children:{374}
+
+374
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:None
+	from:None
+	parents:{373}
+	children:{376, 380, 375}
+
+375
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{374}
+	children:set()
+
+376
+	type:SUB
+	name:(CC1403497422)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{374}
+	children:{377, 378, 379}
+
+377
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{376}
+	children:set()
+
+378
+	type:COL
+	name:CC1403497422
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{376, 83, 437}
+	children:set()
+
+379
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{376}
+	children:set()
+
+380
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{374}
+	children:set()
+
+381
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+382
+	type:COL
+	name:SUM((CC1397497310))
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:C_5
+	from:DUMMY
+	parents:{352, 83, 437}
+	children:{383}
+
+383
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:None
+	from:None
+	parents:{382}
+	children:{384, 385, 389}
+
+384
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{383}
+	children:set()
+
+385
+	type:SUB
+	name:(CC1397497310)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{383}
+	children:{386, 387, 388}
+
+386
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{385}
+	children:set()
+
+387
+	type:COL
+	name:CC1397497310
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{385, 83, 437}
+	children:set()
+
+388
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{385}
+	children:set()
+
+389
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{383}
+	children:set()
+
+390
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+391
+	type:COL
+	name:SUM((CC1603603611))
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:C_6
+	from:DUMMY
+	parents:{352, 83, 437}
+	children:{392}
+
+392
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:None
+	from:None
+	parents:{391}
+	children:{393, 394, 398}
+
+393
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{392}
+	children:set()
+
+394
+	type:SUB
+	name:(CC1603603611)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{392}
+	children:{395, 396, 397}
+
+395
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{394}
+	children:set()
+
+396
+	type:COL
+	name:CC1603603611
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{394, 83, 437}
+	children:set()
+
+397
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{394}
+	children:set()
+
+398
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{392}
+	children:set()
+
+399
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+400
+	type:COL
+	name:SUM((CC1597603499))
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:C_7
+	from:DUMMY
+	parents:{352, 83, 437}
+	children:{401}
+
+401
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:None
+	from:None
+	parents:{400}
+	children:{402, 403, 407}
+
+402
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{401}
+	children:set()
+
+403
+	type:SUB
+	name:(CC1597603499)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{401}
+	children:{404, 405, 406}
+
+404
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{403}
+	children:set()
+
+405
+	type:COL
+	name:CC1597603499
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{83, 403, 437}
+	children:set()
+
+406
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{403}
+	children:set()
+
+407
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{401}
+	children:set()
+
+408
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+409
+	type:COL
+	name:SUM((C1948592346))
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:C_8
+	from:DUMMY
+	parents:{352, 83, 437}
+	children:{410}
+
+410
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:None
+	from:None
+	parents:{409}
+	children:{416, 411, 412}
+
+411
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{410}
+	children:set()
+
+412
+	type:SUB
+	name:(C1948592346)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{410}
+	children:{413, 414, 415}
+
+413
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{412}
+	children:set()
+
+414
+	type:COL
+	name:C1948592346
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{83, 412, 437}
+	children:set()
+
+415
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{412}
+	children:set()
+
+416
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{410}
+	children:set()
+
+417
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+418
+	type:COL
+	name:SUM((C1954592458))
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:C_9
+	from:DUMMY
+	parents:{352, 83, 437}
+	children:{419}
+
+419
+	type:FUNC
+	name:SUM
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:None
+	from:None
+	parents:{418}
+	children:{425, 420, 421}
+
+420
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{419}
+	children:set()
+
+421
+	type:SUB
+	name:(C1954592458)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{419}
+	children:{424, 422, 423}
+
+422
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{421}
+	children:set()
+
+423
+	type:COL
+	name:C1954592458
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{83, 421, 437}
+	children:set()
+
+424
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{421}
+	children:set()
+
+425
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{419}
+	children:set()
+
+426
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+427
+	type:COL
+	name:(C2001817886)
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:C2001817886__TABLECOL_
+	from:DUMMY
+	parents:{352, 83, 437}
+	children:{428, 429, 430}
+
+428
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{427}
+	children:set()
+
+429
+	type:COL
+	name:C2001817886
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{83, 427, 437}
+	children:set()
+
+430
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{427}
+	children:set()
+
+431
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+432
+	type:COL
+	name:(C2007915462)
+	keyword:SELECT
+	statement:SELECT
+	level:2
+	as_name:C2007915462__TABLECOL_
+	from:DUMMY
+	parents:{352, 83, 437}
+	children:{433, 434, 435}
+
+433
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{432}
+	children:set()
+
+434
+	type:COL
+	name:C2007915462
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{432, 83, 437}
+	children:set()
+
+435
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{432}
+	children:set()
+
+436
+	type:STRUCT
+	name:FROM
+	keyword:FROM
+	statement:FROM
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+437
+	type:VIEW
+	name:(  SELECT "申请笔数" C2041963219 , "申请提款笔数" CC1603603611 , "申请提款金额" CC1597603499 , "成功提款金额" C1954592458 , "统计口径" C21383184 , "审批笔数" CC24877953 , "审批通过笔数" CC1403497422 , "切换日期" C2001817886 , "审批通过金额" CC1397497310 , "成功提款笔数" C1948592346 , "切换维度" C2007915462 FROM  ( SELECT 
+  DATA_TYPE               AS "统计口径" 
+  ,CASE WHEN '6'=1 THEN COALESCE(CITY_DESC_CN,'未知') 
+        WHEN '6'=2 THEN COALESCE(BRANCH03_NAME,'未知') 
+          WHEN '6'=3 THEN COALESCE(CHANNEL_SOURCE,'未知') 
+      WHEN '6'=4 THEN COALESCE(SOURCE,'未知') 
+      WHEN '6'=5 THEN COALESCE(OUTERSOURCE,'未知') 
+      WHEN '6'=6 THEN COALESCE(OUTERID,'未知') 
+      WHEN '6'=7 THEN COALESCE(CID,'未知') 
+      WHEN '6'=8 THEN COALESCE(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知') 
+      END AS "切换维度" 
+    ,CASE WHEN '1'=1 THEN  DATA_DATE 
+          ELSE TO_CHAR( TO_DATE( 
+ ('2019-12-12') 
+ , 
+ 'YYYY-MM-DD' 
+ 
+),'YYYYMMDD')||'-'||TO_CHAR( TO_DATE( 
+ ('2019-12-13') 
+ , 
+ 'YYYY-MM-DD' 
+ 
+),'YYYYMMDD') END AS "切换日期" 
+  ,TO_DATE(DATA_DATE,'YYYY-MM-DD')              AS "统计日期" 
+  ,JJ_CHANNEL             AS "KB码分类" 
+  ,REC_NO                 AS "推荐人代码" 
+  ,CHANNEL_SOURCE         AS "渠道来源编码" 
+  ,CHANNEL_SOURCE_NAME    AS "渠道来源" 
+  ,SOURCE                 AS "获客渠道编码" 
+  ,SOURCE_NAME            AS "获客渠道" 
+  ,CITY_DESC_CN           AS "贷款城市" 
+  ,ORG_ID                 AS "机构编码" 
+  ,ORG_NAME               AS "机构名称" 
+  ,BRANCH03_NO            AS "分行编码" 
+  ,BRANCH03_NAME          AS "分行" 
+  ,BRANCH02_NAME          AS "区域" 
+  ,BUSINESSTYPE           AS "业务品种" 
+  ,BUSINESSSUBTYPE        AS "业务子类型" 
+  ,SCHEMENO               AS "方案编号" 
+  ,PURPOSE_NAME           AS "贷款用途" 
+  ,LOANTERM               AS "贷款期限" 
+  ,SQ_NUM                 AS "申请笔数" 
+  ,SQ_AMT                 AS "申请金额" 
+  ,SP_NUM                 AS "审批笔数" 
+  ,SP_TG_NUM              AS "审批通过笔数" 
+  ,SP_TG_AMT              AS "审批通过金额" 
+  ,SQ_TK_NUM              AS "申请提款笔数" 
+  ,SQ_TK_AMT              AS "申请提款金额" 
+  ,TK_NUM                 AS "成功提款笔数" 
+  ,TK_AMT                 AS "成功提款金额" 
+    ,CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END  "推荐人编码" 
+    ,SALERNAME  "推荐人名称" 
+    ,SALERNAME_BRANCH03_NO     "推荐人所属支行编码" 
+    ,SALERNAME_BRANCH03_NAME   "推荐人所属支行名称" 
+  ,YLH_TK_NUM "一类户成功提款笔数" 
+    ,ELH_TK_NUM "二类户成功提款笔数" 
+    ,YLH_HK_NUM "一类户成功还款笔数" 
+    ,ELH_HK_NUM "二类户成功还款笔数" 
+  ,OUTERSOURCE -- "获客路径" 
+    ,OUTERID -- "外媒参数一级渠道" 
+    ,CID -- "外媒参数二级渠道" 
+  ,IS_HEKH -- "是否核额客户" 
+  ,PRODUCT_NAME "子产品分类" 
+FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ 
+WHERE DATA_DT = (SELECT MAX(DATA_DT) FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ) 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD')>=   TO_DATE(('2019-12-12'),'YYYY-MM-DD') 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD') <=   TO_DATE( ('2019-12-13'),'YYYY-MM-DD'))  T_T1150656837 )
+	keyword:FROM
+	statement:FROM
+	level:2
+	as_name:T_T1150656837
+	from:DUMMY
+	parents:{352}
+	children:{91, 93, 95, 608, 97, 99, 101, 614, 103, 105, 107, 109, 112, 625, 114, 116, 118, 630, 120, 122, 124, 126, 128, 131, 133, 135, 137, 140, 142, 144, 146, 148, 150, 152, 155, 157, 159, 161, 163, 165, 167, 169, 171, 173, 175, 177, 179, 181, 183, 185, 187, 355, 360, 364, 369, 373, 378, 382, 387, 391, 396, 400, 405, 409, 414, 418, 423, 427, 429, 432, 434, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462}
+
+438
+	type:STRUCT
+	name:(
+	keyword:
+	statement:FROM
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+439
+	type:STRUCT
+	name:SELECT
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+440
+	type:COL
+	name:"申请笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:C2041963219
+	from:DUMMY
+	parents:{88, 437, 462}
+	children:set()
+
+441
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+442
+	type:COL
+	name:"申请提款笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:CC1603603611
+	from:DUMMY
+	parents:{88, 437, 462}
+	children:set()
+
+443
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+444
+	type:COL
+	name:"申请提款金额"
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:CC1597603499
+	from:DUMMY
+	parents:{88, 437, 462}
+	children:set()
+
+445
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+446
+	type:COL
+	name:"成功提款金额"
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:C1954592458
+	from:DUMMY
+	parents:{88, 437, 462}
+	children:set()
+
+447
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+448
+	type:COL
+	name:"统计口径"
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:C21383184
+	from:DUMMY
+	parents:{88, 437, 462}
+	children:set()
+
+449
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+450
+	type:COL
+	name:"审批笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:CC24877953
+	from:DUMMY
+	parents:{88, 437, 462}
+	children:set()
+
+451
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+452
+	type:COL
+	name:"审批通过笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:CC1403497422
+	from:DUMMY
+	parents:{88, 437, 462}
+	children:set()
+
+453
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+454
+	type:COL
+	name:"切换日期"
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:C2001817886
+	from:DUMMY
+	parents:{88, 437, 462}
+	children:set()
+
+455
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+456
+	type:COL
+	name:"审批通过金额"
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:CC1397497310
+	from:DUMMY
+	parents:{88, 437, 462}
+	children:set()
+
+457
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+458
+	type:COL
+	name:"成功提款笔数"
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:C1948592346
+	from:DUMMY
+	parents:{88, 437, 462}
+	children:set()
+
+459
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+460
+	type:COL
+	name:"切换维度"
+	keyword:SELECT
+	statement:SELECT
+	level:3
+	as_name:C2007915462
+	from:DUMMY
+	parents:{88, 437, 462}
+	children:set()
+
+461
+	type:STRUCT
+	name:FROM
+	keyword:FROM
+	statement:FROM
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+462
+	type:VIEW
+	name:( SELECT 
+  DATA_TYPE               AS "统计口径" 
+  ,CASE WHEN '6'=1 THEN COALESCE(CITY_DESC_CN,'未知') 
+        WHEN '6'=2 THEN COALESCE(BRANCH03_NAME,'未知') 
+          WHEN '6'=3 THEN COALESCE(CHANNEL_SOURCE,'未知') 
+      WHEN '6'=4 THEN COALESCE(SOURCE,'未知') 
+      WHEN '6'=5 THEN COALESCE(OUTERSOURCE,'未知') 
+      WHEN '6'=6 THEN COALESCE(OUTERID,'未知') 
+      WHEN '6'=7 THEN COALESCE(CID,'未知') 
+      WHEN '6'=8 THEN COALESCE(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知') 
+      END AS "切换维度" 
+    ,CASE WHEN '1'=1 THEN  DATA_DATE 
+          ELSE TO_CHAR( TO_DATE( 
+ ('2019-12-12') 
+ , 
+ 'YYYY-MM-DD' 
+ 
+),'YYYYMMDD')||'-'||TO_CHAR( TO_DATE( 
+ ('2019-12-13') 
+ , 
+ 'YYYY-MM-DD' 
+ 
+),'YYYYMMDD') END AS "切换日期" 
+  ,TO_DATE(DATA_DATE,'YYYY-MM-DD')              AS "统计日期" 
+  ,JJ_CHANNEL             AS "KB码分类" 
+  ,REC_NO                 AS "推荐人代码" 
+  ,CHANNEL_SOURCE         AS "渠道来源编码" 
+  ,CHANNEL_SOURCE_NAME    AS "渠道来源" 
+  ,SOURCE                 AS "获客渠道编码" 
+  ,SOURCE_NAME            AS "获客渠道" 
+  ,CITY_DESC_CN           AS "贷款城市" 
+  ,ORG_ID                 AS "机构编码" 
+  ,ORG_NAME               AS "机构名称" 
+  ,BRANCH03_NO            AS "分行编码" 
+  ,BRANCH03_NAME          AS "分行" 
+  ,BRANCH02_NAME          AS "区域" 
+  ,BUSINESSTYPE           AS "业务品种" 
+  ,BUSINESSSUBTYPE        AS "业务子类型" 
+  ,SCHEMENO               AS "方案编号" 
+  ,PURPOSE_NAME           AS "贷款用途" 
+  ,LOANTERM               AS "贷款期限" 
+  ,SQ_NUM                 AS "申请笔数" 
+  ,SQ_AMT                 AS "申请金额" 
+  ,SP_NUM                 AS "审批笔数" 
+  ,SP_TG_NUM              AS "审批通过笔数" 
+  ,SP_TG_AMT              AS "审批通过金额" 
+  ,SQ_TK_NUM              AS "申请提款笔数" 
+  ,SQ_TK_AMT              AS "申请提款金额" 
+  ,TK_NUM                 AS "成功提款笔数" 
+  ,TK_AMT                 AS "成功提款金额" 
+    ,CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END  "推荐人编码" 
+    ,SALERNAME  "推荐人名称" 
+    ,SALERNAME_BRANCH03_NO     "推荐人所属支行编码" 
+    ,SALERNAME_BRANCH03_NAME   "推荐人所属支行名称" 
+  ,YLH_TK_NUM "一类户成功提款笔数" 
+    ,ELH_TK_NUM "二类户成功提款笔数" 
+    ,YLH_HK_NUM "一类户成功还款笔数" 
+    ,ELH_HK_NUM "二类户成功还款笔数" 
+  ,OUTERSOURCE -- "获客路径" 
+    ,OUTERID -- "外媒参数一级渠道" 
+    ,CID -- "外媒参数二级渠道" 
+  ,IS_HEKH -- "是否核额客户" 
+  ,PRODUCT_NAME "子产品分类" 
+FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ 
+WHERE DATA_DT = (SELECT MAX(DATA_DT) FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ) 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD')>=   TO_DATE(('2019-12-12'),'YYYY-MM-DD') 
+AND TO_DATE(DATA_DATE,'YYYY-MM-DD') <=   TO_DATE( ('2019-12-13'),'YYYY-MM-DD'))
+	keyword:FROM
+	statement:FROM
+	level:3
+	as_name:T_T1150656837
+	from:DUMMY
+	parents:{437}
+	children:{512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 562, 573, 575, 590, 592, 91, 93, 95, 607, 97, 99, 101, 103, 105, 107, 109, 112, 114, 116, 118, 120, 122, 124, 126, 128, 131, 133, 135, 137, 140, 142, 144, 146, 148, 150, 152, 155, 157, 159, 161, 163, 165, 167, 169, 171, 173, 175, 177, 179, 181, 183, 185, 187, 440, 442, 444, 446, 448, 450, 452, 454, 456, 458, 460, 463, 464, 465, 466, 467, 468, 469, 470, 471, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499, 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511}
+
+463
+	type:STRUCT
+	name:(
+	keyword:
+	statement:FROM
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+464
+	type:STRUCT
+	name:SELECT
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+465
+	type:COL
+	name:DATA_TYPE
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:"统计口径"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+466
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+467
+	type:COL
+	name:CASE WHEN '6'=1 THEN COALESCE(CITY_DESC_CN,'未知') 
+        WHEN '6'=2 THEN COALESCE(BRANCH03_NAME,'未知') 
+          WHEN '6'=3 THEN COALESCE(CHANNEL_SOURCE,'未知') 
+      WHEN '6'=4 THEN COALESCE(SOURCE,'未知') 
+      WHEN '6'=5 THEN COALESCE(OUTERSOURCE,'未知') 
+      WHEN '6'=6 THEN COALESCE(OUTERID,'未知') 
+      WHEN '6'=7 THEN COALESCE(CID,'未知') 
+      WHEN '6'=8 THEN COALESCE(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知') 
+      END
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:"切换维度"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+468
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+469
+	type:COL
+	name:CASE WHEN '1'=1 THEN  DATA_DATE 
+          ELSE TO_CHAR( TO_DATE( 
+ ('2019-12-12') 
+ , 
+ 'YYYY-MM-DD' 
+ 
+),'YYYYMMDD')||'-'||TO_CHAR( TO_DATE( 
+ ('2019-12-13') 
+ , 
+ 'YYYY-MM-DD' 
+ 
+),'YYYYMMDD') END
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:"切换日期"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+470
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+471
+	type:COL
+	name:TO_DATE(DATA_DATE,'YYYY-MM-DD')
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:"统计日期"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:{472}
+
+472
+	type:FUNC
+	name:TO_DATE
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:None
+	from:None
+	parents:{471}
+	children:{473, 474, 475, 476, 477}
+
+473
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{472}
+	children:set()
+
+474
+	type:COL
+	name:DATA_DATE
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:DUMMY
+	parents:{472, 189, 559}
+	children:set()
+
+475
+	type:STRUCT
+	name:,
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{472}
+	children:set()
+
+476
+	type:VALUE
+	name:'YYYY-MM-DD'
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{472}
+	children:set()
+
+477
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{472}
+	children:set()
+
+478
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+479
+	type:COL
+	name:JJ_CHANNEL
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:"KB码分类"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+480
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+481
+	type:COL
+	name:REC_NO
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:"推荐人代码"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+482
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+483
+	type:COL
+	name:CHANNEL_SOURCE
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:"渠道来源编码"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+484
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+485
+	type:COL
+	name:CHANNEL_SOURCE_NAME
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:"渠道来源"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+486
+	type:STRUCT
+	name:,
+	keyword:SELECT
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+487
+	type:STRUCT
+	name:SOURCE
+	keyword:SOURCE
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+488
+	type:STRUCT
+	name:AS
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+489
+	type:COL
+	name:"获客渠道编码"
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+490
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+491
+	type:COL
+	name:SOURCE_NAME
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"获客渠道"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+492
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+493
+	type:COL
+	name:CITY_DESC_CN
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"贷款城市"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+494
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+495
+	type:COL
+	name:ORG_ID
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"机构编码"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+496
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+497
+	type:COL
+	name:ORG_NAME
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"机构名称"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+498
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+499
+	type:COL
+	name:BRANCH03_NO
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"分行编码"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+500
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+501
+	type:COL
+	name:BRANCH03_NAME
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"分行"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+502
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+503
+	type:COL
+	name:BRANCH02_NAME
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"区域"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+504
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+505
+	type:COL
+	name:BUSINESSTYPE
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"业务品种"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+506
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+507
+	type:COL
+	name:BUSINESSSUBTYPE
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"业务子类型"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+508
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+509
+	type:COL
+	name:SCHEMENO
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"方案编号"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+510
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+511
+	type:COL
+	name:PURPOSE_NAME
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"贷款用途"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+512
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+513
+	type:COL
+	name:LOANTERM
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"贷款期限"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+514
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+515
+	type:COL
+	name:SQ_NUM
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"申请笔数"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+516
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+517
+	type:COL
+	name:SQ_AMT
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"申请金额"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+518
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+519
+	type:COL
+	name:SP_NUM
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"审批笔数"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+520
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+521
+	type:COL
+	name:SP_TG_NUM
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"审批通过笔数"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+522
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+523
+	type:COL
+	name:SP_TG_AMT
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"审批通过金额"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+524
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+525
+	type:COL
+	name:SQ_TK_NUM
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"申请提款笔数"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+526
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+527
+	type:COL
+	name:SQ_TK_AMT
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"申请提款金额"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+528
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+529
+	type:COL
+	name:TK_NUM
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"成功提款笔数"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+530
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+531
+	type:COL
+	name:TK_AMT
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"成功提款金额"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+532
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+533
+	type:COL
+	name:CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"推荐人编码"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+534
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+535
+	type:COL
+	name:SALERNAME
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"推荐人名称"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+536
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+537
+	type:COL
+	name:SALERNAME_BRANCH03_NO
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"推荐人所属支行编码"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+538
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+539
+	type:COL
+	name:SALERNAME_BRANCH03_NAME
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"推荐人所属支行名称"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+540
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+541
+	type:COL
+	name:YLH_TK_NUM
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"一类户成功提款笔数"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+542
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+543
+	type:COL
+	name:ELH_TK_NUM
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"二类户成功提款笔数"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+544
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+545
+	type:COL
+	name:YLH_HK_NUM
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"一类户成功还款笔数"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+546
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+547
+	type:COL
+	name:ELH_HK_NUM
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"二类户成功还款笔数"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+548
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+549
+	type:COL
+	name:OUTERSOURCE
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:-- "获客路径" 
+    
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+550
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+551
+	type:COL
+	name:OUTERID
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:-- "外媒参数一级渠道" 
+    
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+552
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+553
+	type:COL
+	name:CID
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:-- "外媒参数二级渠道" 
+  
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+554
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+555
+	type:COL
+	name:IS_HEKH
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:-- "是否核额客户" 
+  
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+556
+	type:STRUCT
+	name:,
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+557
+	type:COL
+	name:PRODUCT_NAME
+	keyword:AS
+	statement:SELECT
+	level:4
+	as_name:"子产品分类"
+	from:DUMMY
+	parents:{189, 462, 559}
+	children:set()
+
+558
+	type:STRUCT
+	name:FROM
+	keyword:FROM
+	statement:FROM
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+559
+	type:TAB
+	name:XJ_RPT_D_PAZDXE_KJHZ
+	keyword:FROM
+	statement:FROM
+	level:4
+	as_name:XJ_RPT_D_PAZDXE_KJHZ
+	from:BRRPSDATA
+	parents:{462}
+	children:{513, 515, 517, 519, 521, 523, 525, 527, 529, 531, 533, 535, 537, 539, 541, 543, 545, 547, 549, 551, 553, 555, 557, 561, 578, 595, 192, 194, 196, 198, 201, 206, 208, 210, 212, 216, 218, 220, 222, 224, 226, 228, 230, 232, 234, 236, 238, 240, 242, 244, 246, 248, 250, 252, 254, 256, 258, 260, 262, 264, 266, 268, 270, 272, 274, 276, 278, 280, 282, 284, 288, 295, 305, 322, 465, 467, 469, 471, 474, 479, 481, 483, 485, 489, 491, 493, 495, 497, 499, 501, 503, 505, 507, 509, 511}
+
+560
+	type:STRUCT
+	name:WHERE
+	keyword:WHERE
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+561
+	type:COL
+	name:DATA_DT
+	keyword:WHERE
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:DUMMY
+	parents:{562, 189, 559}
+	children:set()
+
+562
+	type:OPT
+	name:=
+	keyword:WHERE
+	statement:WHERE
+	level:4
+	as_name:None
+	from:None
+	parents:{462}
+	children:{561, 563}
+
+563
+	type:SUB
+	name:(SELECT MAX(DATA_DT) FROM BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ)
+	keyword:WHERE
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:DUMMY
+	parents:{562}
+	children:{564, 565, 566, 570, 571, 572}
+
+564
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{563}
+	children:set()
+
+565
+	type:STRUCT
+	name:SELECT
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{563}
+	children:set()
+
+566
+	type:FUNC
+	name:MAX
+	keyword:SELECT
+	statement:SELECT
+	level:5
+	as_name:None
+	from:None
+	parents:{563}
+	children:{568, 569, 567}
+
+567
+	type:STRUCT
+	name:(
+	keyword:
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{566}
+	children:set()
+
+568
+	type:COL
+	name:DATA_DT
+	keyword:
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:DUMMY
+	parents:{571, 566, 286}
+	children:set()
+
+569
+	type:STRUCT
+	name:)
+	keyword:
+	statement:SELECT
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{566}
+	children:set()
+
+570
+	type:STRUCT
+	name:FROM
+	keyword:FROM
+	statement:FROM
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{563}
+	children:set()
+
+571
+	type:TAB
+	name:XJ_RPT_D_PAZDXE_KJHZ
+	keyword:FROM
+	statement:FROM
+	level:5
+	as_name:XJ_RPT_D_PAZDXE_KJHZ
+	from:BRRPSDATA
+	parents:{563}
+	children:{256, 258, 260, 262, 264, 266, 268, 270, 272, 274, 276, 278, 280, 282, 284, 288, 295, 305, 568, 192, 194, 322, 196, 198, 201, 206, 208, 210, 212, 216, 218, 220, 222, 224, 226, 228, 230, 232, 234, 236, 238, 240, 242, 244, 246, 248, 250, 252, 254}
+
+572
+	type:STRUCT
+	name:)
+	keyword:FROM
+	statement:FROM
+	level:5
+	as_name:DUMMY
+	from:None
+	parents:{563}
+	children:set()
+
+573
+	type:STRUCT
+	name:AND
+	keyword:AND
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+574
+	type:FUNC
+	name:TO_DATE
+	keyword:AND
+	statement:WHERE
+	level:4
+	as_name:None
+	from:None
+	parents:{575}
+	children:{577, 578, 579, 580, 581}
+
+575
+	type:OPT
+	name:>=
+	keyword:AND
+	statement:WHERE
+	level:4
+	as_name:None
+	from:None
+	parents:{462}
+	children:{576, 574}
+
+576
+	type:FUNC
+	name:TO_DATE
+	keyword:AND
+	statement:WHERE
+	level:4
+	as_name:None
+	from:None
+	parents:{575}
+	children:{582, 583, 587, 588, 589}
+
+577
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{574}
+	children:set()
+
+578
+	type:COL
+	name:DATA_DATE
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:DUMMY
+	parents:{189, 574, 559}
+	children:set()
+
+579
+	type:STRUCT
+	name:,
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{574}
+	children:set()
+
+580
+	type:VALUE
+	name:'YYYY-MM-DD'
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{574}
+	children:set()
+
+581
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{574}
+	children:set()
+
+582
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{576}
+	children:set()
+
+583
+	type:SUB
+	name:('2019-12-12')
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:DUMMY
+	parents:{576}
+	children:{584, 585, 586}
+
+584
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{583}
+	children:set()
+
+585
+	type:VALUE
+	name:'2019-12-12'
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{583}
+	children:set()
+
+586
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{583}
+	children:set()
+
+587
+	type:STRUCT
+	name:,
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{576}
+	children:set()
+
+588
+	type:VALUE
+	name:'YYYY-MM-DD'
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{576}
+	children:set()
+
+589
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{576}
+	children:set()
+
+590
+	type:STRUCT
+	name:AND
+	keyword:AND
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+591
+	type:FUNC
+	name:TO_DATE
+	keyword:AND
+	statement:WHERE
+	level:4
+	as_name:None
+	from:None
+	parents:{592}
+	children:{594, 595, 596, 597, 598}
+
+592
+	type:OPT
+	name:<=
+	keyword:AND
+	statement:WHERE
+	level:4
+	as_name:None
+	from:None
+	parents:{462}
+	children:{593, 591}
+
+593
+	type:FUNC
+	name:TO_DATE
+	keyword:AND
+	statement:WHERE
+	level:4
+	as_name:None
+	from:None
+	parents:{592}
+	children:{599, 600, 604, 605, 606}
+
+594
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{591}
+	children:set()
+
+595
+	type:COL
+	name:DATA_DATE
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:DUMMY
+	parents:{559, 189, 591}
+	children:set()
+
+596
+	type:STRUCT
+	name:,
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{591}
+	children:set()
+
+597
+	type:VALUE
+	name:'YYYY-MM-DD'
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{591}
+	children:set()
+
+598
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{591}
+	children:set()
+
+599
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{593}
+	children:set()
+
+600
+	type:SUB
+	name:('2019-12-13')
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:DUMMY
+	parents:{593}
+	children:{601, 602, 603}
+
+601
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{600}
+	children:set()
+
+602
+	type:VALUE
+	name:'2019-12-13'
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{600}
+	children:set()
+
+603
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{600}
+	children:set()
+
+604
+	type:STRUCT
+	name:,
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{593}
+	children:set()
+
+605
+	type:VALUE
+	name:'YYYY-MM-DD'
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{593}
+	children:set()
+
+606
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{593}
+	children:set()
+
+607
+	type:STRUCT
+	name:)
+	keyword:FROM
+	statement:FROM
+	level:4
+	as_name:DUMMY
+	from:None
+	parents:{462}
+	children:set()
+
+608
+	type:STRUCT
+	name:)
+	keyword:FROM
+	statement:FROM
+	level:3
+	as_name:DUMMY
+	from:None
+	parents:{437}
+	children:set()
+
+609
+	type:STRUCT
+	name:WHERE
+	keyword:WHERE
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352}
+	children:set()
+
+610
+	type:SUB
+	name:(  (C21383184) IN ('企划口径') )
+	keyword:WHERE
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{352}
+	children:{611, 612, 616, 617, 621}
+
+611
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{610}
+	children:set()
+
+612
+	type:SUB
+	name:(C21383184)
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{610}
+	children:{613, 614, 615}
+
+613
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{612}
+	children:set()
+
+614
+	type:COL
+	name:C21383184
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{83, 612, 437}
+	children:set()
+
+615
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{616, 612}
+	children:set()
+
+616
+	type:OPT
+	name:IN
+	keyword:IN
+	statement:WHERE
+	level:2
+	as_name:None
+	from:None
+	parents:{610}
+	children:{617, 615}
+
+617
+	type:SUB
+	name:('企划口径')
+	keyword:IN
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{616, 610}
+	children:{618, 619, 620}
+
+618
+	type:STRUCT
+	name:(
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{617}
+	children:set()
+
+619
+	type:VALUE
+	name:'企划口径'
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{617}
+	children:set()
+
+620
+	type:STRUCT
+	name:)
+	keyword:
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{617}
+	children:set()
+
+621
+	type:STRUCT
+	name:)
+	keyword:IN
+	statement:WHERE
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{610}
+	children:set()
+
+622
+	type:STRUCT
+	name:GROUP BY
+	keyword:GROUP BY
+	statement:GROUP BY
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352, 0}
+	children:set()
+
+623
+	type:SUB
+	name:(C2001817886)
+	keyword:GROUP BY
+	statement:GROUP BY
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{352}
+	children:{624, 625, 626}
+
+624
+	type:STRUCT
+	name:(
+	keyword:
+	statement:GROUP BY
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{623}
+	children:set()
+
+625
+	type:COL
+	name:C2001817886
+	keyword:
+	statement:GROUP BY
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{83, 437, 623}
+	children:set()
+
+626
+	type:STRUCT
+	name:)
+	keyword:
+	statement:GROUP BY
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{623}
+	children:set()
+
+627
+	type:STRUCT
+	name:,
+	keyword:GROUP BY
+	statement:GROUP BY
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352, 0}
+	children:set()
+
+628
+	type:SUB
+	name:(C2007915462)
+	keyword:GROUP BY
+	statement:GROUP BY
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{352}
+	children:{629, 630, 631}
+
+629
+	type:STRUCT
+	name:(
+	keyword:
+	statement:GROUP BY
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{628}
+	children:set()
+
+630
+	type:COL
+	name:C2007915462
+	keyword:
+	statement:GROUP BY
+	level:2
+	as_name:DUMMY
+	from:DUMMY
+	parents:{83, 628, 437}
+	children:set()
+
+631
+	type:STRUCT
+	name:)
+	keyword:
+	statement:GROUP BY
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{628}
+	children:set()
+
+632
+	type:STRUCT
+	name:)
+	keyword:GROUP BY
+	statement:GROUP BY
+	level:2
+	as_name:DUMMY
+	from:None
+	parents:{352, 0}
+	children:set()
+
+633
+	type:STRUCT
+	name:ON
+	keyword:ON
+	statement:FROM
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+634
+	type:COL
+	name:C2001817886
+	keyword:ON
+	statement:FROM
+	level:1
+	as_name:DUMMY
+	from:T_T_T1396198938
+	parents:{635, 78}
+	children:set()
+
+635
+	type:OPT
+	name:=
+	keyword:ON
+	statement:FROM
+	level:1
+	as_name:None
+	from:None
+	parents:{3}
+	children:{634, 636}
+
+636
+	type:COL
+	name:C2001817886__TABLECOL_
+	keyword:ON
+	statement:FROM
+	level:1
+	as_name:DUMMY
+	from:T_T_2571410
+	parents:{352, 635}
+	children:set()
+
+637
+	type:STRUCT
+	name:AND
+	keyword:AND
+	statement:FROM
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+
+638
+	type:COL
+	name:C2007915462
+	keyword:AND
+	statement:FROM
+	level:1
+	as_name:DUMMY
+	from:T_T_T1396198938
+	parents:{78, 639}
+	children:set()
+
+639
+	type:OPT
+	name:=
+	keyword:AND
+	statement:FROM
+	level:1
+	as_name:None
+	from:None
+	parents:{3}
+	children:{640, 638}
+
+640
+	type:COL
+	name:C2007915462__TABLECOL_
+	keyword:AND
+	statement:FROM
+	level:1
+	as_name:DUMMY
+	from:T_T_2571410
+	parents:{352, 639}
+	children:set()
+
+641
+	type:STRUCT
+	name:)
+	keyword:AND
+	statement:FROM
+	level:1
+	as_name:DUMMY
+	from:None
+	parents:{3}
+	children:set()
+

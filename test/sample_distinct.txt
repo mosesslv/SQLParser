@@ -1,0 +1,104 @@
+/*@ files=AuctionConfigMapper.xml namespace=auction_config id=queryByKey  @*/
+		select
+		ID     id,
+		CREATED_AT createdAt,
+		CREATED_BY createdBy,
+		UPDATED_AT updatedAt,
+		UPDATED_BY updatedBy,
+		KEY_NAME keyName,
+		KEY_VALUE keyValue
+		from bid_config
+		where key_name = :P_keyName
+		and is_valid = '1'
++----+-------------+------------+------+---------------+----------+---------+-------+------+------------------------------------+
+| id | select_type | table      | type | possible_keys | key      | key_len | ref   | rows | Extra                              |
++----+-------------+------------+------+---------------+----------+---------+-------+------+------------------------------------+
+| 1  | SIMPLE      | bid_config | ref  | ID_BC_KN      | ID_BC_KN | 514     | const | 1    | Using index condition; Using where |
++----+-------------+------------+------+---------------+----------+---------+-------+------+------------------------------------+
+[0, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=GENERAL_INVESTMENT_PAGE_CONFIG.xml namespace=GENERAL_INVESTMENT_PAGE_CONFIG id=selectByExample  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, IS_VALID,
+        ORDER_NUM, CONFIG_TYPE, CONFIG_CONTENT,ACTIVITY_ID
+        from GENERAL_INVEST_PAGE_CONFIG t
+        where 1=1
+-- /*isNotNull  property='activityId' prepend='and'*/  and   
+--             t.ACTIVITY_ID = :P_activityId
+-- /*isNotNull  property='isValid' prepend='and'*/  and   
+--             t.IS_VALID = :P_isValid
+        order by ORDER_NUM asc
++----+-------------+-------+------+---------------+------+---------+------+-------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows  | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+-------+----------------+
+| 1  | SIMPLE      | t     | ALL  | None          | None | None    | None | 20304 | Using filesort |
++----+-------------+-------+------+---------------+------+---------+------+-------+----------------+
+[0, " "]
+问题点:
+	表GENERAL_INVEST_PAGE_CONFIG使用全表扫描
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_user_participation_SqlMap_mysql.xml namespace=isr_user_participation id=selectByActivityCodeUserId  @*/
+        select
+    ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, USER_ID, ACTIVITY_CODE, STATUS
+        from isr_user_participation
+        where ACTIVITY_CODE = 'JLJ_001'
+        and USER_ID = 36278904
++----+-------------+------------------------+------+---------------------------+--------------+---------+-------+------+-------------+
+| id | select_type | table                  | type | possible_keys             | key          | key_len | ref   | rows | Extra       |
++----+-------------+------------------------+------+---------------------------+--------------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_user_participation | ref  | IDX_PTC_USER,IDX_PTC_CODE | IDX_PTC_USER | 8       | const | 2    | Using where |
++----+-------------+------------------------+------+---------------------------+--------------+---------+-------+------+-------------+
+[1, ""]
+建议:
+	表isr_user_participation中,IDX_PTC_USER(user_id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=selectByPkAngPageNum  @*/
+        SELECT 
+        id id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPk
+        , USER_ID userId
+        , PARTY_NO partyNo
+        , AGENT_UM agentUm
+        , AGENT_ID agentId
+        , AGENT_NAME agentName
+        , MEMBER_RANK_CODE memberRankCode
+        , BW_1730_FLAG bw1730Flag
+        , AUM_AMOUNT aumAmount
+        , CA_AMOUNT caAmount
+        , LAST_1730_DATE last1730Date
+        , LAST_BW_DATE lastBwDate
+        , EXPIRED_1730_DATE expired1730Date
+        , EXPIRED_BW_DATE expiredBwDate
+        , ANNUAL_ROA annualRoa
+        , PARTITION_KEY partitionKey
+        , IS_1732_FLAG is1732Flag
+        , FIRST_INVESTMENT_TIME firstInvestmentTime
+        , AI_CA_AMOUNT aiCaAmount
+        , MGM_CA_AMOUNT mgmCaAmount
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE BELONG_PK = '2019-04-09'
+        AND PARTITION_KEY = 20190409
+        AND USER_ID > 100
+        ORDER BY USER_ID + 0 ASC
+        LIMIT 100, 100
++----+-------------+---------------------------+------+--------------------+------+---------+------+---------+-----------------------------+
+| id | select_type | table                     | type | possible_keys      | key  | key_len | ref  | rows    | Extra                       |
++----+-------------+---------------------------+------+--------------------+------+---------+------+---------+-----------------------------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | ALL  | UK_USER_ID_DATE_PK | None | None    | None | 1846394 | Using where; Using filesort |
++----+-------------+---------------------------+------+--------------------+------+---------+------+---------+-----------------------------+
+[0, " "]
+问题点:
+	表VIP_RM_USER_INFO_SNAPSHOT使用全表扫描
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中，可以使用索引UK_USER_ID_DATE_PK(user_id,belong_pk,partition_key)
+
+

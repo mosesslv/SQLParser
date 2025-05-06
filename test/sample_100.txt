@@ -1,0 +1,2938 @@
+/*@ files=AuctionConfigMapper.xml namespace=auction_config id=queryByKey  @*/
+		select
+		ID     id,
+		CREATED_AT createdAt,
+		CREATED_BY createdBy,
+		UPDATED_AT updatedAt,
+		UPDATED_BY updatedBy,
+		KEY_NAME keyName,
+		KEY_VALUE keyValue
+		from bid_config
+		where key_name = :P_keyName
+		and is_valid = '1'
++----+-------------+------------+------+---------------+----------+---------+-------+------+------------------------------------+
+| id | select_type | table      | type | possible_keys | key      | key_len | ref   | rows | Extra                              |
++----+-------------+------------+------+---------------+----------+---------+-------+------+------------------------------------+
+| 1  | SIMPLE      | bid_config | ref  | ID_BC_KN      | ID_BC_KN | 514     | const | 1    | Using index condition; Using where |
++----+-------------+------------+------+---------------+----------+---------+-------+------+------------------------------------+
+[0, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=PrmSystemConfig_mysql.xml namespace=PrmSystemConfig id=getConfigValueByKey  @*/
+        select 
+        id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy,
+        config_key configKey,
+        config_value configValue,
+        config_desc configDesc,
+        is_valid isValid
+        from prm_system_config
+        where config_key = 'IsPointsPerEnable'
+        and is_valid = 1
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+| id | select_type | table             | type  | possible_keys | key           | key_len | ref   | rows | Extra |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+| 1  | SIMPLE      | prm_system_config | const | UK_CONFIG_KEY | UK_CONFIG_KEY | 2050    | const | 1    | None  |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=PrmSystemConfig_mysql.xml namespace=PrmSystemConfig id=updateConfigValueByKey  @*/
+        update prm_system_config
+        set config_value = 'NO',
+        updated_at = now(),
+        updated_by = 'SYS'
+        where config_key = 'IsPointsPerEnable'
+    
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------------+
+| id | select_type | table             | type  | possible_keys | key           | key_len | ref   | rows | Extra       |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------------+
+| 1  | SIMPLE      | prm_system_config | range | UK_CONFIG_KEY | UK_CONFIG_KEY | 2050    | const | 1    | Using where |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=ai_app_device_finger.xml namespace=AiAppDeviceFinger id=getAiAppFinger  @*/
+        select
+        id, created_at, created_by, updated_at, updated_by, device_type, device_id,finger_hash,guid, cid,
+        inverted_colors_enabled, mono_audio_enabled, voice_over_enabled, voip_allowed, jailbreak,
+        device_country, country_code, device_language, device_model, device_name, device_brand,
+        os_name, os_version, screen_size, screen_pix, user_agent, mobile_accept, ios_token,
+        ios_idfv, ios_idfa, android_imei, android_serial_no, android_mac_address, carrier_name,
+        connection_type, current_public_ip, wifi_ssid, ip_address, scene,count,is_simulator,simulator_id
+        from   ai_app_device_finger
+        where  device_id = 'DA20190106105844882103'
+        order by created_at desc
+        limit 1
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+----------------------------------------------------+
+| id | select_type | table                | type | possible_keys     | key               | key_len | ref   | rows | Extra                                              |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+----------------------------------------------------+
+| 1  | SIMPLE      | ai_app_device_finger | ref  | IDX_APP_DEVICE_ID | IDX_APP_DEVICE_ID | 514     | const | 1    | Using index condition; Using where; Using filesort |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+----------------------------------------------------+
+[0, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=ai_web_device_finger.xml namespace=AiWebDeviceFinger id=getAiWebFinger  @*/
+        select 
+        id, created_at, created_by, updated_at, updated_by,device_type, device_id,
+        finger_hash, guid,navigator_name, product_name, app_name, app_version,
+        product_sub, os_name, platform, cpu_class, cookie_enabled, online, session_storage,
+        local_storage, indexed_db, add_behavior, open_database, do_not_track, language, time_zone_offset,
+        http_accept_header, is_support_touch, user_agent, is_has_lied_languages, is_has_lied_resolution,
+        is_has_lied_os, is_has_lied_browser, scr_width, scr_height, available_width, available_height,
+        scr_color_depth, scr_pixel_depth, scr_device_xdpi, scr_device_ydpi, scr_logical_xdpi,
+        scr_logical_ydpi, webgl_finger_print, canvas_finger_print, ip_address, scene, plugins_hash,count,is_simulator,simulator_id
+        from ai_web_device_finger
+        where device_id = 'DW2019012416255149088'
+        order by created_at desc
+        limit 1
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+----------------------------------------------------+
+| id | select_type | table                | type | possible_keys     | key               | key_len | ref   | rows | Extra                                              |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+----------------------------------------------------+
+| 1  | SIMPLE      | ai_web_device_finger | ref  | IDX_WEB_DEVICE_ID | IDX_WEB_DEVICE_ID | 514     | const | 1    | Using index condition; Using where; Using filesort |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+----------------------------------------------------+
+[0, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=PrmSystemConfig_mysql.xml namespace=PrmSystemConfig id=getConfigValueByKey  @*/
+        select 
+        id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy,
+        config_key configKey,
+        config_value configValue,
+        config_desc configDesc,
+        is_valid isValid
+        from prm_system_config
+        where config_key = 'IsPointsPerEnable'
+        and is_valid = 1
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+| id | select_type | table             | type  | possible_keys | key           | key_len | ref   | rows | Extra |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+| 1  | SIMPLE      | prm_system_config | const | UK_CONFIG_KEY | UK_CONFIG_KEY | 2050    | const | 1    | None  |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=PrmSystemConfig_mysql.xml namespace=PrmSystemConfig id=getConfigValueByKey  @*/
+        select 
+        id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy,
+        config_key configKey,
+        config_value configValue,
+        config_desc configDesc,
+        is_valid isValid
+        from prm_system_config
+        where config_key = 'IsPointsPerEnable'
+        and is_valid = 1
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+| id | select_type | table             | type  | possible_keys | key           | key_len | ref   | rows | Extra |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+| 1  | SIMPLE      | prm_system_config | const | UK_CONFIG_KEY | UK_CONFIG_KEY | 2050    | const | 1    | None  |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=SettlementInfoMapper.xml namespace=com.paic.bs.tls.dao.mapper.SettlementInfoMapper id=selectByCondition  @*/
+	    select
+    ID, CREATE_DATE, CREATE_BY, UPDATE_DATE, UPDATE_BY, IS_DELETE, VERSION, SETTLEMENT_NO,
+    SETTLEMENT_DATE, BIZ_TYPE, SETTLEMENT_AMOUNT, CONFIRM_AMOUNT, CONFIRM_DATE, TA_CODE, 
+    PRODUCT_CODE, SETTLEMENT_STATUS, TRADE_HANDLE_DATE, APP_SHEET_SERIAL_NO
+	      from TLS_SETTLEMENT_INFO where IS_DELETE = '0'
+-- /*if  test='taCode != null and taCode != '''*/     
+100-- /*if  test='tradeHandleDate != null and tradeHandleDate != '''*/     
+100	   		AND SETTLEMENT_STATUS='SETT_ING'
++----+-------------+---------------------+------------+------+------------------------+------------------------+---------+-------+------+----------+-------------+
+| id | select_type | table               | partitions | type | possible_keys          | key                    | key_len | ref   | rows | filtered | Extra       |
++----+-------------+---------------------+------------+------+------------------------+------------------------+---------+-------+------+----------+-------------+
+| 1  | SIMPLE      | TLS_SETTLEMENT_INFO | None       | ref  | IDX_TLS_SETTLE_INFO_SS | IDX_TLS_SETTLE_INFO_SS | 131     | const | 3104 | 10.0     | Using where |
++----+-------------+---------------------+------------+------+------------------------+------------------------+---------+-------+------+----------+-------------+
+[0, " "]
+建议:
+	表TLS_SETTLEMENT_INFO中,IDX_TLS_SETTLE_INFO_SS(settlement_status)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=GENERAL_INVESTMENT_PAGE_CONFIG.xml namespace=GENERAL_INVESTMENT_PAGE_CONFIG id=insertSelective  @*/
+        insert into GENERAL_INVEST_PAGE_CONFIG
+/*dynamic  prepend='('*/
+(
+-- /*isNotNull  property='id' prepend=','*/  ,   
+--                 ID
+-- /*isNotNull  property='createdAt' prepend=','*/  ,   
+--                 CREATED_AT
+-- /*isNotNull  property='createdBy' prepend=','*/  ,   
+--                 CREATED_BY
+-- /*isNotNull  property='updatedAt' prepend=','*/  ,   
+--                 UPDATED_AT
+-- /*isNotNull  property='updatedBy' prepend=','*/  ,   
+--                 UPDATED_BY
+-- /*isNotNull  property='isValid' prepend=','*/  ,   
+--                 IS_VALID
+-- /*isNotNull  property='orderNum' prepend=','*/  ,   
+--                 ORDER_NUM
+-- /*isNotNull  property='configType' prepend=','*/  ,   
+--                 CONFIG_TYPE
+-- /*isNotNull  property='configContent' prepend=','*/  ,   
+--                 CONFIG_CONTENT
+-- /*isNotNull  property='activityId' prepend=','*/  ,   
+--                 ACTIVITY_ID
+            )
+        values
+/*dynamic  prepend='('*/
+(
+-- /*isNotNull  property='id' prepend=','*/  ,   
+--                 :P_id
+-- /*isNotNull  property='createdAt' prepend=','*/  ,   
+--                 :P_createdAt
+-- /*isNotNull  property='createdBy' prepend=','*/  ,   
+--                 :P_createdBy
+-- /*isNotNull  property='updatedAt' prepend=','*/  ,   
+--                 :P_updatedAt
+-- /*isNotNull  property='updatedBy' prepend=','*/  ,   
+--                 :P_updatedBy
+-- /*isNotNull  property='isValid' prepend=','*/  ,   
+--                 :P_isValid
+-- /*isNotNull  property='orderNum' prepend=','*/  ,   
+--                 :P_orderNum
+-- /*isNotNull  property='configType' prepend=','*/  ,   
+--                 :P_configType
+-- /*isNotNull  property='configContent' prepend=','*/  ,   
+--                 :P_configContent
+-- /*isNotNull  property='activityId' prepend=','*/  ,   
+--                 :P_activityId
+            )
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=GENERAL_INVESTMENT_PAGE_CONFIG.xml namespace=GENERAL_INVESTMENT_PAGE_CONFIG id=selectByExample  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, IS_VALID,
+        ORDER_NUM, CONFIG_TYPE, CONFIG_CONTENT,ACTIVITY_ID
+        from GENERAL_INVEST_PAGE_CONFIG t
+        where 1=1
+-- /*isNotNull  property='activityId' prepend='and'*/  and   
+--             t.ACTIVITY_ID = :P_activityId
+-- /*isNotNull  property='isValid' prepend='and'*/  and   
+--             t.IS_VALID = :P_isValid
+        order by ORDER_NUM asc
++----+-------------+-------+------+---------------+------+---------+------+-------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows  | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+-------+----------------+
+| 1  | SIMPLE      | t     | ALL  | None          | None | None    | None | 20304 | Using filesort |
++----+-------------+-------+------+---------------+------+---------+------+-------+----------------+
+[0, " "]
+问题点:
+	表GENERAL_INVEST_PAGE_CONFIG使用全表扫描
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=BpProducts.xml namespace=BpProducts id=queryByBankTypeAndProductStatus  @*/
+        SELECT
+        ID as id,
+        CREATED_AT as createdAt,
+        CREATED_BY as createdBy,
+        UPDATED_AT as updatedAt,
+        UPDATED_BY as updatedBy,
+        EXT_UK_CODE as extUkCode,
+        BANK_TYPE as bankType,
+        PRODUCT_CODE as productCode,
+        PRODUCT_NAME as productName,
+        DISPLAY_NAME as displayName,
+        PRODUCT_CATEGORY as productCategory,
+        PRODUCT_STATUS as productStatus,
+        INTEREST_RATE_TYPE as interestRateType,
+        REDEMPTION_MODE_DESC as redemptionModeDesc,
+        MIN_INVEST_AMOUNT as minInvestAmount,
+        MAX_INVEST_AMOUNT as maxInvestAmount,
+        INCREASE_AMOUNT as increaseAmount,
+        LIMIT_AMOUNT as limitAmount,
+        PRICE as price,
+        MIN_INTEREST_RATE as minInterestRate,
+        MAX_INTEREST_RATE as maxInterestRate,
+        RISK_LEVEL as riskLevel,
+        INST_ID as instId,
+        PRODUCT_ID as productId,
+        TRX_START_AT as trxStartAt,
+        TRX_END_AT as trxEndAt,
+        VALUE_DATE_TYPE as valueDateType,
+        VALUE_DATE_INCREASE as valueDateIncrease,
+        VALUE_DATE_TIME as valueDateTime,
+        VALUE_DATE as valueDate,
+        LAST_COLLECTION_DATE as lastCollectionDate,
+        PERIOD as period,
+        PERIOD_UNIT as periodUnit,
+        PRE_WITHDRAW_PERIOD as preWithdrawPeriod,
+        PRE_WITHDRAW_PERIOD_UNIT as preWithdrawPeriodUnit,
+        ID_TYPE as idType,
+        PRE_WITHDRAW_TYPE as preWithdrawType,
+        GROUP_CODE as groupCode,
+        IS_PUSHED as isPushed,
+        IS_VALID as isValid,
+        VERSION as version,
+        SUB_PRODUCT_CATEGORY as subProductCategory,
+        RECOMMEND_DESC as recommendDesc,
+        PRODUCT_FEATURE_TYPE as productFeatureType,
+        OPENING_DATE as openingDate,
+        EXT_PROPERTY as extProperty
+        FROM
+            BP_PRODUCTS
+        WHERE
+            BANK_TYPE = 'WEGOBANK'
+            AND PRODUCT_STATUS in
+/*iterate  property='productStatusList' close=')' conjunction=',' open='('*/ 
+ ( 
+                100
+             , 
+                100
+             , 
+                100
+             )
+            AND IS_VALID = 1
++----+-------------+-------------+------+----------------------------------------------------+-------------------------+---------+-------+------+------------------------------------+
+| id | select_type | table       | type | possible_keys                                      | key                     | key_len | ref   | rows | Extra                              |
++----+-------------+-------------+------+----------------------------------------------------+-------------------------+---------+-------+------+------------------------------------+
+| 1  | SIMPLE      | BP_PRODUCTS | ref  | IDX_BP_PRODUCTS_PRD_STATUS,IDX_BP_PRODUCTS_BTP_STS | IDX_BP_PRODUCTS_BTP_STS | 130     | const | 96   | Using index condition; Using where |
++----+-------------+-------------+------+----------------------------------------------------+-------------------------+---------+-------+------+------------------------------------+
+[0, " "]
+建议:
+	表BP_PRODUCTS中,IDX_BP_PRODUCTS_BTP_STS(bank_type,product_status)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=BpProducts.xml namespace=BpProducts id=queryByCategory  @*/
+        SELECT
+        ID as id,
+        CREATED_AT as createdAt,
+        CREATED_BY as createdBy,
+        UPDATED_AT as updatedAt,
+        UPDATED_BY as updatedBy,
+        EXT_UK_CODE as extUkCode,
+        BANK_TYPE as bankType,
+        PRODUCT_CODE as productCode,
+        PRODUCT_NAME as productName,
+        DISPLAY_NAME as displayName,
+        PRODUCT_CATEGORY as productCategory,
+        PRODUCT_STATUS as productStatus,
+        INTEREST_RATE_TYPE as interestRateType,
+        REDEMPTION_MODE_DESC as redemptionModeDesc,
+        MIN_INVEST_AMOUNT as minInvestAmount,
+        MAX_INVEST_AMOUNT as maxInvestAmount,
+        INCREASE_AMOUNT as increaseAmount,
+        LIMIT_AMOUNT as limitAmount,
+        PRICE as price,
+        MIN_INTEREST_RATE as minInterestRate,
+        MAX_INTEREST_RATE as maxInterestRate,
+        RISK_LEVEL as riskLevel,
+        INST_ID as instId,
+        PRODUCT_ID as productId,
+        TRX_START_AT as trxStartAt,
+        TRX_END_AT as trxEndAt,
+        VALUE_DATE_TYPE as valueDateType,
+        VALUE_DATE_INCREASE as valueDateIncrease,
+        VALUE_DATE_TIME as valueDateTime,
+        VALUE_DATE as valueDate,
+        LAST_COLLECTION_DATE as lastCollectionDate,
+        PERIOD as period,
+        PERIOD_UNIT as periodUnit,
+        PRE_WITHDRAW_PERIOD as preWithdrawPeriod,
+        PRE_WITHDRAW_PERIOD_UNIT as preWithdrawPeriodUnit,
+        ID_TYPE as idType,
+        PRE_WITHDRAW_TYPE as preWithdrawType,
+        GROUP_CODE as groupCode,
+        IS_PUSHED as isPushed,
+        IS_VALID as isValid,
+        VERSION as version,
+        SUB_PRODUCT_CATEGORY as subProductCategory,
+        RECOMMEND_DESC as recommendDesc,
+        PRODUCT_FEATURE_TYPE as productFeatureType,
+        OPENING_DATE as openingDate,
+        EXT_PROPERTY as extProperty
+        FROM
+            BP_PRODUCTS
+        WHERE
+            PRODUCT_CATEGORY = 'D01'
+            AND SUB_PRODUCT_CATEGORY = '02'
+            AND PRODUCT_STATUS in
+/*iterate  property='productStatusList' close=')' conjunction=',' open='('*/ 
+ ( 
+                100
+             , 
+                100
+             , 
+                100
+             )
+            AND IS_VALID = 1
++----+-------------+-------------+------+--------------------------------------------------------------------+----------------+---------+-------------+------+------------------------------------+
+| id | select_type | table       | type | possible_keys                                                      | key            | key_len | ref         | rows | Extra                              |
++----+-------------+-------------+------+--------------------------------------------------------------------+----------------+---------+-------------+------+------------------------------------+
+| 1  | SIMPLE      | BP_PRODUCTS | ref  | UK_BP_PRODUCTS,IDX_BP_PRODUCTS_CATEGORY,IDX_BP_PRODUCTS_PRD_STATUS | UK_BP_PRODUCTS | 260     | const,const | 3    | Using index condition; Using where |
++----+-------------+-------------+------+--------------------------------------------------------------------+----------------+---------+-------------+------+------------------------------------+
+[1, ""]
+建议:
+	表BP_PRODUCTS中,UK_BP_PRODUCTS(product_category,sub_product_category,ext_uk_code)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=BpProducts.xml namespace=BpProducts id=queryByCategoryAndExtUkCode  @*/
+        SELECT
+        ID as id,
+        CREATED_AT as createdAt,
+        CREATED_BY as createdBy,
+        UPDATED_AT as updatedAt,
+        UPDATED_BY as updatedBy,
+        EXT_UK_CODE as extUkCode,
+        BANK_TYPE as bankType,
+        PRODUCT_CODE as productCode,
+        PRODUCT_NAME as productName,
+        DISPLAY_NAME as displayName,
+        PRODUCT_CATEGORY as productCategory,
+        PRODUCT_STATUS as productStatus,
+        INTEREST_RATE_TYPE as interestRateType,
+        REDEMPTION_MODE_DESC as redemptionModeDesc,
+        MIN_INVEST_AMOUNT as minInvestAmount,
+        MAX_INVEST_AMOUNT as maxInvestAmount,
+        INCREASE_AMOUNT as increaseAmount,
+        LIMIT_AMOUNT as limitAmount,
+        PRICE as price,
+        MIN_INTEREST_RATE as minInterestRate,
+        MAX_INTEREST_RATE as maxInterestRate,
+        RISK_LEVEL as riskLevel,
+        INST_ID as instId,
+        PRODUCT_ID as productId,
+        TRX_START_AT as trxStartAt,
+        TRX_END_AT as trxEndAt,
+        VALUE_DATE_TYPE as valueDateType,
+        VALUE_DATE_INCREASE as valueDateIncrease,
+        VALUE_DATE_TIME as valueDateTime,
+        VALUE_DATE as valueDate,
+        LAST_COLLECTION_DATE as lastCollectionDate,
+        PERIOD as period,
+        PERIOD_UNIT as periodUnit,
+        PRE_WITHDRAW_PERIOD as preWithdrawPeriod,
+        PRE_WITHDRAW_PERIOD_UNIT as preWithdrawPeriodUnit,
+        ID_TYPE as idType,
+        PRE_WITHDRAW_TYPE as preWithdrawType,
+        GROUP_CODE as groupCode,
+        IS_PUSHED as isPushed,
+        IS_VALID as isValid,
+        VERSION as version,
+        SUB_PRODUCT_CATEGORY as subProductCategory,
+        RECOMMEND_DESC as recommendDesc,
+        PRODUCT_FEATURE_TYPE as productFeatureType,
+        OPENING_DATE as openingDate,
+        EXT_PROPERTY as extProperty
+        FROM
+            BP_PRODUCTS
+        WHERE
+            PRODUCT_CATEGORY = 'D01'
+            AND SUB_PRODUCT_CATEGORY = '02'
+            AND EXT_UK_CODE = '832TD022007'
+            AND IS_VALID = 1
++----+-------------+-------------+-------+-----------------------------------------+----------------+---------+-------------------+------+-------+
+| id | select_type | table       | type  | possible_keys                           | key            | key_len | ref               | rows | Extra |
++----+-------------+-------------+-------+-----------------------------------------+----------------+---------+-------------------+------+-------+
+| 1  | SIMPLE      | BP_PRODUCTS | const | UK_BP_PRODUCTS,IDX_BP_PRODUCTS_CATEGORY | UK_BP_PRODUCTS | 774     | const,const,const | 1    | None  |
++----+-------------+-------------+-------+-----------------------------------------+----------------+---------+-------------------+------+-------+
+[1, " "]
+建议:
+	表BP_PRODUCTS中,UK_BP_PRODUCTS(product_category,sub_product_category,ext_uk_code)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=BpProducts.xml namespace=BpProducts id=queryByIsPushed  @*/
+        SELECT
+        ID as id,
+        CREATED_AT as createdAt,
+        CREATED_BY as createdBy,
+        UPDATED_AT as updatedAt,
+        UPDATED_BY as updatedBy,
+        EXT_UK_CODE as extUkCode,
+        BANK_TYPE as bankType,
+        PRODUCT_CODE as productCode,
+        PRODUCT_NAME as productName,
+        DISPLAY_NAME as displayName,
+        PRODUCT_CATEGORY as productCategory,
+        PRODUCT_STATUS as productStatus,
+        INTEREST_RATE_TYPE as interestRateType,
+        REDEMPTION_MODE_DESC as redemptionModeDesc,
+        MIN_INVEST_AMOUNT as minInvestAmount,
+        MAX_INVEST_AMOUNT as maxInvestAmount,
+        INCREASE_AMOUNT as increaseAmount,
+        LIMIT_AMOUNT as limitAmount,
+        PRICE as price,
+        MIN_INTEREST_RATE as minInterestRate,
+        MAX_INTEREST_RATE as maxInterestRate,
+        RISK_LEVEL as riskLevel,
+        INST_ID as instId,
+        PRODUCT_ID as productId,
+        TRX_START_AT as trxStartAt,
+        TRX_END_AT as trxEndAt,
+        VALUE_DATE_TYPE as valueDateType,
+        VALUE_DATE_INCREASE as valueDateIncrease,
+        VALUE_DATE_TIME as valueDateTime,
+        VALUE_DATE as valueDate,
+        LAST_COLLECTION_DATE as lastCollectionDate,
+        PERIOD as period,
+        PERIOD_UNIT as periodUnit,
+        PRE_WITHDRAW_PERIOD as preWithdrawPeriod,
+        PRE_WITHDRAW_PERIOD_UNIT as preWithdrawPeriodUnit,
+        ID_TYPE as idType,
+        PRE_WITHDRAW_TYPE as preWithdrawType,
+        GROUP_CODE as groupCode,
+        IS_PUSHED as isPushed,
+        IS_VALID as isValid,
+        VERSION as version,
+        SUB_PRODUCT_CATEGORY as subProductCategory,
+        RECOMMEND_DESC as recommendDesc,
+        PRODUCT_FEATURE_TYPE as productFeatureType,
+        OPENING_DATE as openingDate,
+        EXT_PROPERTY as extProperty
+        FROM
+            BP_PRODUCTS
+        WHERE
+            IS_PUSHED = 1
+            AND IS_VALID = 1
++----+-------------+-------------+------+---------------------------+------+---------+------+------+-------------+
+| id | select_type | table       | type | possible_keys             | key  | key_len | ref  | rows | Extra       |
++----+-------------+-------------+------+---------------------------+------+---------+------+------+-------------+
+| 1  | SIMPLE      | BP_PRODUCTS | ALL  | IDX_BP_PRODUCTS_IS_PUSHED | None | None    | None | 1029 | Using where |
++----+-------------+-------------+------+---------------------------+------+---------+------+------+-------------+
+[0, " "]
+问题点:
+	表BP_PRODUCTS使用全表扫描
+建议:
+	表BP_PRODUCTS中，可以使用索引IDX_BP_PRODUCTS_IS_PUSHED(is_pushed)
+
+/*@ files=BpProducts.xml namespace=BpProducts id=queryByProductId  @*/
+        SELECT
+        ID as id,
+        CREATED_AT as createdAt,
+        CREATED_BY as createdBy,
+        UPDATED_AT as updatedAt,
+        UPDATED_BY as updatedBy,
+        EXT_UK_CODE as extUkCode,
+        BANK_TYPE as bankType,
+        PRODUCT_CODE as productCode,
+        PRODUCT_NAME as productName,
+        DISPLAY_NAME as displayName,
+        PRODUCT_CATEGORY as productCategory,
+        PRODUCT_STATUS as productStatus,
+        INTEREST_RATE_TYPE as interestRateType,
+        REDEMPTION_MODE_DESC as redemptionModeDesc,
+        MIN_INVEST_AMOUNT as minInvestAmount,
+        MAX_INVEST_AMOUNT as maxInvestAmount,
+        INCREASE_AMOUNT as increaseAmount,
+        LIMIT_AMOUNT as limitAmount,
+        PRICE as price,
+        MIN_INTEREST_RATE as minInterestRate,
+        MAX_INTEREST_RATE as maxInterestRate,
+        RISK_LEVEL as riskLevel,
+        INST_ID as instId,
+        PRODUCT_ID as productId,
+        TRX_START_AT as trxStartAt,
+        TRX_END_AT as trxEndAt,
+        VALUE_DATE_TYPE as valueDateType,
+        VALUE_DATE_INCREASE as valueDateIncrease,
+        VALUE_DATE_TIME as valueDateTime,
+        VALUE_DATE as valueDate,
+        LAST_COLLECTION_DATE as lastCollectionDate,
+        PERIOD as period,
+        PERIOD_UNIT as periodUnit,
+        PRE_WITHDRAW_PERIOD as preWithdrawPeriod,
+        PRE_WITHDRAW_PERIOD_UNIT as preWithdrawPeriodUnit,
+        ID_TYPE as idType,
+        PRE_WITHDRAW_TYPE as preWithdrawType,
+        GROUP_CODE as groupCode,
+        IS_PUSHED as isPushed,
+        IS_VALID as isValid,
+        VERSION as version,
+        SUB_PRODUCT_CATEGORY as subProductCategory,
+        RECOMMEND_DESC as recommendDesc,
+        PRODUCT_FEATURE_TYPE as productFeatureType,
+        OPENING_DATE as openingDate,
+        EXT_PROPERTY as extProperty
+        FROM
+            BP_PRODUCTS
+        WHERE
+            PRODUCT_ID = 176634710
+            AND IS_VALID = 1
++----+-------------+-------------+------+----------------------------+----------------------------+---------+-------+------+-------------+
+| id | select_type | table       | type | possible_keys              | key                        | key_len | ref   | rows | Extra       |
++----+-------------+-------------+------+----------------------------+----------------------------+---------+-------+------+-------------+
+| 1  | SIMPLE      | BP_PRODUCTS | ref  | IDX_BP_PRODUCTS_PRODUCT_ID | IDX_BP_PRODUCTS_PRODUCT_ID | 9       | const | 1    | Using where |
++----+-------------+-------------+------+----------------------------+----------------------------+---------+-------+------+-------------+
+[1, ""]
+建议:
+	表BP_PRODUCTS中,IDX_BP_PRODUCTS_PRODUCT_ID(product_id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=BpProducts.xml namespace=BpProducts id=queryByProductStatus  @*/
+        SELECT
+        ID as id,
+        CREATED_AT as createdAt,
+        CREATED_BY as createdBy,
+        UPDATED_AT as updatedAt,
+        UPDATED_BY as updatedBy,
+        EXT_UK_CODE as extUkCode,
+        BANK_TYPE as bankType,
+        PRODUCT_CODE as productCode,
+        PRODUCT_NAME as productName,
+        DISPLAY_NAME as displayName,
+        PRODUCT_CATEGORY as productCategory,
+        PRODUCT_STATUS as productStatus,
+        INTEREST_RATE_TYPE as interestRateType,
+        REDEMPTION_MODE_DESC as redemptionModeDesc,
+        MIN_INVEST_AMOUNT as minInvestAmount,
+        MAX_INVEST_AMOUNT as maxInvestAmount,
+        INCREASE_AMOUNT as increaseAmount,
+        LIMIT_AMOUNT as limitAmount,
+        PRICE as price,
+        MIN_INTEREST_RATE as minInterestRate,
+        MAX_INTEREST_RATE as maxInterestRate,
+        RISK_LEVEL as riskLevel,
+        INST_ID as instId,
+        PRODUCT_ID as productId,
+        TRX_START_AT as trxStartAt,
+        TRX_END_AT as trxEndAt,
+        VALUE_DATE_TYPE as valueDateType,
+        VALUE_DATE_INCREASE as valueDateIncrease,
+        VALUE_DATE_TIME as valueDateTime,
+        VALUE_DATE as valueDate,
+        LAST_COLLECTION_DATE as lastCollectionDate,
+        PERIOD as period,
+        PERIOD_UNIT as periodUnit,
+        PRE_WITHDRAW_PERIOD as preWithdrawPeriod,
+        PRE_WITHDRAW_PERIOD_UNIT as preWithdrawPeriodUnit,
+        ID_TYPE as idType,
+        PRE_WITHDRAW_TYPE as preWithdrawType,
+        GROUP_CODE as groupCode,
+        IS_PUSHED as isPushed,
+        IS_VALID as isValid,
+        VERSION as version,
+        SUB_PRODUCT_CATEGORY as subProductCategory,
+        RECOMMEND_DESC as recommendDesc,
+        PRODUCT_FEATURE_TYPE as productFeatureType,
+        OPENING_DATE as openingDate,
+        EXT_PROPERTY as extProperty
+        FROM
+            BP_PRODUCTS
+        WHERE
+            PRODUCT_STATUS = 'DONE_PROCESSED'
+            AND IS_VALID = 1
++----+-------------+-------------+------+----------------------------+----------------------------+---------+-------+------+------------------------------------+
+| id | select_type | table       | type | possible_keys              | key                        | key_len | ref   | rows | Extra                              |
++----+-------------+-------------+------+----------------------------+----------------------------+---------+-------+------+------------------------------------+
+| 1  | SIMPLE      | BP_PRODUCTS | ref  | IDX_BP_PRODUCTS_PRD_STATUS | IDX_BP_PRODUCTS_PRD_STATUS | 130     | const | 128  | Using index condition; Using where |
++----+-------------+-------------+------+----------------------------+----------------------------+---------+-------+------+------------------------------------+
+[0, " "]
+建议:
+	表BP_PRODUCTS中,IDX_BP_PRODUCTS_PRD_STATUS(product_status)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=BpProducts.xml namespace=BpProducts id=queryByProductStatusPagination  @*/
+        SELECT
+        ID as id,
+        CREATED_AT as createdAt,
+        CREATED_BY as createdBy,
+        UPDATED_AT as updatedAt,
+        UPDATED_BY as updatedBy,
+        EXT_UK_CODE as extUkCode,
+        BANK_TYPE as bankType,
+        PRODUCT_CODE as productCode,
+        PRODUCT_NAME as productName,
+        DISPLAY_NAME as displayName,
+        PRODUCT_CATEGORY as productCategory,
+        PRODUCT_STATUS as productStatus,
+        INTEREST_RATE_TYPE as interestRateType,
+        REDEMPTION_MODE_DESC as redemptionModeDesc,
+        MIN_INVEST_AMOUNT as minInvestAmount,
+        MAX_INVEST_AMOUNT as maxInvestAmount,
+        INCREASE_AMOUNT as increaseAmount,
+        LIMIT_AMOUNT as limitAmount,
+        PRICE as price,
+        MIN_INTEREST_RATE as minInterestRate,
+        MAX_INTEREST_RATE as maxInterestRate,
+        RISK_LEVEL as riskLevel,
+        INST_ID as instId,
+        PRODUCT_ID as productId,
+        TRX_START_AT as trxStartAt,
+        TRX_END_AT as trxEndAt,
+        VALUE_DATE_TYPE as valueDateType,
+        VALUE_DATE_INCREASE as valueDateIncrease,
+        VALUE_DATE_TIME as valueDateTime,
+        VALUE_DATE as valueDate,
+        LAST_COLLECTION_DATE as lastCollectionDate,
+        PERIOD as period,
+        PERIOD_UNIT as periodUnit,
+        PRE_WITHDRAW_PERIOD as preWithdrawPeriod,
+        PRE_WITHDRAW_PERIOD_UNIT as preWithdrawPeriodUnit,
+        ID_TYPE as idType,
+        PRE_WITHDRAW_TYPE as preWithdrawType,
+        GROUP_CODE as groupCode,
+        IS_PUSHED as isPushed,
+        IS_VALID as isValid,
+        VERSION as version,
+        SUB_PRODUCT_CATEGORY as subProductCategory,
+        RECOMMEND_DESC as recommendDesc,
+        PRODUCT_FEATURE_TYPE as productFeatureType,
+        OPENING_DATE as openingDate,
+        EXT_PROPERTY as extProperty
+        FROM
+            BP_PRODUCTS
+        WHERE
+            PRODUCT_STATUS = 'DONE_PROCESSED'
+            AND IS_VALID = 1
+            AND ID > 1
+        ORDER BY ID ASC
+        LIMIT 100
++----+-------------+-------------+-------------+------------------------------------+------------------------------------+---------+------+------+----------------------------------------------------------------------------------+
+| id | select_type | table       | type        | possible_keys                      | key                                | key_len | ref  | rows | Extra                                                                            |
++----+-------------+-------------+-------------+------------------------------------+------------------------------------+---------+------+------+----------------------------------------------------------------------------------+
+| 1  | SIMPLE      | BP_PRODUCTS | index_merge | PRIMARY,IDX_BP_PRODUCTS_PRD_STATUS | IDX_BP_PRODUCTS_PRD_STATUS,PRIMARY | 138,8   | None | 63   | Using intersect(IDX_BP_PRODUCTS_PRD_STATUS,PRIMARY); Using where; Using filesort |
++----+-------------+-------------+-------------+------------------------------------+------------------------------------+---------+------+------+----------------------------------------------------------------------------------+
+[0, " "]
+问题点:
+	表BP_PRODUCTS使用索引全表扫描
+建议:
+	表BP_PRODUCTS中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+	表BP_PRODUCTS中，可以使用索引PRIMARY(id)
+
+/*@ files=BpProducts.xml namespace=BpProducts id=queryOneByBankType  @*/
+        SELECT
+        ID as id,
+        CREATED_AT as createdAt,
+        CREATED_BY as createdBy,
+        UPDATED_AT as updatedAt,
+        UPDATED_BY as updatedBy,
+        EXT_UK_CODE as extUkCode,
+        BANK_TYPE as bankType,
+        PRODUCT_CODE as productCode,
+        PRODUCT_NAME as productName,
+        DISPLAY_NAME as displayName,
+        PRODUCT_CATEGORY as productCategory,
+        PRODUCT_STATUS as productStatus,
+        INTEREST_RATE_TYPE as interestRateType,
+        REDEMPTION_MODE_DESC as redemptionModeDesc,
+        MIN_INVEST_AMOUNT as minInvestAmount,
+        MAX_INVEST_AMOUNT as maxInvestAmount,
+        INCREASE_AMOUNT as increaseAmount,
+        LIMIT_AMOUNT as limitAmount,
+        PRICE as price,
+        MIN_INTEREST_RATE as minInterestRate,
+        MAX_INTEREST_RATE as maxInterestRate,
+        RISK_LEVEL as riskLevel,
+        INST_ID as instId,
+        PRODUCT_ID as productId,
+        TRX_START_AT as trxStartAt,
+        TRX_END_AT as trxEndAt,
+        VALUE_DATE_TYPE as valueDateType,
+        VALUE_DATE_INCREASE as valueDateIncrease,
+        VALUE_DATE_TIME as valueDateTime,
+        VALUE_DATE as valueDate,
+        LAST_COLLECTION_DATE as lastCollectionDate,
+        PERIOD as period,
+        PERIOD_UNIT as periodUnit,
+        PRE_WITHDRAW_PERIOD as preWithdrawPeriod,
+        PRE_WITHDRAW_PERIOD_UNIT as preWithdrawPeriodUnit,
+        ID_TYPE as idType,
+        PRE_WITHDRAW_TYPE as preWithdrawType,
+        GROUP_CODE as groupCode,
+        IS_PUSHED as isPushed,
+        IS_VALID as isValid,
+        VERSION as version,
+        SUB_PRODUCT_CATEGORY as subProductCategory,
+        RECOMMEND_DESC as recommendDesc,
+        PRODUCT_FEATURE_TYPE as productFeatureType,
+        OPENING_DATE as openingDate,
+        EXT_PROPERTY as extProperty
+        FROM
+            BP_PRODUCTS
+        WHERE
+            BANK_TYPE = 'WEGOBANK'
+            AND IS_VALID = 1
+        LIMIT 1
++----+-------------+-------------+------+-------------------------+-------------------------+---------+-------+------+------------------------------------+
+| id | select_type | table       | type | possible_keys           | key                     | key_len | ref   | rows | Extra                              |
++----+-------------+-------------+------+-------------------------+-------------------------+---------+-------+------+------------------------------------+
+| 1  | SIMPLE      | BP_PRODUCTS | ref  | IDX_BP_PRODUCTS_BTP_STS | IDX_BP_PRODUCTS_BTP_STS | 130     | const | 96   | Using index condition; Using where |
++----+-------------+-------------+------+-------------------------+-------------------------+---------+-------+------+------------------------------------+
+[0, " "]
+建议:
+	表BP_PRODUCTS中,IDX_BP_PRODUCTS_BTP_STS(bank_type,product_status)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=PrmSystemConfig_mysql.xml namespace=PrmSystemConfig id=getConfigValueByKey  @*/
+        select 
+        id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy,
+        config_key configKey,
+        config_value configValue,
+        config_desc configDesc,
+        is_valid isValid
+        from prm_system_config
+        where config_key = 'IsPointsPerEnable'
+        and is_valid = 1
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+| id | select_type | table             | type  | possible_keys | key           | key_len | ref   | rows | Extra |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+| 1  | SIMPLE      | prm_system_config | const | UK_CONFIG_KEY | UK_CONFIG_KEY | 2050    | const | 1    | None  |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=PrmSystemConfig_mysql.xml namespace=PrmSystemConfig id=updateConfigValueByKey  @*/
+        update prm_system_config
+        set config_value = 'NO',
+        updated_at = now(),
+        updated_by = 'SYS'
+        where config_key = 'IsPointsPerEnable'
+    
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------------+
+| id | select_type | table             | type  | possible_keys | key           | key_len | ref   | rows | Extra       |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------------+
+| 1  | SIMPLE      | prm_system_config | range | UK_CONFIG_KEY | UK_CONFIG_KEY | 2050    | const | 1    | Using where |
++----+-------------+-------------------+-------+---------------+---------------+---------+-------+------+-------------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=vdo_live_record_txt_SqlMap.xml namespace=vdo_live_record_txt id=selectByRecordId  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY,PUSH_PPT_URL,PULL_PPT_URL,LIVE_RECORD_ID,PPT_LIVE_ID
+        from vdo_live_record_txt
+        where live_record_id = '3'  limit 1
++----+-------------+---------------------+------+---------------+------+---------+------+------+-------------+
+| id | select_type | table               | type | possible_keys | key  | key_len | ref  | rows | Extra       |
++----+-------------+---------------------+------+---------------+------+---------+------+------+-------------+
+| 1  | SIMPLE      | vdo_live_record_txt | ALL  | None          | None | None    | None | 1    | Using where |
++----+-------------+---------------------+------+---------------+------+---------+------+------+-------------+
+[0, " "]
+问题点:
+	表vdo_live_record_txt使用全表扫描
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=PrmSystemConfig.xml namespace=PrmSystemConfig id=getByKey  @*/
+        select  /*+ index(t,UK_CONFIG_KEY) */
+        id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , config_key configKey
+        , config_value configValue
+        , is_valid isValid
+        , config_desc configDesc
+        from prm_system_config t
+        where config_key = 'IsPointsPerEnable'
++----+-------------+-------+-------+---------------+---------------+---------+-------+------+-------+
+| id | select_type | table | type  | possible_keys | key           | key_len | ref   | rows | Extra |
++----+-------------+-------+-------+---------------+---------------+---------+-------+------+-------+
+| 1  | SIMPLE      | t     | const | UK_CONFIG_KEY | UK_CONFIG_KEY | 2050    | const | 1    | None  |
++----+-------------+-------+-------+---------------+---------------+---------+-------+------+-------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_activity_SqlMap_mysql.xml namespace=isr_activity id=insert  @*/
+    insert into isr_activity (NAME, CODE, TITLE, REMARK,
+      REWARD_PAY_TIME, REWARD_DESC, REWARD_TARGET, MORE_DESC, MORE_URL,
+      ACTIVITY_RANGE, ACTIVITY_START_TIME, ACTIVITY_END_TIME,HOLDING_DESC
+      )
+    values ('【限时学习】享至高2200元奖学金', 100, 100, 100,
+      100, 100, 100, 100, 100,
+      100, 100, 100, 100
+      )
+  
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=isr_activity_SqlMap_mysql.xml namespace=isr_activity id=selectActivityByCode  @*/
+        select
+    ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, NAME, CODE, TITLE, REMARK, REWARD_PAY_TIME, 
+    REWARD_DESC, REWARD_TARGET, MORE_DESC, MORE_URL, ACTIVITY_RANGE, ACTIVITY_START_TIME, ACTIVITY_END_TIME,HOLDING_DESC
+        from isr_activity
+        where  code = 'JLJ_001'
++----+-------------+--------------+-------+---------------+--------------+---------+-------+------+-------+
+| id | select_type | table        | type  | possible_keys | key          | key_len | ref   | rows | Extra |
++----+-------------+--------------+-------+---------------+--------------+---------+-------+------+-------+
+| 1  | SIMPLE      | isr_activity | const | IDX_ACT_CODE  | IDX_ACT_CODE | 258     | const | 1    | None  |
++----+-------------+--------------+-------+---------------+--------------+---------+-------+------+-------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_activity_SqlMap_mysql.xml namespace=isr_activity id=selectByPrimaryKey  @*/
+    select 
+    ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, NAME, CODE, TITLE, REMARK, REWARD_PAY_TIME, 
+    REWARD_DESC, REWARD_TARGET, MORE_DESC, MORE_URL, ACTIVITY_RANGE, ACTIVITY_START_TIME, ACTIVITY_END_TIME,HOLDING_DESC
+    from isr_activity
+    where ID = 1
++----+-------------+--------------+-------+---------------+---------+---------+-------+------+-------+
+| id | select_type | table        | type  | possible_keys | key     | key_len | ref   | rows | Extra |
++----+-------------+--------------+-------+---------------+---------+---------+-------+------+-------+
+| 1  | SIMPLE      | isr_activity | const | PRIMARY       | PRIMARY | 8       | const | 1    | None  |
++----+-------------+--------------+-------+---------------+---------+---------+-------+------+-------+
+[1, " "]
+建议:
+	表isr_activity中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_activity_SqlMap_mysql.xml namespace=isr_activity id=selectCurrentValidActivityByCode  @*/
+        select
+    ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, NAME, CODE, TITLE, REMARK, REWARD_PAY_TIME, 
+    REWARD_DESC, REWARD_TARGET, MORE_DESC, MORE_URL, ACTIVITY_RANGE, ACTIVITY_START_TIME, ACTIVITY_END_TIME,HOLDING_DESC
+        from isr_activity
+        where  code = 'JLJ_001'
+        and now() > ACTIVITY_START_TIME
+        and now() < ACTIVITY_END_TIME
++----+-------------+-------+------+---------------+------+---------+------+------+-----------------------------------------------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra                                               |
++----+-------------+-------+------+---------------+------+---------+------+------+-----------------------------------------------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | Impossible WHERE noticed after reading const tables |
++----+-------------+-------+------+---------------+------+---------+------+------+-----------------------------------------------------+
+[0, ""]
+问题点:
+	MySQL已读取所有const（和系统）表，并注意到WHERE子句始终为false。(WHERE所查找的字段在数据之外？)
+
+/*@ files=isr_product_participation_SqlMap_mysql.xml namespace=isr_product_participation id=insert  @*/
+    insert into isr_product_participation (PRODUCT_ID, ACTIVITY_CODE, IS_VALID
+      )
+    values (183459671, 100, 100
+      )
+  
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=isr_product_participation_SqlMap_mysql.xml namespace=isr_product_participation id=insertSelective  @*/
+    insert into isr_product_participation
+/*dynamic  prepend='('*/
+(
+-- /*isNotNull  property='createdAt' prepend=','*/  ,   
+--         CREATED_AT
+-- /*isNotNull  property='createdBy' prepend=','*/  ,   
+--         CREATED_BY
+-- /*isNotNull  property='updatedAt' prepend=','*/  ,   
+--         UPDATED_AT
+-- /*isNotNull  property='updatedBy' prepend=','*/  ,   
+--         UPDATED_BY
+-- /*isNotNull  property='productId' prepend=','*/  ,   
+--         PRODUCT_ID
+-- /*isNotNull  property='activityCode' prepend=','*/  ,   
+--         ACTIVITY_CODE
+-- /*isNotNull  property='isValid' prepend=','*/  ,   
+--         IS_VALID
+      )
+    values
+/*dynamic  prepend='('*/
+(
+-- /*isNotNull  property='createdAt' prepend=','*/  ,   
+--         :P_createdAt
+-- /*isNotNull  property='createdBy' prepend=','*/  ,   
+--         :P_createdBy
+-- /*isNotNull  property='updatedAt' prepend=','*/  ,   
+--         :P_updatedAt
+-- /*isNotNull  property='updatedBy' prepend=','*/  ,   
+--         :P_updatedBy
+-- /*isNotNull  property='productId' prepend=','*/  ,   
+--         :P_productId
+-- /*isNotNull  property='activityCode' prepend=','*/  ,   
+--         :P_activityCode
+-- /*isNotNull  property='isValid' prepend=','*/  ,   
+--         :P_isValid
+      )
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=isr_product_participation_SqlMap_mysql.xml namespace=isr_product_participation id=selectByPrimaryKey  @*/
+    select 
+    ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, PRODUCT_ID, ACTIVITY_CODE, IS_VALID
+    from isr_product_participation
+    where ID = 1
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------+
+| id | select_type | table                     | type  | possible_keys | key     | key_len | ref   | rows | Extra |
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------+
+| 1  | SIMPLE      | isr_product_participation | const | PRIMARY       | PRIMARY | 8       | const | 1    | None  |
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------+
+[1, " "]
+建议:
+	表isr_product_participation中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_product_participation_SqlMap_mysql.xml namespace=isr_product_participation id=selectByProductId  @*/
+        select
+    ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, PRODUCT_ID, ACTIVITY_CODE, IS_VALID
+        from isr_product_participation
+        where product_id = 183459671
+        and is_valid = '1'
++----+-------------+---------------------------+------+---------------+------------+---------+-------+------+-------------+
+| id | select_type | table                     | type | possible_keys | key        | key_len | ref   | rows | Extra       |
++----+-------------+---------------------------+------+---------------+------------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_product_participation | ref  | IDX_PRT_ID    | IDX_PRT_ID | 8       | const | 2    | Using where |
++----+-------------+---------------------------+------+---------------+------------+---------+-------+------+-------------+
+[0, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_product_participation_SqlMap_mysql.xml namespace=isr_product_participation id=updateByPrimaryKey  @*/
+    update isr_product_participation
+    set CREATED_AT = '2019-08-05 19:38:50.000000',
+      CREATED_BY = 'SYS',
+      UPDATED_AT = now(),
+      UPDATED_BY = 'SYS',
+      PRODUCT_ID = 183459671,
+      ACTIVITY_CODE = 'JLJ_001',
+      IS_VALID = '0'
+    where ID = 1
+  
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| id | select_type | table                     | type  | possible_keys | key     | key_len | ref   | rows | Extra       |
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_product_participation | range | PRIMARY       | PRIMARY | 8       | const | 1    | Using where |
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------------+
+[1, " "]
+建议:
+	表isr_product_participation中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_user_participation_SqlMap_mysql.xml namespace=isr_user_participation id=insert  @*/
+    insert into isr_user_participation (USER_ID, ACTIVITY_CODE, STATUS)
+    values (36278904, 100, 100)
+  
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=isr_user_participation_SqlMap_mysql.xml namespace=isr_user_participation id=insertSelective  @*/
+    insert into isr_user_participation
+/*dynamic  prepend='('*/
+(
+-- /*isNotNull  property='createdAt' prepend=','*/  ,   
+--         CREATED_AT
+-- /*isNotNull  property='createdBy' prepend=','*/  ,   
+--         CREATED_BY
+-- /*isNotNull  property='updatedAt' prepend=','*/  ,   
+--         UPDATED_AT
+-- /*isNotNull  property='updatedBy' prepend=','*/  ,   
+--         UPDATED_BY
+-- /*isNotNull  property='userId' prepend=','*/  ,   
+--         USER_ID
+-- /*isNotNull  property='activityCode' prepend=','*/  ,   
+--         ACTIVITY_CODE
+-- /*isNotNull  property='status' prepend=','*/  ,   
+--         STATUS
+      )
+    values
+/*dynamic  prepend='('*/
+(
+-- /*isNotNull  property='createdAt' prepend=','*/  ,   
+--         :P_createdAt
+-- /*isNotNull  property='createdBy' prepend=','*/  ,   
+--         :P_createdBy
+-- /*isNotNull  property='updatedAt' prepend=','*/  ,   
+--         :P_updatedAt
+-- /*isNotNull  property='updatedBy' prepend=','*/  ,   
+--         :P_updatedBy
+-- /*isNotNull  property='userId' prepend=','*/  ,   
+--         :P_userId
+-- /*isNotNull  property='activityCode' prepend=','*/  ,   
+--         :P_activityCode
+-- /*isNotNull  property='status' prepend=','*/  ,   
+--         :P_status
+      )
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=isr_user_participation_SqlMap_mysql.xml namespace=isr_user_participation id=selectByActivityCodeUserId  @*/
+        select
+    ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, USER_ID, ACTIVITY_CODE, STATUS
+        from isr_user_participation
+        where ACTIVITY_CODE = 'JLJ_001'
+        and USER_ID = 36278904
++----+-------------+------------------------+------+---------------------------+--------------+---------+-------+------+-------------+
+| id | select_type | table                  | type | possible_keys             | key          | key_len | ref   | rows | Extra       |
++----+-------------+------------------------+------+---------------------------+--------------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_user_participation | ref  | IDX_PTC_USER,IDX_PTC_CODE | IDX_PTC_USER | 8       | const | 2    | Using where |
++----+-------------+------------------------+------+---------------------------+--------------+---------+-------+------+-------------+
+[1, ""]
+建议:
+	表isr_user_participation中,IDX_PTC_USER(user_id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_user_participation_SqlMap_mysql.xml namespace=isr_user_participation id=selectByPrimaryKey  @*/
+    select 
+    ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, USER_ID, ACTIVITY_CODE, STATUS
+    from isr_user_participation
+    where ID = 1
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------+
+| id | select_type | table                  | type  | possible_keys | key     | key_len | ref   | rows | Extra |
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------+
+| 1  | SIMPLE      | isr_user_participation | const | PRIMARY       | PRIMARY | 8       | const | 1    | None  |
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------+
+[1, " "]
+建议:
+	表isr_user_participation中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_user_participation_SqlMap_mysql.xml namespace=isr_user_participation id=updateByPrimaryKey  @*/
+    update isr_user_participation
+    set CREATED_AT = '2019-08-05 22:47:34.000000',
+      CREATED_BY = 'SYS',
+      UPDATED_AT = now(),
+      UPDATED_BY = 'SYS',
+      USER_ID = 36278904,
+      ACTIVITY_CODE = 'JLJ_001',
+      STATUS = '2'
+    where ID = 1
+  
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| id | select_type | table                  | type  | possible_keys | key     | key_len | ref   | rows | Extra       |
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_user_participation | range | PRIMARY       | PRIMARY | 8       | const | 1    | Using where |
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------------+
+[1, " "]
+建议:
+	表isr_user_participation中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=PrmSystemConfig.xml namespace=PrmSystemConfig id=getByKey  @*/
+        select  /*+ index(t,UK_CONFIG_KEY) */
+        id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , config_key configKey
+        , config_value configValue
+        , is_valid isValid
+        , config_desc configDesc
+        from prm_system_config t
+        where config_key = 'IsPointsPerEnable'
++----+-------------+-------+-------+---------------+---------------+---------+-------+------+-------+
+| id | select_type | table | type  | possible_keys | key           | key_len | ref   | rows | Extra |
++----+-------------+-------+-------+---------------+---------------+---------+-------+------+-------+
+| 1  | SIMPLE      | t     | const | UK_CONFIG_KEY | UK_CONFIG_KEY | 2050    | const | 1    | None  |
++----+-------------+-------+-------+---------------+---------------+---------+-------+------+-------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_activity_SqlMap_mysql.xml namespace=isr_activity id=insert  @*/
+    insert into isr_activity (NAME, CODE, TITLE, REMARK,
+      REWARD_PAY_TIME, REWARD_DESC, REWARD_TARGET, MORE_DESC, MORE_URL,
+      ACTIVITY_RANGE, ACTIVITY_START_TIME, ACTIVITY_END_TIME,HOLDING_DESC
+      )
+    values ('【限时学习】享至高2200元奖学金', 100, 100, 100,
+      100, 100, 100, 100, 100,
+      100, 100, 100, 100
+      )
+  
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=isr_activity_SqlMap_mysql.xml namespace=isr_activity id=selectActivityByCode  @*/
+        select
+    ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, NAME, CODE, TITLE, REMARK, REWARD_PAY_TIME, 
+    REWARD_DESC, REWARD_TARGET, MORE_DESC, MORE_URL, ACTIVITY_RANGE, ACTIVITY_START_TIME, ACTIVITY_END_TIME,HOLDING_DESC
+        from isr_activity
+        where  code = 'JLJ_001'
++----+-------------+--------------+-------+---------------+--------------+---------+-------+------+-------+
+| id | select_type | table        | type  | possible_keys | key          | key_len | ref   | rows | Extra |
++----+-------------+--------------+-------+---------------+--------------+---------+-------+------+-------+
+| 1  | SIMPLE      | isr_activity | const | IDX_ACT_CODE  | IDX_ACT_CODE | 258     | const | 1    | None  |
++----+-------------+--------------+-------+---------------+--------------+---------+-------+------+-------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_activity_SqlMap_mysql.xml namespace=isr_activity id=selectByPrimaryKey  @*/
+    select 
+    ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, NAME, CODE, TITLE, REMARK, REWARD_PAY_TIME, 
+    REWARD_DESC, REWARD_TARGET, MORE_DESC, MORE_URL, ACTIVITY_RANGE, ACTIVITY_START_TIME, ACTIVITY_END_TIME,HOLDING_DESC
+    from isr_activity
+    where ID = 1
++----+-------------+--------------+-------+---------------+---------+---------+-------+------+-------+
+| id | select_type | table        | type  | possible_keys | key     | key_len | ref   | rows | Extra |
++----+-------------+--------------+-------+---------------+---------+---------+-------+------+-------+
+| 1  | SIMPLE      | isr_activity | const | PRIMARY       | PRIMARY | 8       | const | 1    | None  |
++----+-------------+--------------+-------+---------------+---------+---------+-------+------+-------+
+[1, " "]
+建议:
+	表isr_activity中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_activity_SqlMap_mysql.xml namespace=isr_activity id=selectCurrentValidActivityByCode  @*/
+        select
+    ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, NAME, CODE, TITLE, REMARK, REWARD_PAY_TIME, 
+    REWARD_DESC, REWARD_TARGET, MORE_DESC, MORE_URL, ACTIVITY_RANGE, ACTIVITY_START_TIME, ACTIVITY_END_TIME,HOLDING_DESC
+        from isr_activity
+        where  code = 'JLJ_001'
+        and now() > ACTIVITY_START_TIME
+        and now() < ACTIVITY_END_TIME
++----+-------------+-------+------+---------------+------+---------+------+------+-----------------------------------------------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra                                               |
++----+-------------+-------+------+---------------+------+---------+------+------+-----------------------------------------------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | Impossible WHERE noticed after reading const tables |
++----+-------------+-------+------+---------------+------+---------+------+------+-----------------------------------------------------+
+[0, ""]
+问题点:
+	MySQL已读取所有const（和系统）表，并注意到WHERE子句始终为false。(WHERE所查找的字段在数据之外？)
+
+/*@ files=isr_product_participation_SqlMap_mysql.xml namespace=isr_product_participation id=insert  @*/
+        insert into isr_product_participation (PRODUCT_ID, ACTIVITY_CODE, IS_VALID
+        )
+        values (183459671, 100, 100
+        )
+    
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=isr_product_participation_SqlMap_mysql.xml namespace=isr_product_participation id=selectByPrimaryKey  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, PRODUCT_ID, ACTIVITY_CODE, IS_VALID
+        from isr_product_participation
+        where ID = 1
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------+
+| id | select_type | table                     | type  | possible_keys | key     | key_len | ref   | rows | Extra |
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------+
+| 1  | SIMPLE      | isr_product_participation | const | PRIMARY       | PRIMARY | 8       | const | 1    | None  |
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------+
+[1, " "]
+建议:
+	表isr_product_participation中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_product_participation_SqlMap_mysql.xml namespace=isr_product_participation id=selectByProductId  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, PRODUCT_ID, ACTIVITY_CODE, IS_VALID
+        from isr_product_participation
+        where product_id = 183459671
+        and is_valid = '1'
++----+-------------+---------------------------+------+---------------+------------+---------+-------+------+-------------+
+| id | select_type | table                     | type | possible_keys | key        | key_len | ref   | rows | Extra       |
++----+-------------+---------------------------+------+---------------+------------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_product_participation | ref  | IDX_PRT_ID    | IDX_PRT_ID | 8       | const | 2    | Using where |
++----+-------------+---------------------------+------+---------------+------------+---------+-------+------+-------------+
+[0, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_product_participation_SqlMap_mysql.xml namespace=isr_product_participation id=updateByPrimaryKey  @*/
+        update isr_product_participation
+        set
+        UPDATED_AT = now(),
+        UPDATED_BY = 'SYS',
+        PRODUCT_ID = 183459671,
+        ACTIVITY_CODE = 'JLJ_001',
+        IS_VALID = '0'
+        where ID = 1
+    
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| id | select_type | table                     | type  | possible_keys | key     | key_len | ref   | rows | Extra       |
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_product_participation | range | PRIMARY       | PRIMARY | 8       | const | 1    | Using where |
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------------+
+[1, " "]
+建议:
+	表isr_product_participation中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_user_participation_SqlMap_mysql.xml namespace=isr_user_participation id=insert  @*/
+        insert into isr_user_participation (USER_ID, ACTIVITY_CODE, STATUS)
+        values (36278904, 100, 100)
+    
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=isr_user_participation_SqlMap_mysql.xml namespace=isr_user_participation id=selectByActivityCodeUserId  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, USER_ID, ACTIVITY_CODE, STATUS
+        from isr_user_participation
+        where ACTIVITY_CODE = 'JLJ_001'
+        and USER_ID = 36278904
++----+-------------+------------------------+------+---------------------------+--------------+---------+-------+------+-------------+
+| id | select_type | table                  | type | possible_keys             | key          | key_len | ref   | rows | Extra       |
++----+-------------+------------------------+------+---------------------------+--------------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_user_participation | ref  | IDX_PTC_USER,IDX_PTC_CODE | IDX_PTC_USER | 8       | const | 2    | Using where |
++----+-------------+------------------------+------+---------------------------+--------------+---------+-------+------+-------------+
+[1, ""]
+建议:
+	表isr_user_participation中,IDX_PTC_USER(user_id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_user_participation_SqlMap_mysql.xml namespace=isr_user_participation id=selectByPrimaryKey  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, USER_ID, ACTIVITY_CODE, STATUS
+        from isr_user_participation
+        where ID = 1
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------+
+| id | select_type | table                  | type  | possible_keys | key     | key_len | ref   | rows | Extra |
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------+
+| 1  | SIMPLE      | isr_user_participation | const | PRIMARY       | PRIMARY | 8       | const | 1    | None  |
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------+
+[1, " "]
+建议:
+	表isr_user_participation中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_user_participation_SqlMap_mysql.xml namespace=isr_user_participation id=updateByPrimaryKey  @*/
+        update isr_user_participation
+        set
+        UPDATED_AT = now(),
+        UPDATED_BY = 'SYS',
+        USER_ID = 36278904,
+        ACTIVITY_CODE = 'JLJ_001',
+        STATUS = '2'
+        where ID = 1
+    
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| id | select_type | table                  | type  | possible_keys | key     | key_len | ref   | rows | Extra       |
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_user_participation | range | PRIMARY       | PRIMARY | 8       | const | 1    | Using where |
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------------+
+[1, " "]
+建议:
+	表isr_user_participation中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_product_participation_SqlMap_mysql.xml namespace=isr_product_participation id=updateByPrimaryKey  @*/
+        update isr_product_participation
+        set
+        UPDATED_AT = now(),
+        UPDATED_BY = 'SYS',
+        PRODUCT_ID = 183459671,
+        ACTIVITY_CODE = 'JLJ_001',
+        IS_VALID = '0'
+        where ID = 1
+    
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| id | select_type | table                     | type  | possible_keys | key     | key_len | ref   | rows | Extra       |
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_product_participation | range | PRIMARY       | PRIMARY | 8       | const | 1    | Using where |
++----+-------------+---------------------------+-------+---------------+---------+---------+-------+------+-------------+
+[1, " "]
+建议:
+	表isr_product_participation中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_user_participation_SqlMap_mysql.xml namespace=isr_user_participation id=updateByPrimaryKey  @*/
+        update isr_user_participation
+        set
+        UPDATED_AT = now(),
+        UPDATED_BY = 'SYS',
+        USER_ID = 36278904,
+        ACTIVITY_CODE = 'JLJ_001',
+        STATUS = '2'
+        where ID = 1
+    
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| id | select_type | table                  | type  | possible_keys | key     | key_len | ref   | rows | Extra       |
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_user_participation | range | PRIMARY       | PRIMARY | 8       | const | 1    | Using where |
++----+-------------+------------------------+-------+---------------+---------+---------+-------+------+-------------+
+[1, " "]
+建议:
+	表isr_user_participation中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=isr_product_participation_SqlMap_mysql.xml namespace=isr_product_participation id=selectByProductId  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, PRODUCT_ID, ACTIVITY_CODE, IS_VALID
+        from isr_product_participation
+        where product_id = 183459671
+        and is_valid = '1'
++----+-------------+---------------------------+------+---------------+------------+---------+-------+------+-------------+
+| id | select_type | table                     | type | possible_keys | key        | key_len | ref   | rows | Extra       |
++----+-------------+---------------------------+------+---------------+------------+---------+-------+------+-------------+
+| 1  | SIMPLE      | isr_product_participation | ref  | IDX_PRT_ID    | IDX_PRT_ID | 8       | const | 2    | Using where |
++----+-------------+---------------------------+------+---------------+------------+---------+-------+------+-------------+
+[0, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=PrlFinEtlConfig.xml namespace=PrlFinEtlConfig id=getById  @*/
+        select 
+        ID id
+        , CREATED_AT createdAt
+        , CREATED_BY createdBy
+        , UPDATED_AT updatedAt
+        , UPDATED_BY updatedBy
+        , DATA_UNIQUE_IDENTIFIER dataUniqueIdentifier
+        , TRANSLATION_MODE translationMode
+        , DELETED deleted
+        , ETL_TIDB_SQL etlTidbSql
+        , ETL_INSERT_MIDDLE_SQL etlInsertMiddleSql
+        , ETL_INSERT_LOG_SQL etlInsertLogSql
+        from prl_fin_etl_config
+        where DELETED = 0
+        and ID =1
++----+-------------+--------------------+------------+-------+---------------+---------+---------+-------+------+----------+-------+
+| id | select_type | table              | partitions | type  | possible_keys | key     | key_len | ref   | rows | filtered | Extra |
++----+-------------+--------------------+------------+-------+---------------+---------+---------+-------+------+----------+-------+
+| 1  | SIMPLE      | prl_fin_etl_config | None       | const | PRIMARY       | PRIMARY | 8       | const | 1    | 100.0    | None  |
++----+-------------+--------------------+------------+-------+---------------+---------+---------+-------+------+----------+-------+
+[1, " "]
+建议:
+	表prl_fin_etl_config中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=PrlFinEtlConfig.xml namespace=PrlFinEtlConfig id=getCount  @*/
+        select count(1)
+        from prl_fin_etl_config
+        where DELETED = 0
+    
++----+-------------+--------------------+------------+-------+---------------+-----------------------+---------+------+------+----------+--------------------------+
+| id | select_type | table              | partitions | type  | possible_keys | key                   | key_len | ref  | rows | filtered | Extra                    |
++----+-------------+--------------------+------------+-------+---------------+-----------------------+---------+------+------+----------+--------------------------+
+| 1  | SIMPLE      | prl_fin_etl_config | None       | index | None          | UK_PRL_FIN_ETL_CONFIG | 522     | None | 19   | 10.0     | Using where; Using index |
++----+-------------+--------------------+------------+-------+---------------+-----------------------+---------+------+------+----------+--------------------------+
+[0, " "]
+问题点:
+	表prl_fin_etl_config使用索引全表扫描
+建议:
+	可以尝试在请在DELETED字段上加组合索引
+	建立索引的DDL语句为： CREATED INDEX xxx(索引名) ON prl_fin_etl_config([DELETED])
+
+/*@ files=PrmSystemConfig.xml namespace=PrmSystemConfig id=getByKey  @*/
+        select  /*+ index(t,UK_CONFIG_KEY) */
+        id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , config_key configKey
+        , config_value configValue
+        , is_valid isValid
+        , config_desc configDesc
+        from prm_system_config t
+        where config_key = 'IsPointsPerEnable'
++----+-------------+-------+-------+---------------+---------------+---------+-------+------+-------+
+| id | select_type | table | type  | possible_keys | key           | key_len | ref   | rows | Extra |
++----+-------------+-------+-------+---------------+---------------+---------+-------+------+-------+
+| 1  | SIMPLE      | t     | const | UK_CONFIG_KEY | UK_CONFIG_KEY | 2050    | const | 1    | None  |
++----+-------------+-------+-------+---------------+---------------+---------+-------+------+-------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=KEF_CONFIG_SqlMap.xml namespace=KefConfig id=getConfigById  @*/
+    select
+    ID id,
+    KEY_NAME keyName,
+    VALUE value,
+    VERSION version,
+    VALID valid,
+    created_at createdAt,
+    created_by createdBy,
+    updated_at updatedAt,
+    updated_by updatedBy
+    from KEF_CONFIG
+    where  VALID='1'
+    AND  ID = 1
++----+-------------+-------+------+---------------+------+---------+------+------+-----------------------------------------------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra                                               |
++----+-------------+-------+------+---------------+------+---------+------+------+-----------------------------------------------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | Impossible WHERE noticed after reading const tables |
++----+-------------+-------+------+---------------+------+---------+------+------+-----------------------------------------------------+
+[1, " "]
+问题点:
+	MySQL已读取所有const（和系统）表，并注意到WHERE子句始终为false。(WHERE所查找的字段在数据之外？)
+
+/*@ files=RmTargetSummary.xml namespace=RmTargetSummary id=insert  @*/
+        insert into  VIP_RM_TARGET_SUMMARY (
+        created_at,
+        created_by,
+        updated_at,
+        updated_by,
+        AGENT_UM
+        , MANAGER
+        , TEAM_LEADER
+        , WEIGHT
+        , RANK
+        , BELONG_DATE
+        , BELONG_PK
+        , AGENT_ROLE
+        ) values (
+         now(),
+        'SYS',
+        now(),
+        'SYS',
+        100
+        ,100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        )
+    
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=RmTargetSummary.xml namespace=RmTargetSummary id=selectMemberSummaryByManagerUm  @*/
+        SELECT
+        ID id,
+        CREATED_AT createdAt,
+        CREATED_BY createdBy,
+        UPDATED_AT updatedAt,
+        UPDATED_BY updatedBy
+        , AGENT_UM agentUm
+        , MANAGER manager
+        , TEAM_LEADER teamLeader
+        , WEIGHT weight
+        , RANK rank
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPK
+        , AGENT_ROLE agentRole
+        FROM
+        VIP_RM_TARGET_SUMMARY
+        WHERE
+        BELONG_PK = '2019-08-21'
+        AND
+        MANAGER = 'DONGZIYU127'
+        AND
+        AGENT_ROLE='IFC'
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------+------+------------------------------------+
+| id | select_type | table                 | type | possible_keys         | key                   | key_len | ref         | rows | Extra                              |
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------+------+------------------------------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_SUMMARY | ref  | IDX_SUMMARY_BELONG_PK | IDX_SUMMARY_BELONG_PK | 516     | const,const | 2    | Using index condition; Using where |
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------+------+------------------------------------+
+[1, ""]
+建议:
+	表VIP_RM_TARGET_SUMMARY中,IDX_SUMMARY_BELONG_PK(belong_pk,agent_role,agent_um)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmTargetSummary.xml namespace=RmTargetSummary id=selectMemberSummaryByTeamLeaderUm  @*/
+        SELECT
+        ID id,
+        CREATED_AT createdAt,
+        CREATED_BY createdBy,
+        UPDATED_AT updatedAt,
+        UPDATED_BY updatedBy
+        , AGENT_UM agentUm
+        , MANAGER manager
+        , TEAM_LEADER teamLeader
+        , WEIGHT weight
+        , RANK rank
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPK
+        , AGENT_ROLE agentRole
+        FROM
+        VIP_RM_TARGET_SUMMARY
+        WHERE
+        BELONG_PK = '2019-08-21'
+        AND
+        TEAM_LEADER = 'SUNWENHUA396'
+        AND
+        AGENT_ROLE='IFC'
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------+------+------------------------------------+
+| id | select_type | table                 | type | possible_keys         | key                   | key_len | ref         | rows | Extra                              |
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------+------+------------------------------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_SUMMARY | ref  | IDX_SUMMARY_BELONG_PK | IDX_SUMMARY_BELONG_PK | 516     | const,const | 2    | Using index condition; Using where |
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------+------+------------------------------------+
+[1, ""]
+建议:
+	表VIP_RM_TARGET_SUMMARY中,IDX_SUMMARY_BELONG_PK(belong_pk,agent_role,agent_um)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmTargetSummary.xml namespace=RmTargetSummary id=selectSummaryByUm  @*/
+        SELECT
+        ID id,
+        CREATED_AT createdAt,
+        CREATED_BY createdBy,
+        UPDATED_AT updatedAt,
+        UPDATED_BY updatedBy
+        , AGENT_UM agentUm
+        , MANAGER manager
+        , TEAM_LEADER teamLeader
+        , WEIGHT weight
+        , RANK rank
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPK
+        , AGENT_ROLE agentRole
+        FROM
+        VIP_RM_TARGET_SUMMARY
+        WHERE
+        BELONG_PK = '2019-08-21'
+        AND
+        AGENT_UM = 'PENGLIANG024'
+        AND
+        AGENT_ROLE='IFC'
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------------+------+-----------------------+
+| id | select_type | table                 | type | possible_keys         | key                   | key_len | ref               | rows | Extra                 |
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------------+------+-----------------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_SUMMARY | ref  | IDX_SUMMARY_BELONG_PK | IDX_SUMMARY_BELONG_PK | 774     | const,const,const | 1    | Using index condition |
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------------+------+-----------------------+
+[1, ""]
+建议:
+	表VIP_RM_TARGET_SUMMARY中,IDX_SUMMARY_BELONG_PK(belong_pk,agent_role,agent_um)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmTargetSummary.xml namespace=RmTargetSummary id=sumAgent  @*/
+        SELECT
+        count(1)
+        FROM
+        VIP_RM_TARGET_SUMMARY
+        WHERE
+        BELONG_PK = '2019-08-21'
+        AND
+        AGENT_ROLE = 'IFC'
+    
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------+------+--------------------------+
+| id | select_type | table                 | type | possible_keys         | key                   | key_len | ref         | rows | Extra                    |
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------+------+--------------------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_SUMMARY | ref  | IDX_SUMMARY_BELONG_PK | IDX_SUMMARY_BELONG_PK | 516     | const,const | 2    | Using where; Using index |
++----+-------------+-----------------------+------+-----------------------+-----------------------+---------+-------------+------+--------------------------+
+[1, ""]
+建议:
+	表VIP_RM_TARGET_SUMMARY中,IDX_SUMMARY_BELONG_PK(belong_pk,agent_role,agent_um)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmTargetWeight.xml namespace=RmTargetWeight id=insert  @*/
+        insert into  VIP_RM_TARGET_WEIGHT (
+        created_at,
+        created_by,
+        updated_at,
+        updated_by,
+        AGENT_UM
+        , AGENT_ROLE
+        , AGENT_GRADE
+        , ITEM_NAME
+        , TEAM_LEADER
+        , MANAGER
+        , INVESTMENT_AMOUNT
+        , PERCENT
+        , TARGET_AMOUNT
+        , ACHIEVEMENT_RATE
+        , BELONG_DATE
+        , BELONG_PK
+        , ITEM_CATEGORY
+        ) values (
+        now(),
+        'SYS',
+        now(),
+        'SYS'
+        ,100
+        ,100
+        ,100
+        ,100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        )
+    
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=RmTargetWeight.xml namespace=RmTargetWeight id=selectByBelongPKAndAgentRole  @*/
+        SELECT
+        ID id
+        , AGENT_UM agentUm
+        , AGENT_ROLE agentRole
+        , AGENT_GRADE agentGrade
+        , ITEM_NAME itemName
+        , TEAM_LEADER teamLeader
+        , MANAGER manager
+        , INVESTMENT_AMOUNT investmentAmount
+        , PERCENT percent
+        , TARGET_AMOUNT targetAmount
+        , ACHIEVEMENT_RATE achievementRate
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPK
+        , ITEM_CATEGORY itemCategory
+        FROM
+        VIP_RM_TARGET_WEIGHT
+        WHERE
+        BELONG_PK = '2019-08-21'
+        AND
+        AGENT_ROLE = 'IFC'
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+------------------------------------+
+| id | select_type | table                | type | possible_keys     | key               | key_len | ref   | rows | Extra                              |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+------------------------------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_WEIGHT | ref  | IDX_AGENT_UM_ITEM | IDX_AGENT_UM_ITEM | 258     | const | 3    | Using index condition; Using where |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+------------------------------------+
+[1, " "]
+建议:
+	表VIP_RM_TARGET_WEIGHT中,IDX_AGENT_UM_ITEM(belong_pk,agent_um,item_name)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmTargetWeight.xml namespace=RmTargetWeight id=selectByBelongPk  @*/
+        SELECT
+        ID id
+        , AGENT_UM agentUm
+        , AGENT_ROLE agentRole
+        , AGENT_GRADE agentGrade
+        , ITEM_NAME itemName
+        , TEAM_LEADER teamLeader
+        , MANAGER manager
+        , INVESTMENT_AMOUNT investmentAmount
+        , PERCENT percent
+        , TARGET_AMOUNT targetAmount
+        , ACHIEVEMENT_RATE achievementRate
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPK
+        , ITEM_CATEGORY itemCategory
+        FROM
+        VIP_RM_TARGET_WEIGHT
+        WHERE
+        BELONG_PK = '2019-08-21'
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+-----------------------+
+| id | select_type | table                | type | possible_keys     | key               | key_len | ref   | rows | Extra                 |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+-----------------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_WEIGHT | ref  | IDX_AGENT_UM_ITEM | IDX_AGENT_UM_ITEM | 258     | const | 3    | Using index condition |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+-----------------------+
+[1, " "]
+建议:
+	表VIP_RM_TARGET_WEIGHT中,IDX_AGENT_UM_ITEM(belong_pk,agent_um,item_name)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmTargetWeight.xml namespace=RmTargetWeight id=selectByUmAndBelongPk  @*/
+        SELECT
+        ID id
+        , AGENT_UM agentUm
+        , AGENT_ROLE agentRole
+        , AGENT_GRADE agentGrade
+        , ITEM_NAME itemName
+        , TEAM_LEADER teamLeader
+        , MANAGER manager
+        , INVESTMENT_AMOUNT investmentAmount
+        , PERCENT percent
+        , TARGET_AMOUNT targetAmount
+        , ACHIEVEMENT_RATE achievementRate
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPK
+        , ITEM_CATEGORY itemCategory
+        FROM
+        VIP_RM_TARGET_WEIGHT
+        WHERE
+        BELONG_PK = '2019-08-21'
+        AND
+        AGENT_UM = 'CHENXIAOLIN574'
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------------+------+-----------------------+
+| id | select_type | table                | type | possible_keys     | key               | key_len | ref         | rows | Extra                 |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------------+------+-----------------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_WEIGHT | ref  | IDX_AGENT_UM_ITEM | IDX_AGENT_UM_ITEM | 516     | const,const | 1    | Using index condition |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------------+------+-----------------------+
+[1, " "]
+建议:
+	表VIP_RM_TARGET_WEIGHT中,IDX_AGENT_UM_ITEM(belong_pk,agent_um,item_name)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmTargetWeight.xml namespace=RmTargetWeight id=selectByUmAndItemName  @*/
+        SELECT
+        ID id
+        , AGENT_UM agentUm
+        , AGENT_ROLE agentRole
+        , AGENT_GRADE agentGrade
+        , ITEM_NAME itemName
+        , TEAM_LEADER teamLeader
+        , MANAGER manager
+        , INVESTMENT_AMOUNT investmentAmount
+        , PERCENT percent
+        , TARGET_AMOUNT targetAmount
+        , ACHIEVEMENT_RATE achievementRate
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPK
+        , ITEM_CATEGORY itemCategory
+        FROM
+        VIP_RM_TARGET_WEIGHT
+        WHERE
+        BELONG_PK = '2019-08-21'
+        AND
+        TEAM_LEADER = 'SUNWENHUA396'
+        AND
+        ITEM_NAME = '陆金所CA'
+        AND
+        AGENT_ROLE = 'IFC'
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+------------------------------------+
+| id | select_type | table                | type | possible_keys     | key               | key_len | ref   | rows | Extra                              |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+------------------------------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_WEIGHT | ref  | IDX_AGENT_UM_ITEM | IDX_AGENT_UM_ITEM | 258     | const | 3    | Using index condition; Using where |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+------------------------------------+
+[1, " "]
+建议:
+	表VIP_RM_TARGET_WEIGHT中,IDX_AGENT_UM_ITEM(belong_pk,agent_um,item_name)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmTargetWeight.xml namespace=RmTargetWeight id=sumAmountByBelongPKAndAgentRole  @*/
+        SELECT
+        SUM(INVESTMENT_AMOUNT) investmentAmount
+        ,ITEM_CATEGORY itemCategory
+        ,SUM(TARGET_AMOUNT) targetAmount
+        FROM
+        VIP_RM_TARGET_WEIGHT
+        WHERE
+        BELONG_PK = '2019-08-21'
+        AND
+        TEAM_LEADER = 'SUNWENHUA396'
+        AND
+        AGENT_ROLE = 'IFC'
+        AND
+        ITEM_NAME = '陆金所CA'
+    
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+------------------------------------+
+| id | select_type | table                | type | possible_keys     | key               | key_len | ref   | rows | Extra                              |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+------------------------------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_WEIGHT | ref  | IDX_AGENT_UM_ITEM | IDX_AGENT_UM_ITEM | 258     | const | 3    | Using index condition; Using where |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------+------+------------------------------------+
+[1, " "]
+建议:
+	表VIP_RM_TARGET_WEIGHT中,IDX_AGENT_UM_ITEM(belong_pk,agent_um,item_name)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmTargetWeight.xml namespace=RmTargetWeight id=sumWeightByUm  @*/
+        SELECT
+        SUM(PERCENT * ACHIEVEMENT_RATE)
+        FROM
+        VIP_RM_TARGET_WEIGHT
+        WHERE
+        BELONG_PK = '2019-08-21'
+        AND
+        AGENT_UM = 'CHENXIAOLIN574'
+    
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------------+------+-----------------------+
+| id | select_type | table                | type | possible_keys     | key               | key_len | ref         | rows | Extra                 |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------------+------+-----------------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_WEIGHT | ref  | IDX_AGENT_UM_ITEM | IDX_AGENT_UM_ITEM | 516     | const,const | 1    | Using index condition |
++----+-------------+----------------------+------+-------------------+-------------------+---------+-------------+------+-----------------------+
+[1, " "]
+建议:
+	表VIP_RM_TARGET_WEIGHT中,IDX_AGENT_UM_ITEM(belong_pk,agent_um,item_name)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmTargetWeight.xml namespace=RmTargetWeight id=update  @*/
+        UPDATE
+        VIP_RM_TARGET_WEIGHT
+        SET
+        UPDATED_AT = now(),
+        UPDATED_BY = 'SYS',
+        INVESTMENT_AMOUNT = 6168024.03,
+        ACHIEVEMENT_RATE = 1.11
+        WHERE
+        BELONG_PK = '2019-08-21'
+        and ID = 1
+    
++----+-------------+----------------------+-------+---------------------------+---------+---------+-------+------+-------------+
+| id | select_type | table                | type  | possible_keys             | key     | key_len | ref   | rows | Extra       |
++----+-------------+----------------------+-------+---------------------------+---------+---------+-------+------+-------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_WEIGHT | range | PRIMARY,IDX_AGENT_UM_ITEM | PRIMARY | 8       | const | 1    | Using where |
++----+-------------+----------------------+-------+---------------------------+---------+---------+-------+------+-------------+
+[1, " "]
+建议:
+	表VIP_RM_TARGET_WEIGHT中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=getMgmAmountByBelongPKAndUserId  @*/
+        SELECT
+        MGM_CA_AMOUNT
+        FROM
+        VIP_RM_USER_INFO_SNAPSHOT
+        WHERE USER_ID = 100
+        AND BELONG_PK = '2019-04-09'
+    
++----+-------------+---------------------------+------+--------------------+--------------------+---------+-------------+------+-------------+
+| id | select_type | table                     | type | possible_keys      | key                | key_len | ref         | rows | Extra       |
++----+-------------+---------------------------+------+--------------------+--------------------+---------+-------------+------+-------------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | ref  | UK_USER_ID_DATE_PK | UK_USER_ID_DATE_PK | 522     | const,const | 5    | Using where |
++----+-------------+---------------------------+------+--------------------+--------------------+---------+-------------+------+-------------+
+[1, " "]
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中,UK_USER_ID_DATE_PK(user_id,belong_pk,partition_key)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=getUserIdListByDateAndUm  @*/
+        SELECT USER_ID
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE BELONG_PK = '2019-04-09'
+        and AGENT_UM = 'LIUFEI081'
+        and PARTITION_KEY = 20190409
+    
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------------------+------+-------------+
+| id | select_type | table                     | type | possible_keys              | key                        | key_len | ref               | rows | Extra       |
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------------------+------+-------------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | ref  | IDX_VIP_RM_USER_INFO_S_ABP | IDX_VIP_RM_USER_INFO_S_ABP | 1037    | const,const,const | 179  | Using where |
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------------------+------+-------------+
+[0, " "]
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中,IDX_VIP_RM_USER_INFO_S_ABP(agent_um,belong_pk,partition_key)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=getUserIdListByDateAndUmAnd1730  @*/
+        SELECT USER_ID
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE BELONG_PK = '2019-04-09'
+        and AGENT_UM = 'LIUFEI081'
+        and PARTITION_KEY = 20190409
+        AND BW_1730_FLAG = 'None'
+    
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------------------+------+-------------+
+| id | select_type | table                     | type | possible_keys              | key                        | key_len | ref               | rows | Extra       |
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------------------+------+-------------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | ref  | IDX_VIP_RM_USER_INFO_S_ABP | IDX_VIP_RM_USER_INFO_S_ABP | 1037    | const,const,const | 179  | Using where |
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------------------+------+-------------+
+[0, " "]
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中,IDX_VIP_RM_USER_INFO_S_ABP(agent_um,belong_pk,partition_key)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=getUserIdListByFirstInvestmentAndUm  @*/
+        SELECT USER_ID
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE
+        AGENT_UM = 'LIUFEI081'
+        AND
+        DATE_FORMAT(FIRST_INVESTMENT_TIME,'%Y-%m-%d') = BELONG_PK
+    
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------+-------+-------------+
+| id | select_type | table                     | type | possible_keys              | key                        | key_len | ref   | rows  | Extra       |
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------+-------+-------------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | ref  | IDX_VIP_RM_USER_INFO_S_ABP | IDX_VIP_RM_USER_INFO_S_ABP | 515     | const | 63415 | Using where |
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------+-------+-------------+
+[0, " "]
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中,IDX_VIP_RM_USER_INFO_S_ABP(agent_um,belong_pk,partition_key)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=VipRmTargetDetail.xml namespace=VipRmTargetDetail id=getTargetDetail  @*/
+        SELECT
+        ID id,
+        AGENT_NAME agentName,
+        AGENT_UM agentUm,
+        AGENT_ROLE agentRole,
+        ITEM_NAME itemName,
+        PERCENT percent,
+        TARGET_AMOUNT targetAmount,
+        100 templateName
+        FROM
+        VIP_RM_TARGET_DETAIL
+        WHERE
+        UPLOAD_ID = 1
+        AND
+        IS_VALID = 1
+    
++----+-------------+----------------------+------+--------------------------+--------------------------+---------+-------+------+-------------+
+| id | select_type | table                | type | possible_keys            | key                      | key_len | ref   | rows | Extra       |
++----+-------------+----------------------+------+--------------------------+--------------------------+---------+-------+------+-------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_DETAIL | ref  | IDX_RM_TARGET_DETAIL_UID | IDX_RM_TARGET_DETAIL_UID | 8       | const | 4    | Using where |
++----+-------------+----------------------+------+--------------------------+--------------------------+---------+-------+------+-------------+
+[0, " "]
+建议:
+	表VIP_RM_TARGET_DETAIL中,IDX_RM_TARGET_DETAIL_UID(upload_id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=VipRmTargetUpload.xml namespace=VipRmTargetUpload id=getTargetUpload  @*/
+        SELECT
+        ID id,
+        TEMPLATE_NAME templateName,
+        TARGET_MONTH targetMonth
+        FROM
+        VIP_RM_TARGET_UPLOAD
+        WHERE
+        TARGET_MONTH = '2019-09'
+        AND
+        IS_VALID = 1
+    
++----+-------------+----------------------+------+----------------------------+----------------------------+---------+-------+------+------------------------------------+
+| id | select_type | table                | type | possible_keys              | key                        | key_len | ref   | rows | Extra                              |
++----+-------------+----------------------+------+----------------------------+----------------------------+---------+-------+------+------------------------------------+
+| 1  | SIMPLE      | VIP_RM_TARGET_UPLOAD | ref  | IDX_RM_TARGET_UPLOAD_TAR_M | IDX_RM_TARGET_UPLOAD_TAR_M | 258     | const | 1    | Using index condition; Using where |
++----+-------------+----------------------+------+----------------------------+----------------------------+---------+-------+------+------------------------------------+
+[1, ""]
+建议:
+	表VIP_RM_TARGET_UPLOAD中,IDX_RM_TARGET_UPLOAD_TAR_M(target_month)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=VipRmTemplateItem.xml namespace=VipRmTemplateItem id=getTemplateItem  @*/
+        SELECT
+        t1.ITEM_DETAIL_GSON itemDetailGson
+        FROM
+        VIP_RM_TEMPLATE_ITEM t1 LEFT JOIN VIP_RM_TEMPLATE t2
+        ON t1.TEMPLATE_ID = t2.ID
+        WHERE
+        t2.TEMPLATE_NAME = '2018年8月专员权重统计'
+        AND
+        t1.ITEM_NAME = '百万私募产品'
+        AND
+        t1.IS_VALID = 1
+    
++----+-------------+-------+--------+-----------------------------------------------------------------------+--------------------------+---------+--------------------------+------+------------------------------------+
+| id | select_type | table | type   | possible_keys                                                         | key                      | key_len | ref                      | rows | Extra                              |
++----+-------------+-------+--------+-----------------------------------------------------------------------+--------------------------+---------+--------------------------+------+------------------------------------+
+| 1  | SIMPLE      | t1    | ref    | UK_RM_TP_ITEM_TID_NAME,IDX_RM_TP_ITEM_TEM_ID,IDX_RM_TP_ITEM_ITEM_NAME | IDX_RM_TP_ITEM_ITEM_NAME | 514     | const                    | 1    | Using index condition; Using where |
+| 1  | SIMPLE      | t2    | eq_ref | PRIMARY,IDX_RM_TEMPLATE_TEM_NAME                                      | PRIMARY                  | 8       | vipmydata.t1.TEMPLATE_ID | 1    | Using where                        |
++----+-------------+-------+--------+-----------------------------------------------------------------------+--------------------------+---------+--------------------------+------+------------------------------------+
+[1, ""]
+建议:
+	表t1中,IDX_RM_TP_ITEM_ITEM_NAME(item_name)已是最优索引，请评估是否还有效率更高的扫描方式
+	表t2中，可以使用索引IDX_RM_TEMPLATE_TEM_NAME(template_name)
+
+/*@ files=be_VipMonthlyAppraisal_mysql.xml namespace=MonthlyAppraisal id=findbyIfcPcUmAndAppraiseTime  @*/
+        SELECT 
+        id,
+        CREATED_AT        createdAt,
+        CREATED_BY        createdBy,
+        UPDATED_AT        updatedAt,
+        UPDATED_BY        updatedBy,
+        VERSION           version,
+        USER_ID           userId,
+        USER_PARTYNO      userPartyno,
+        IFC_PC_ID         ifcPcId,
+        IFC_PC_UM         ifcPcUm,
+        IFC_PC_NAME       ifcPcName,
+        SERVICE_PERIOD    servicePeriod,
+        APPRAISE_STATUS   appraiseStatus,
+        APPRAISE_TIME     appraiseTime,
+        APPRAISAL_VERSION appraisalVersion,
+        APPRAISAL_SCORE   appraisalScore,
+        APPRAISE_CONTENT  appraiseContent,
+        LU_CHANNEL        luChannel,
+        BAD_COMMENT_REASON badCommentReason
+        FROM VIP_MONTHLY_APPRAISAL
+        WHERE
+        APPRAISE_STATUS = 'APPRAISED'
+        AND
+        IFC_PC_UM = 'YINXIAOXIANG636'
+        AND APPRAISE_TIME >= '2018-03-01 09:00:07.000000'
+        AND APPRAISE_TIME <= '2018-03-01 09:00:07.000000'
++----+-------------+-----------------------+-------+--------------------------------------------------------+------------------------------+---------+------+------+------------------------------------+
+| id | select_type | table                 | type  | possible_keys                                          | key                          | key_len | ref  | rows | Extra                              |
++----+-------------+-----------------------+-------+--------------------------------------------------------+------------------------------+---------+------+------+------------------------------------+
+| 1  | SIMPLE      | VIP_MONTHLY_APPRAISAL | range | IDX_MONTHLYAPPRAISAL_PCUM,IDX_MONTHLYAPPRAISAL_APPTIME | IDX_MONTHLYAPPRAISAL_APPTIME | 6       | None | 5    | Using index condition; Using where |
++----+-------------+-----------------------+-------+--------------------------------------------------------+------------------------------+---------+------+------+------------------------------------+
+[1, ""]
+建议:
+	表VIP_MONTHLY_APPRAISAL中,IDX_MONTHLYAPPRAISAL_APPTIME(appraise_time)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=getUserInfoByPartyNoAndPkList  @*/
+        SELECT 
+        id id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPk
+        , USER_ID userId
+        , PARTY_NO partyNo
+        , AGENT_UM agentUm
+        , AGENT_ID agentId
+        , AGENT_NAME agentName
+        , MEMBER_RANK_CODE memberRankCode
+        , BW_1730_FLAG bw1730Flag
+        , AUM_AMOUNT aumAmount
+        , CA_AMOUNT caAmount
+        , LAST_1730_DATE last1730Date
+        , LAST_BW_DATE lastBwDate
+        , EXPIRED_1730_DATE expired1730Date
+        , EXPIRED_BW_DATE expiredBwDate
+        , ANNUAL_ROA annualRoa
+        , PARTITION_KEY partitionKey
+        , IS_1732_FLAG is1732Flag
+        , FIRST_INVESTMENT_TIME firstInvestmentTime
+        , AI_CA_AMOUNT aiCaAmount
+        , MGM_CA_AMOUNT mgmCaAmount
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE BELONG_PK in
+/*iterate  close=')' conjunction=',' property='belongPkList' open='('*/ 
+ ( 
+            100
+         , 
+            100
+         , 
+            100
+         )
+        and PARTY_NO = 100
+        ORDER BY BELONG_DATE + 0 ASC
++----+-------------+---------------------------+------+------------------+------+---------+------+---------+-----------------------------+
+| id | select_type | table                     | type | possible_keys    | key  | key_len | ref  | rows    | Extra                       |
++----+-------------+---------------------------+------+------------------+------+---------+------+---------+-----------------------------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | ALL  | UK_PARTY_DATE_PK | None | None    | None | 9725148 | Using where; Using filesort |
++----+-------------+---------------------------+------+------------------+------+---------+------+---------+-----------------------------+
+[0, " "]
+问题点:
+	表VIP_RM_USER_INFO_SNAPSHOT使用全表扫描
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中，可以使用索引UK_PARTY_DATE_PK(party_no,belong_pk,partition_key)
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=getUserListByDateAndUm  @*/
+        SELECT 
+        id id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPk
+        , USER_ID userId
+        , PARTY_NO partyNo
+        , AGENT_UM agentUm
+        , AGENT_ID agentId
+        , AGENT_NAME agentName
+        , MEMBER_RANK_CODE memberRankCode
+        , BW_1730_FLAG bw1730Flag
+        , AUM_AMOUNT aumAmount
+        , CA_AMOUNT caAmount
+        , LAST_1730_DATE last1730Date
+        , LAST_BW_DATE lastBwDate
+        , EXPIRED_1730_DATE expired1730Date
+        , EXPIRED_BW_DATE expiredBwDate
+        , ANNUAL_ROA annualRoa
+        , PARTITION_KEY partitionKey
+        , IS_1732_FLAG is1732Flag
+        , FIRST_INVESTMENT_TIME firstInvestmentTime
+        , AI_CA_AMOUNT aiCaAmount
+        , MGM_CA_AMOUNT mgmCaAmount
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE BELONG_PK = '2019-04-09'
+        and AGENT_UM = 'LIUFEI081'
+        and PARTITION_KEY = 20190409
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------------------+------+-------------+
+| id | select_type | table                     | type | possible_keys              | key                        | key_len | ref               | rows | Extra       |
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------------------+------+-------------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | ref  | IDX_VIP_RM_USER_INFO_S_ABP | IDX_VIP_RM_USER_INFO_S_ABP | 1037    | const,const,const | 179  | Using where |
++----+-------------+---------------------------+------+----------------------------+----------------------------+---------+-------------------+------+-------------+
+[0, " "]
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中,IDX_VIP_RM_USER_INFO_S_ABP(agent_um,belong_pk,partition_key)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=insert  @*/
+        insert into VIP_RM_USER_INFO_SNAPSHOT (
+        created_at,
+        created_by,
+        updated_at,
+        updated_by
+        , BELONG_DATE
+        , BELONG_PK
+        , USER_ID
+        , PARTY_NO
+        , AGENT_UM
+        , AGENT_ID
+        , AGENT_NAME
+        , MEMBER_RANK_CODE
+        , BW_1730_FLAG
+        , AUM_AMOUNT
+        , CA_AMOUNT
+        , LAST_1730_DATE
+        , LAST_BW_DATE
+        , EXPIRED_1730_DATE
+        , EXPIRED_BW_DATE
+        , ANNUAL_ROA
+        , PARTITION_KEY
+        , IS_1732_FLAG
+        , FIRST_INVESTMENT_TIME
+        , AI_CA_AMOUNT
+        , MGM_CA_AMOUNT
+        ) values (
+        now(),
+        'SYS',
+        now(),
+        'SYS'
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        , 100
+        )
+        
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=selectByBelongPkAndUserId  @*/
+        SELECT 
+        id id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPk
+        , USER_ID userId
+        , PARTY_NO partyNo
+        , AGENT_UM agentUm
+        , AGENT_ID agentId
+        , AGENT_NAME agentName
+        , MEMBER_RANK_CODE memberRankCode
+        , BW_1730_FLAG bw1730Flag
+        , AUM_AMOUNT aumAmount
+        , CA_AMOUNT caAmount
+        , LAST_1730_DATE last1730Date
+        , LAST_BW_DATE lastBwDate
+        , EXPIRED_1730_DATE expired1730Date
+        , EXPIRED_BW_DATE expiredBwDate
+        , ANNUAL_ROA annualRoa
+        , PARTITION_KEY partitionKey
+        , IS_1732_FLAG is1732Flag
+        , FIRST_INVESTMENT_TIME firstInvestmentTime
+        , AI_CA_AMOUNT aiCaAmount
+        , MGM_CA_AMOUNT mgmCaAmount
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE BELONG_PK = '2019-04-09'
+        AND PARTITION_KEY = 20190409
+        and USER_ID = 100
++----+-------------+---------------------------+-------+--------------------+--------------------+---------+-------------------+------+-------+
+| id | select_type | table                     | type  | possible_keys      | key                | key_len | ref               | rows | Extra |
++----+-------------+---------------------------+-------+--------------------+--------------------+---------+-------------------+------+-------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | const | UK_USER_ID_DATE_PK | UK_USER_ID_DATE_PK | 530     | const,const,const | 1    | None  |
++----+-------------+---------------------------+-------+--------------------+--------------------+---------+-------------------+------+-------+
+[1, " "]
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中,UK_USER_ID_DATE_PK(user_id,belong_pk,partition_key)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=selectByBelongPkAndUserIdList  @*/
+        SELECT 
+        id id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPk
+        , USER_ID userId
+        , PARTY_NO partyNo
+        , AGENT_UM agentUm
+        , AGENT_ID agentId
+        , AGENT_NAME agentName
+        , MEMBER_RANK_CODE memberRankCode
+        , BW_1730_FLAG bw1730Flag
+        , AUM_AMOUNT aumAmount
+        , CA_AMOUNT caAmount
+        , LAST_1730_DATE last1730Date
+        , LAST_BW_DATE lastBwDate
+        , EXPIRED_1730_DATE expired1730Date
+        , EXPIRED_BW_DATE expiredBwDate
+        , ANNUAL_ROA annualRoa
+        , PARTITION_KEY partitionKey
+        , IS_1732_FLAG is1732Flag
+        , FIRST_INVESTMENT_TIME firstInvestmentTime
+        , AI_CA_AMOUNT aiCaAmount
+        , MGM_CA_AMOUNT mgmCaAmount
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE BELONG_PK = '2019-04-09'
+        AND PARTITION_KEY = 20190409
+        AND USER_ID in
+/*iterate  close=')' conjunction=',' property='userIdList' open='('*/ 
+ ( 
+            100
+         , 
+            100
+         , 
+            100
+         )
++----+-------------+---------------------------+-------+--------------------+--------------------+---------+------+------+-------------+
+| id | select_type | table                     | type  | possible_keys      | key                | key_len | ref  | rows | Extra       |
++----+-------------+---------------------------+-------+--------------------+--------------------+---------+------+------+-------------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | range | UK_USER_ID_DATE_PK | UK_USER_ID_DATE_PK | 530     | None | 1    | Using where |
++----+-------------+---------------------------+-------+--------------------+--------------------+---------+------+------+-------------+
+[1, ""]
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中,UK_USER_ID_DATE_PK(user_id,belong_pk,partition_key)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=selectById  @*/
+        SELECT 
+        id id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPk
+        , USER_ID userId
+        , PARTY_NO partyNo
+        , AGENT_UM agentUm
+        , AGENT_ID agentId
+        , AGENT_NAME agentName
+        , MEMBER_RANK_CODE memberRankCode
+        , BW_1730_FLAG bw1730Flag
+        , AUM_AMOUNT aumAmount
+        , CA_AMOUNT caAmount
+        , LAST_1730_DATE last1730Date
+        , LAST_BW_DATE lastBwDate
+        , EXPIRED_1730_DATE expired1730Date
+        , EXPIRED_BW_DATE expiredBwDate
+        , ANNUAL_ROA annualRoa
+        , PARTITION_KEY partitionKey
+        , IS_1732_FLAG is1732Flag
+        , FIRST_INVESTMENT_TIME firstInvestmentTime
+        , AI_CA_AMOUNT aiCaAmount
+        , MGM_CA_AMOUNT mgmCaAmount
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE ID = 43705
++----+-------------+---------------------------+------+---------------+---------+---------+-------+------+-------+
+| id | select_type | table                     | type | possible_keys | key     | key_len | ref   | rows | Extra |
++----+-------------+---------------------------+------+---------------+---------+---------+-------+------+-------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | ref  | PRIMARY       | PRIMARY | 8       | const | 5    | None  |
++----+-------------+---------------------------+------+---------------+---------+---------+-------+------+-------+
+[1, " "]
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中,PRIMARY(id,partition_key)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=selectByPartyNo  @*/
+        SELECT 
+        id id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPk
+        , USER_ID userId
+        , PARTY_NO partyNo
+        , AGENT_UM agentUm
+        , AGENT_ID agentId
+        , AGENT_NAME agentName
+        , MEMBER_RANK_CODE memberRankCode
+        , BW_1730_FLAG bw1730Flag
+        , AUM_AMOUNT aumAmount
+        , CA_AMOUNT caAmount
+        , LAST_1730_DATE last1730Date
+        , LAST_BW_DATE lastBwDate
+        , EXPIRED_1730_DATE expired1730Date
+        , EXPIRED_BW_DATE expiredBwDate
+        , ANNUAL_ROA annualRoa
+        , PARTITION_KEY partitionKey
+        , IS_1732_FLAG is1732Flag
+        , FIRST_INVESTMENT_TIME firstInvestmentTime
+        , AI_CA_AMOUNT aiCaAmount
+        , MGM_CA_AMOUNT mgmCaAmount
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE PARTY_NO = '400811322634294657'
+        ORDER BY BELONG_DATE + 0 DESC
+        LIMIT 1
++----+-------------+---------------------------+------+------------------+------------------+---------+-------+------+-----------------------------+
+| id | select_type | table                     | type | possible_keys    | key              | key_len | ref   | rows | Extra                       |
++----+-------------+---------------------------+------+------------------+------------------+---------+-------+------+-----------------------------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | ref  | UK_PARTY_DATE_PK | UK_PARTY_DATE_PK | 514     | const | 215  | Using where; Using filesort |
++----+-------------+---------------------------+------+------------------+------------------+---------+-------+------+-----------------------------+
+[1, " "]
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中,UK_PARTY_DATE_PK(party_no,belong_pk,partition_key)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=selectByPartyNoList  @*/
+        SELECT 
+        id id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPk
+        , USER_ID userId
+        , PARTY_NO partyNo
+        , AGENT_UM agentUm
+        , AGENT_ID agentId
+        , AGENT_NAME agentName
+        , MEMBER_RANK_CODE memberRankCode
+        , BW_1730_FLAG bw1730Flag
+        , AUM_AMOUNT aumAmount
+        , CA_AMOUNT caAmount
+        , LAST_1730_DATE last1730Date
+        , LAST_BW_DATE lastBwDate
+        , EXPIRED_1730_DATE expired1730Date
+        , EXPIRED_BW_DATE expiredBwDate
+        , ANNUAL_ROA annualRoa
+        , PARTITION_KEY partitionKey
+        , IS_1732_FLAG is1732Flag
+        , FIRST_INVESTMENT_TIME firstInvestmentTime
+        , AI_CA_AMOUNT aiCaAmount
+        , MGM_CA_AMOUNT mgmCaAmount
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE BELONG_PK = '2019-04-09'
+        AND PARTITION_KEY = 20190409
+        AND PARTY_NO in
+/*iterate  close=')' conjunction=',' property='partyNoList' open='('*/ 
+ ( 
+            100
+         , 
+            100
+         , 
+            100
+         )
++----+-------------+---------------------------+------+------------------+------+---------+------+---------+-------------+
+| id | select_type | table                     | type | possible_keys    | key  | key_len | ref  | rows    | Extra       |
++----+-------------+---------------------------+------+------------------+------+---------+------+---------+-------------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | ALL  | UK_PARTY_DATE_PK | None | None    | None | 1846394 | Using where |
++----+-------------+---------------------------+------+------------------+------+---------+------+---------+-------------+
+[0, " "]
+问题点:
+	表VIP_RM_USER_INFO_SNAPSHOT使用全表扫描
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中，可以使用索引UK_PARTY_DATE_PK(party_no,belong_pk,partition_key)
+
+/*@ files=RmUserInfoSnapshot.xml namespace=RmUserInfoSnapshot id=selectByPkAngPageNum  @*/
+        SELECT 
+        id id,
+        created_at createdAt,
+        created_by createdBy,
+        updated_at updatedAt,
+        updated_by updatedBy
+        , BELONG_DATE belongDate
+        , BELONG_PK belongPk
+        , USER_ID userId
+        , PARTY_NO partyNo
+        , AGENT_UM agentUm
+        , AGENT_ID agentId
+        , AGENT_NAME agentName
+        , MEMBER_RANK_CODE memberRankCode
+        , BW_1730_FLAG bw1730Flag
+        , AUM_AMOUNT aumAmount
+        , CA_AMOUNT caAmount
+        , LAST_1730_DATE last1730Date
+        , LAST_BW_DATE lastBwDate
+        , EXPIRED_1730_DATE expired1730Date
+        , EXPIRED_BW_DATE expiredBwDate
+        , ANNUAL_ROA annualRoa
+        , PARTITION_KEY partitionKey
+        , IS_1732_FLAG is1732Flag
+        , FIRST_INVESTMENT_TIME firstInvestmentTime
+        , AI_CA_AMOUNT aiCaAmount
+        , MGM_CA_AMOUNT mgmCaAmount
+        FROM VIP_RM_USER_INFO_SNAPSHOT
+        WHERE BELONG_PK = '2019-04-09'
+        AND PARTITION_KEY = 20190409
+        AND USER_ID > 100
+        ORDER BY USER_ID + 0 ASC
+        LIMIT 100, 100
++----+-------------+---------------------------+------+--------------------+------+---------+------+---------+-----------------------------+
+| id | select_type | table                     | type | possible_keys      | key  | key_len | ref  | rows    | Extra                       |
++----+-------------+---------------------------+------+--------------------+------+---------+------+---------+-----------------------------+
+| 1  | SIMPLE      | VIP_RM_USER_INFO_SNAPSHOT | ALL  | UK_USER_ID_DATE_PK | None | None    | None | 1846394 | Using where; Using filesort |
++----+-------------+---------------------------+------+--------------------+------+---------+------+---------+-----------------------------+
+[0, " "]
+问题点:
+	表VIP_RM_USER_INFO_SNAPSHOT使用全表扫描
+建议:
+	表VIP_RM_USER_INFO_SNAPSHOT中，可以使用索引UK_USER_ID_DATE_PK(user_id,belong_pk,partition_key)
+
+/*@ files=VipRmIntentTrack.xml namespace=VipRmIntentTrack id=getTotalCount  @*/
+		select count(*)
+		FROM vip_rm_intent_track
+        where IS_VALID = '1'
+        and STR_TO_DATE(ADD_CALLFEED_TIME, '%Y-%m-%d %H:%i:%s') >= '2019-08-21 11:50:52.000000'
+        and STR_TO_DATE(ADD_CALLFEED_TIME, '%Y-%m-%d %H:%i:%s') <= '2019-08-21 11:50:52.000000'
+        and ID > 1
+        and PRODUCT_ID IS NOT NULL
+        and INTENTION_BUY_AMOUNT IS NOT NULL
+	
++----+-------------+---------------------+-------+---------------+---------+---------+------+-------+-------------+
+| id | select_type | table               | type  | possible_keys | key     | key_len | ref  | rows  | Extra       |
++----+-------------+---------------------+-------+---------------+---------+---------+------+-------+-------------+
+| 1  | SIMPLE      | vip_rm_intent_track | range | PRIMARY       | PRIMARY | 8       | None | 34708 | Using where |
++----+-------------+---------------------+-------+---------------+---------+---------+------+-------+-------------+
+[0, ""]
+建议:
+	表vip_rm_intent_track中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=VipRmIntentTrack.xml namespace=VipRmIntentTrack id=selectByPage  @*/
+        select
+        ID ,CREATED_AT ,CREATED_BY ,UPDATED_AT ,UPDATED_BY ,VERSION ,IS_VALID ,RECOMMEND_ID ,ADD_CALLFEED_TIME ,UM ,PARTY_NO ,PRODUCT_CATEGORY ,RECOMMENTED_PRODUCT ,IS_OPEN ,PRODUCT_ID ,IS_INTENTION_PURCHASE ,INTENTION_BUY_AMOUNT ,TOTAL_INVESTMENT_AMOUNT ,EXPERT_DIFFERENT_AMOUNT
+        FROM vip_rm_intent_track
+        WHERE IS_VALID = '1'
+        and STR_TO_DATE(ADD_CALLFEED_TIME, '%Y-%m-%d %H:%i:%s') >= '2019-08-21 11:50:52.000000'
+        and STR_TO_DATE(ADD_CALLFEED_TIME, '%Y-%m-%d %H:%i:%s') <= '2019-08-21 11:50:52.000000'
+        and ID > 1
+        and PRODUCT_ID IS NOT NULL
+        and INTENTION_BUY_AMOUNT IS NOT NULL
+        order by ID asc
+        limit 100,100
++----+-------------+---------------------+-------+---------------+---------+---------+------+-------+-------------+
+| id | select_type | table               | type  | possible_keys | key     | key_len | ref  | rows  | Extra       |
++----+-------------+---------------------+-------+---------------+---------+---------+------+-------+-------------+
+| 1  | SIMPLE      | vip_rm_intent_track | range | PRIMARY       | PRIMARY | 8       | None | 34708 | Using where |
++----+-------------+---------------------+-------+---------------+---------+---------+------+-------+-------------+
+[0, ""]
+建议:
+	表vip_rm_intent_track中,PRIMARY(id)已是最优索引，请评估是否还有效率更高的扫描方式
+
+/*@ files=ISR_REFUND_RESULT_NOTIFY_SqlMap_mysql.xml namespace=ISR_REFUND_RESULT_NOTIFY id=insertSelective  @*/
+    insert into ISR_REFUND_RESULT_NOTIFY
+/*dynamic  prepend='('*/
+(
+-- /*isNotNull  property='createdAt' prepend=','*/  ,   
+--         CREATED_AT
+-- /*isNotNull  property='createdBy' prepend=','*/  ,   
+--         CREATED_BY
+-- /*isNotNull  property='updatedAt' prepend=','*/  ,   
+--         UPDATED_AT
+-- /*isNotNull  property='updatedBy' prepend=','*/  ,   
+--         UPDATED_BY
+-- /*isNotNull  property='messageId' prepend=','*/  ,   
+--         MESSAGE_ID
+-- /*isNotNull  property='orderId' prepend=','*/  ,   
+--           ORDER_ID
+-- /*isNotNull  property='refundId' prepend=','*/  ,   
+--           REFUND_ID
+-- /*isNotNull  property='policyNo' prepend=','*/  ,   
+--           POLICY_NO
+-- /*isNotNull  property='policyValue' prepend=','*/  ,   
+--           POLICY_VALUE
+-- /*isNotNull  property='withdrawMoney' prepend=','*/  ,   
+--           WITHDRAW_MONEY
+-- /*isNotNull  property='availableMoney' prepend=','*/  ,   
+--           AVAILABLE_MONEY
+-- /*isNotNull  property='hesitationStatus' prepend=','*/  ,   
+--             HESITATION_STATUS
+-- /*isNotNull  property='investmentId' prepend=','*/  ,   
+--             INVESTMENT_ID
+-- /*isNotNull  property='productId' prepend=','*/  ,   
+--             PRODUCT_ID
+-- /*isNotNull  property='status' prepend=','*/  ,   
+--             STATUS
+-- /*isNotNull  property='insuranceType' prepend=','*/  ,   
+--             INSURANCE_TYPE
+-- /*isNotNull  property='refundProposalNo' prepend=','*/  ,   
+--             REFUND_PROPOSAL_NO
+-- /*isNotNull  property='sendTime' prepend=','*/  ,   
+--             SEND_TIME
+-- /*isNotNull  property='loanerId' prepend=','*/  ,   
+--             LOANER_ID
+-- /*isNotNull  property='loaneeId' prepend=','*/  ,   
+--             LOANEE_ID
+-- /*isNotNull  property='version' prepend=','*/  ,   
+--             VERSION
+-- /*isNotNull  property='remark' prepend=','*/  ,   
+--             REMARK
+-- /*isNotNull  property='recordId' prepend=','*/  ,   
+--             RECORD_ID
+-- /*isNotNull  property='uploadPic' prepend=','*/  ,   
+--             UPLOAD_PIC
+      )
+    values
+/*dynamic  prepend='('*/
+(
+-- /*isNotNull  property='createdAt' prepend=','*/  ,   
+--         :P_createdAt
+-- /*isNotNull  property='createdBy' prepend=','*/  ,   
+--         :P_createdBy
+-- /*isNotNull  property='updatedAt' prepend=','*/  ,   
+--         :P_updatedAt
+-- /*isNotNull  property='updatedBy' prepend=','*/  ,   
+--         :P_updatedBy
+-- /*isNotNull  property='messageId' prepend=','*/  ,   
+--         :P_messageId
+-- /*isNotNull  property='orderId' prepend=','*/  ,   
+--         :P_orderId
+-- /*isNotNull  property='refundId' prepend=','*/  ,   
+--         :P_refundId
+-- /*isNotNull  property='policyNo' prepend=','*/  ,   
+--         :P_policyNo
+-- /*isNotNull  property='policyValue' prepend=','*/  ,   
+--         :P_policyValue
+-- /*isNotNull  property='withdrawMoney' prepend=','*/  ,   
+--         :P_withdrawMoney
+-- /*isNotNull  property='availableMoney' prepend=','*/  ,   
+--         :P_availableMoney
+-- /*isNotNull  property='hesitationStatus' prepend=','*/  ,   
+--             :P_hesitationStatus
+-- /*isNotNull  property='investmentId' prepend=','*/  ,   
+--             :P_investmentId
+-- /*isNotNull  property='productId' prepend=','*/  ,   
+--             :P_productId
+-- /*isNotNull  property='status' prepend=','*/  ,   
+--             :P_status
+-- /*isNotNull  property='insuranceType' prepend=','*/  ,   
+--             :P_insuranceType
+-- /*isNotNull  property='refundProposalNo' prepend=','*/  ,   
+--             :P_refundProposalNo
+-- /*isNotNull  property='sendTime' prepend=','*/  ,   
+--             :P_sendTime
+-- /*isNotNull  property='loanerId' prepend=','*/  ,   
+--             :P_loanerId
+-- /*isNotNull  property='loaneeId' prepend=','*/  ,   
+--             :P_loaneeId
+-- /*isNotNull  property='version' prepend=','*/  ,   
+--             :P_version
+-- /*isNotNull  property='remark' prepend=','*/  ,   
+--             :P_remark
+-- /*isNotNull  property='recordId' prepend=','*/  ,   
+--             :P_recordId
+-- /*isNotNull  property='uploadPic' prepend=','*/  ,   
+--             :P_uploadPic
+      )
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra          |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+| 1  | SIMPLE      | None  | None | None          | None | None    | None | None | No tables used |
++----+-------------+-------+------+---------------+------+---------+------+------+----------------+
+[1, " "]
+问题点:
+	未使用任何表，请检查sql语句是否正确
+
+/*@ files=ISR_REFUND_RESULT_NOTIFY_SqlMap_mysql.xml namespace=ISR_REFUND_RESULT_NOTIFY id=selectByUploadPic  @*/
+        SELECT
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY, MESSAGE_ID, ORDER_ID, REFUND_ID, POLICY_NO,
+        POLICY_VALUE, WITHDRAW_MONEY, AVAILABLE_MONEY, HESITATION_STATUS, INVESTMENT_ID, PRODUCT_ID, STATUS,
+        INSURANCE_TYPE, REFUND_PROPOSAL_NO, SEND_TIME, LOANER_ID, LOANEE_ID, VERSION, REMARK, RECORD_ID, UPLOAD_PIC
+        FROM ISR_REFUND_RESULT_NOTIFY
+        WHERE
+        UPLOAD_PIC = '1'
++----+-------------+--------------------------+------+----------------------+------+---------+------+------+-------------+
+| id | select_type | table                    | type | possible_keys        | key  | key_len | ref  | rows | Extra       |
++----+-------------+--------------------------+------+----------------------+------+---------+------+------+-------------+
+| 1  | SIMPLE      | ISR_REFUND_RESULT_NOTIFY | ALL  | IDX_REFUND_NOTIF_UPP | None | None    | None | 84   | Using where |
++----+-------------+--------------------------+------+----------------------+------+---------+------+------+-------------+
+[0, " "]
+问题点:
+	表ISR_REFUND_RESULT_NOTIFY使用全表扫描
+建议:
+	表ISR_REFUND_RESULT_NOTIFY中，可以使用索引IDX_REFUND_NOTIF_UPP(upload_pic)
+
+/*@ files=ISR_REFUND_RESULT_NOTIFY_SqlMap_mysql.xml namespace=ISR_REFUND_RESULT_NOTIFY id=updateStatusByIds  @*/
+        update ISR_REFUND_RESULT_NOTIFY
+        set UPLOAD_PIC = '1',
+        UPDATED_AT = now()
+        where id in
+/*iterate  property='ids' close=')' conjunction=',' open='('*/ 
+ ( 
+            100
+         , 
+            100
+         , 
+            100
+         )
++----+-------------+--------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| id | select_type | table                    | type  | possible_keys | key     | key_len | ref   | rows | Extra       |
++----+-------------+--------------------------+-------+---------------+---------+---------+-------+------+-------------+
+| 1  | SIMPLE      | ISR_REFUND_RESULT_NOTIFY | range | PRIMARY       | PRIMARY | 8       | const | 1    | Using where |
++----+-------------+--------------------------+-------+---------------+---------+---------+-------+------+-------------+
+[0, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=vdo_live_record_SqlMap.xml namespace=vdo_live_record id=selectAdviserVideo  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY,VIDEO_ID,TITLE,SUB_TITLE,START_TIME,STATUS,ADVISER_ID,IS_LIFE_TAB,
+        IS_ADVISER_TAB,IS_FINANCE_TAB,CONTENT,IMG,TYPE,DURATION,IS_VALID,LABEL_ID,IS_APPROPRIATE,PRODUCT_ID,RECOMMEND_PRODUCT,RECESSIVE,
+        DOMINANT,RECOMMEND_ID,SHARE_SUBJECT,SHARE_DESCRIPTION,SHARE_IMG,IS_PUSH,QUESTIONNAIRE_ID,COMMENT_ID,IS_NEED_COMMENT,END_TIME,
+        SOCIAL_TITLE,SHOW_PPT,IS_TAB_CATEGORY_TOP,ORGANIZER_COMMAND,PARTICIPANT_COMMAND,VIDEO_URL,VIDEO_SIZE,LIKE_NUM,VIEW_NUM,COLLECT_NUM,SHARE_NUM,
+        IS_INSURANCE_VIDEO,IS_INSURANCE_TAB,PUSH_VIDEO_URL,PULL_VIDEO_URL
+        from vdo_live_record
+        where (STATUS= '0' or STATUS='2') and IS_VALID='1'  and IS_ADVISER_TAB='1' and
+        ADVISER_ID=1  order by START_TIME+0
+        desc
+        limit 100,100
++----+-------------+-----------------+------+----------------------------+------+---------+------+------+-----------------------------+
+| id | select_type | table           | type | possible_keys              | key  | key_len | ref  | rows | Extra                       |
++----+-------------+-----------------+------+----------------------------+------+---------+------+------+-----------------------------+
+| 1  | SIMPLE      | vdo_live_record | ALL  | IDX_LIVE_RECORD_ADVID_STAT | None | None    | None | 3    | Using where; Using filesort |
++----+-------------+-----------------+------+----------------------------+------+---------+------+------+-----------------------------+
+[0, " "]
+问题点:
+	表vdo_live_record使用全表扫描
+建议:
+	表vdo_live_record中，可以使用索引IDX_LIVE_RECORD_ADVID_STAT(adviser_id,status,is_valid,start_time)
+
+/*@ files=vdo_live_record_SqlMap.xml namespace=vdo_live_record id=selectBannerCategoryVideo  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY,VIDEO_ID,TITLE,SUB_TITLE,START_TIME,STATUS,ADVISER_ID,IS_LIFE_TAB,
+        IS_ADVISER_TAB,IS_FINANCE_TAB,CONTENT,IMG,TYPE,DURATION,IS_VALID,LABEL_ID,IS_APPROPRIATE,PRODUCT_ID,RECOMMEND_PRODUCT,RECESSIVE,
+        DOMINANT,RECOMMEND_ID,SHARE_SUBJECT,SHARE_DESCRIPTION,SHARE_IMG,IS_PUSH,QUESTIONNAIRE_ID,COMMENT_ID,IS_NEED_COMMENT,END_TIME,
+        SOCIAL_TITLE,SHOW_PPT,IS_TAB_CATEGORY_TOP,ORGANIZER_COMMAND,PARTICIPANT_COMMAND,VIDEO_URL,VIDEO_SIZE,LIKE_NUM,VIEW_NUM,COLLECT_NUM,SHARE_NUM,
+        IS_INSURANCE_VIDEO,IS_INSURANCE_TAB,PUSH_VIDEO_URL,PULL_VIDEO_URL
+        from vdo_live_record
+        where (STATUS= '0' or STATUS='2') and IS_VALID='1'
+        and id in
+/*iterate  close=')' conjunction=',' property='videoIdList' open='('*/ 
+ ( 
+            100
+         , 
+            100
+         , 
+            100
+         )
+        order by IS_TAB_CATEGORY_TOP desc, START_TIME+0 desc
+        limit 100,100
++----+-------------+-----------------+-------+---------------+---------+---------+------+------+-----------------------------+
+| id | select_type | table           | type  | possible_keys | key     | key_len | ref  | rows | Extra                       |
++----+-------------+-----------------+-------+---------------+---------+---------+------+------+-----------------------------+
+| 1  | SIMPLE      | vdo_live_record | range | PRIMARY       | PRIMARY | 8       | None | 1    | Using where; Using filesort |
++----+-------------+-----------------+-------+---------------+---------+---------+------+------+-----------------------------+
+[0, " "]
+建议:
+	可以尝试在请在IS_VALID和STATUS字段上加组合索引
+	建立索引的DDL语句为： CREATED INDEX xxx(索引名) ON vdo_live_record([IS_VALID,STATUS])
+
+/*@ files=vdo_live_record_SqlMap.xml namespace=vdo_live_record id=selectBannerCategoryVideoOrderByViewNum  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY,VIDEO_ID,TITLE,SUB_TITLE,START_TIME,STATUS,ADVISER_ID,IS_LIFE_TAB,
+        IS_ADVISER_TAB,IS_FINANCE_TAB,CONTENT,IMG,TYPE,DURATION,IS_VALID,LABEL_ID,IS_APPROPRIATE,PRODUCT_ID,RECOMMEND_PRODUCT,RECESSIVE,
+        DOMINANT,RECOMMEND_ID,SHARE_SUBJECT,SHARE_DESCRIPTION,SHARE_IMG,IS_PUSH,QUESTIONNAIRE_ID,COMMENT_ID,IS_NEED_COMMENT,END_TIME,
+        SOCIAL_TITLE,SHOW_PPT,IS_TAB_CATEGORY_TOP,ORGANIZER_COMMAND,PARTICIPANT_COMMAND,VIDEO_URL,VIDEO_SIZE,LIKE_NUM,VIEW_NUM,COLLECT_NUM,SHARE_NUM,
+        IS_INSURANCE_VIDEO,IS_INSURANCE_TAB,PUSH_VIDEO_URL,PULL_VIDEO_URL
+        from vdo_live_record
+        where (STATUS= '0' or STATUS='2') and IS_VALID='1'
+        and id in
+/*iterate  close=')' conjunction=',' property='videoIdList' open='('*/ 
+ ( 
+            100
+         , 
+            100
+         , 
+            100
+         )
+        order by VIEW_NUM desc, START_TIME+0 desc
+        limit 100,100
++----+-------------+-----------------+-------+---------------+---------+---------+------+------+-----------------------------+
+| id | select_type | table           | type  | possible_keys | key     | key_len | ref  | rows | Extra                       |
++----+-------------+-----------------+-------+---------------+---------+---------+------+------+-----------------------------+
+| 1  | SIMPLE      | vdo_live_record | range | PRIMARY       | PRIMARY | 8       | None | 1    | Using where; Using filesort |
++----+-------------+-----------------+-------+---------------+---------+---------+------+------+-----------------------------+
+[0, " "]
+建议:
+	可以尝试在请在IS_VALID和STATUS字段上加组合索引
+	建立索引的DDL语句为： CREATED INDEX xxx(索引名) ON vdo_live_record([IS_VALID,STATUS])
+
+/*@ files=vdo_live_record_SqlMap.xml namespace=vdo_live_record id=selectById  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY,VIDEO_ID,TITLE,SUB_TITLE,START_TIME,STATUS,ADVISER_ID,IS_LIFE_TAB,
+        IS_ADVISER_TAB,IS_FINANCE_TAB,CONTENT,IMG,TYPE,DURATION,IS_VALID,LABEL_ID,IS_APPROPRIATE,PRODUCT_ID,RECOMMEND_PRODUCT,RECESSIVE,
+        DOMINANT,RECOMMEND_ID,SHARE_SUBJECT,SHARE_DESCRIPTION,SHARE_IMG,IS_PUSH,QUESTIONNAIRE_ID,COMMENT_ID,IS_NEED_COMMENT,END_TIME,
+        SOCIAL_TITLE,SHOW_PPT,IS_TAB_CATEGORY_TOP,ORGANIZER_COMMAND,PARTICIPANT_COMMAND,VIDEO_URL,VIDEO_SIZE,LIKE_NUM,VIEW_NUM,COLLECT_NUM,SHARE_NUM,
+        IS_INSURANCE_VIDEO,IS_INSURANCE_TAB,PUSH_VIDEO_URL,PULL_VIDEO_URL
+        from vdo_live_record
+        where id=1
++----+-------------+-----------------+-------+---------------+---------+---------+-------+------+-------+
+| id | select_type | table           | type  | possible_keys | key     | key_len | ref   | rows | Extra |
++----+-------------+-----------------+-------+---------------+---------+---------+-------+------+-------+
+| 1  | SIMPLE      | vdo_live_record | const | PRIMARY       | PRIMARY | 8       | const | 1    | None  |
++----+-------------+-----------------+-------+---------------+---------+---------+-------+------+-------+
+[1, " "]
+建议:
+	请评估是否还有效率更高的扫描方式
+
+/*@ files=vdo_live_record_SqlMap.xml namespace=vdo_live_record id=selectByVideoId  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY,VIDEO_ID,TITLE,SUB_TITLE,START_TIME,STATUS,ADVISER_ID,IS_LIFE_TAB,
+        IS_ADVISER_TAB,IS_FINANCE_TAB,CONTENT,IMG,TYPE,DURATION,IS_VALID,LABEL_ID,IS_APPROPRIATE,PRODUCT_ID,RECOMMEND_PRODUCT,RECESSIVE,
+        DOMINANT,RECOMMEND_ID,SHARE_SUBJECT,SHARE_DESCRIPTION,SHARE_IMG,IS_PUSH,QUESTIONNAIRE_ID,COMMENT_ID,IS_NEED_COMMENT,END_TIME,
+        SOCIAL_TITLE,SHOW_PPT,IS_TAB_CATEGORY_TOP,ORGANIZER_COMMAND,PARTICIPANT_COMMAND,VIDEO_URL,VIDEO_SIZE,LIKE_NUM,VIEW_NUM,COLLECT_NUM,SHARE_NUM,
+        IS_INSURANCE_VIDEO,IS_INSURANCE_TAB,PUSH_VIDEO_URL,PULL_VIDEO_URL
+        from vdo_live_record
+        where id=1 and IS_VALID='1'
++----+-------------+-----------------+-------+---------------+---------+---------+-------+------+-------+
+| id | select_type | table           | type  | possible_keys | key     | key_len | ref   | rows | Extra |
++----+-------------+-----------------+-------+---------------+---------+---------+-------+------+-------+
+| 1  | SIMPLE      | vdo_live_record | const | PRIMARY       | PRIMARY | 8       | const | 1    | None  |
++----+-------------+-----------------+-------+---------------+---------+---------+-------+------+-------+
+[1, " "]
+建议:
+	可以尝试在请在IS_VALID字段上加组合索引
+	建立索引的DDL语句为： CREATED INDEX xxx(索引名) ON vdo_live_record([IS_VALID])
+
+/*@ files=vdo_live_record_SqlMap.xml namespace=vdo_live_record id=selectFinanceCategoryVideoOrderByViewNum  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY,VIDEO_ID,TITLE,SUB_TITLE,START_TIME,STATUS,ADVISER_ID,IS_LIFE_TAB,
+        IS_ADVISER_TAB,IS_FINANCE_TAB,CONTENT,IMG,TYPE,DURATION,IS_VALID,LABEL_ID,IS_APPROPRIATE,PRODUCT_ID,RECOMMEND_PRODUCT,RECESSIVE,
+        DOMINANT,RECOMMEND_ID,SHARE_SUBJECT,SHARE_DESCRIPTION,SHARE_IMG,IS_PUSH,QUESTIONNAIRE_ID,COMMENT_ID,IS_NEED_COMMENT,END_TIME,
+        SOCIAL_TITLE,SHOW_PPT,IS_TAB_CATEGORY_TOP,ORGANIZER_COMMAND,PARTICIPANT_COMMAND,VIDEO_URL,VIDEO_SIZE,LIKE_NUM,VIEW_NUM,COLLECT_NUM,SHARE_NUM,
+        IS_INSURANCE_VIDEO,IS_INSURANCE_TAB,PUSH_VIDEO_URL,PULL_VIDEO_URL
+        from vdo_live_record
+        where (STATUS= '0' or STATUS='2') and IS_VALID='1'
+        and IS_FINANCE_TAB in
+/*iterate  close=')' conjunction=',' property='subCategoryIdList' open='('*/ 
+ ( 
+            100
+         , 
+            100
+         , 
+            100
+         )
+        order by VIEW_NUM desc, START_TIME+0 desc
+        limit 100,100
++----+-------------+-----------------+------+--------------------------+------+---------+------+------+-----------------------------+
+| id | select_type | table           | type | possible_keys            | key  | key_len | ref  | rows | Extra                       |
++----+-------------+-----------------+------+--------------------------+------+---------+------+------+-----------------------------+
+| 1  | SIMPLE      | vdo_live_record | ALL  | IDX_LIVE_RECORD_FINA_TAB | None | None    | None | 3    | Using where; Using filesort |
++----+-------------+-----------------+------+--------------------------+------+---------+------+------+-----------------------------+
+[0, " "]
+问题点:
+	表vdo_live_record使用全表扫描
+建议:
+	表vdo_live_record中，可以使用索引IDX_LIVE_RECORD_FINA_TAB(is_finance_tab,status,is_valid,start_time)
+
+/*@ files=vdo_live_record_SqlMap.xml namespace=vdo_live_record id=selectFinanceVideo  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY,VIDEO_ID,TITLE,SUB_TITLE,START_TIME,STATUS,ADVISER_ID,IS_LIFE_TAB,
+        IS_ADVISER_TAB,IS_FINANCE_TAB,CONTENT,IMG,TYPE,DURATION,IS_VALID,LABEL_ID,IS_APPROPRIATE,PRODUCT_ID,RECOMMEND_PRODUCT,RECESSIVE,
+        DOMINANT,RECOMMEND_ID,SHARE_SUBJECT,SHARE_DESCRIPTION,SHARE_IMG,IS_PUSH,QUESTIONNAIRE_ID,COMMENT_ID,IS_NEED_COMMENT,END_TIME,
+        SOCIAL_TITLE,SHOW_PPT,IS_TAB_CATEGORY_TOP,ORGANIZER_COMMAND,PARTICIPANT_COMMAND,VIDEO_URL,VIDEO_SIZE,LIKE_NUM,VIEW_NUM,COLLECT_NUM,SHARE_NUM,
+        IS_INSURANCE_VIDEO,IS_INSURANCE_TAB,PUSH_VIDEO_URL,PULL_VIDEO_URL
+        from vdo_live_record
+        where (STATUS= '0' or STATUS='2')  and IS_VALID='1' and
+        IS_FINANCE_TAB in
+/*iterate  close=')' conjunction=',' property='subCategoryIdList' open='('*/ 
+ ( 
+            100
+         , 
+            100
+         , 
+            100
+         )
+        order by  START_TIME+0 desc
+        limit 100,100
++----+-------------+-----------------+------+--------------------------+------+---------+------+------+-----------------------------+
+| id | select_type | table           | type | possible_keys            | key  | key_len | ref  | rows | Extra                       |
++----+-------------+-----------------+------+--------------------------+------+---------+------+------+-----------------------------+
+| 1  | SIMPLE      | vdo_live_record | ALL  | IDX_LIVE_RECORD_FINA_TAB | None | None    | None | 3    | Using where; Using filesort |
++----+-------------+-----------------+------+--------------------------+------+---------+------+------+-----------------------------+
+[0, " "]
+问题点:
+	表vdo_live_record使用全表扫描
+建议:
+	表vdo_live_record中，可以使用索引IDX_LIVE_RECORD_FINA_TAB(is_finance_tab,status,is_valid,start_time)
+
+/*@ files=vdo_live_record_SqlMap.xml namespace=vdo_live_record id=selectInsuranceCategoryVideo  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY,VIDEO_ID,TITLE,SUB_TITLE,START_TIME,STATUS,ADVISER_ID,IS_LIFE_TAB,
+        IS_ADVISER_TAB,IS_FINANCE_TAB,CONTENT,IMG,TYPE,DURATION,IS_VALID,LABEL_ID,IS_APPROPRIATE,PRODUCT_ID,RECOMMEND_PRODUCT,RECESSIVE,
+        DOMINANT,RECOMMEND_ID,SHARE_SUBJECT,SHARE_DESCRIPTION,SHARE_IMG,IS_PUSH,QUESTIONNAIRE_ID,COMMENT_ID,IS_NEED_COMMENT,END_TIME,
+        SOCIAL_TITLE,SHOW_PPT,IS_TAB_CATEGORY_TOP,ORGANIZER_COMMAND,PARTICIPANT_COMMAND,VIDEO_URL,VIDEO_SIZE,LIKE_NUM,VIEW_NUM,COLLECT_NUM,SHARE_NUM,
+        IS_INSURANCE_VIDEO,IS_INSURANCE_TAB,PUSH_VIDEO_URL,PULL_VIDEO_URL
+        from vdo_live_record
+        where (STATUS= '0' or STATUS='2') and IS_VALID='1'
+        and IS_INSURANCE_TAB in
+/*iterate  close=')' conjunction=',' property='subCategoryIdList' open='('*/ 
+ ( 
+            100
+         , 
+            100
+         , 
+            100
+         )
+        order by IS_TAB_CATEGORY_TOP desc, START_TIME+0 desc
+        limit 100,100
++----+-------------+-----------------+------+---------------------------+------+---------+------+------+-----------------------------+
+| id | select_type | table           | type | possible_keys             | key  | key_len | ref  | rows | Extra                       |
++----+-------------+-----------------+------+---------------------------+------+---------+------+------+-----------------------------+
+| 1  | SIMPLE      | vdo_live_record | ALL  | IDX_LIVE_RECORD_INSUR_TAB | None | None    | None | 3    | Using where; Using filesort |
++----+-------------+-----------------+------+---------------------------+------+---------+------+------+-----------------------------+
+[0, " "]
+问题点:
+	表vdo_live_record使用全表扫描
+建议:
+	表vdo_live_record中，可以使用索引IDX_LIVE_RECORD_INSUR_TAB(is_insurance_tab,status,is_valid,start_time)
+
+/*@ files=vdo_live_record_SqlMap.xml namespace=vdo_live_record id=selectInsuranceCategoryVideoOrderByViewNum  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY,VIDEO_ID,TITLE,SUB_TITLE,START_TIME,STATUS,ADVISER_ID,IS_LIFE_TAB,
+        IS_ADVISER_TAB,IS_FINANCE_TAB,CONTENT,IMG,TYPE,DURATION,IS_VALID,LABEL_ID,IS_APPROPRIATE,PRODUCT_ID,RECOMMEND_PRODUCT,RECESSIVE,
+        DOMINANT,RECOMMEND_ID,SHARE_SUBJECT,SHARE_DESCRIPTION,SHARE_IMG,IS_PUSH,QUESTIONNAIRE_ID,COMMENT_ID,IS_NEED_COMMENT,END_TIME,
+        SOCIAL_TITLE,SHOW_PPT,IS_TAB_CATEGORY_TOP,ORGANIZER_COMMAND,PARTICIPANT_COMMAND,VIDEO_URL,VIDEO_SIZE,LIKE_NUM,VIEW_NUM,COLLECT_NUM,SHARE_NUM,
+        IS_INSURANCE_VIDEO,IS_INSURANCE_TAB,PUSH_VIDEO_URL,PULL_VIDEO_URL
+        from vdo_live_record
+        where (STATUS= '0' or STATUS='2') and IS_VALID='1'
+        and IS_INSURANCE_TAB in
+/*iterate  close=')' conjunction=',' property='subCategoryIdList' open='('*/ 
+ ( 
+            100
+         , 
+            100
+         , 
+            100
+         )
+        order by VIEW_NUM desc, START_TIME+0 desc
+        limit 100,100
++----+-------------+-----------------+------+---------------------------+------+---------+------+------+-----------------------------+
+| id | select_type | table           | type | possible_keys             | key  | key_len | ref  | rows | Extra                       |
++----+-------------+-----------------+------+---------------------------+------+---------+------+------+-----------------------------+
+| 1  | SIMPLE      | vdo_live_record | ALL  | IDX_LIVE_RECORD_INSUR_TAB | None | None    | None | 3    | Using where; Using filesort |
++----+-------------+-----------------+------+---------------------------+------+---------+------+------+-----------------------------+
+[0, " "]
+问题点:
+	表vdo_live_record使用全表扫描
+建议:
+	表vdo_live_record中，可以使用索引IDX_LIVE_RECORD_INSUR_TAB(is_insurance_tab,status,is_valid,start_time)
+
+/*@ files=vdo_live_record_SqlMap.xml namespace=vdo_live_record id=selectLabelVideo  @*/
+        select
+        ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY,VIDEO_ID,TITLE,SUB_TITLE,START_TIME,STATUS,ADVISER_ID,IS_LIFE_TAB,
+        IS_ADVISER_TAB,IS_FINANCE_TAB,CONTENT,IMG,TYPE,DURATION,IS_VALID,LABEL_ID,IS_APPROPRIATE,PRODUCT_ID,RECOMMEND_PRODUCT,RECESSIVE,
+        DOMINANT,RECOMMEND_ID,SHARE_SUBJECT,SHARE_DESCRIPTION,SHARE_IMG,IS_PUSH,QUESTIONNAIRE_ID,COMMENT_ID,IS_NEED_COMMENT,END_TIME,
+        SOCIAL_TITLE,SHOW_PPT,IS_TAB_CATEGORY_TOP,ORGANIZER_COMMAND,PARTICIPANT_COMMAND,VIDEO_URL,VIDEO_SIZE,LIKE_NUM,VIEW_NUM,COLLECT_NUM,SHARE_NUM,
+        IS_INSURANCE_VIDEO,IS_INSURANCE_TAB,PUSH_VIDEO_URL,PULL_VIDEO_URL
+        from vdo_live_record
+        where (STATUS= '0' or STATUS='2')  and IS_VALID='1' and
+        LABEL_ID=1 order by START_TIME+0
+        desc
+        limit 100,100
++----+-------------+-----------------+------+---------------------------+------+---------+------+------+-----------------------------+
+| id | select_type | table           | type | possible_keys             | key  | key_len | ref  | rows | Extra                       |
++----+-------------+-----------------+------+---------------------------+------+---------+------+------+-----------------------------+
+| 1  | SIMPLE      | vdo_live_record | ALL  | IDX_LIVE_RECORD_LBID_STAT | None | None    | None | 3    | Using where; Using filesort |
++----+-------------+-----------------+------+---------------------------+------+---------+------+------+-----------------------------+
+[0, " "]
+问题点:
+	表vdo_live_record使用全表扫描
+建议:
+	表vdo_live_record中，可以使用索引IDX_LIVE_RECORD_LBID_STAT(label_id,status,is_valid,start_time)
+

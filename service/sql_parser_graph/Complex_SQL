@@ -1,0 +1,151 @@
+SELECT  *  FROM  (
+SELECT  SUM((CC1403497422)) T4 ,  SUM((CC1397497310)) T5 ,  SUM((CC1603603611)) T6 ,  SUM((CC1597603499)) T7 ,
+SUM((C1948592346)) T8 ,  SUM((C1954592458)) T9 ,  SUM((C2041963219)) T2 ,  SUM((CC24877953)) T3 FROM  (
+SELECT  *  FROM  (
+SELECT  *  FROM  (
+SELECT "获客渠道" C807349589 , "申请笔数" C2041963219 , "申请提款笔数" CC1603603611 ,
+"推荐人所属支行名称" C1557163809 , "业务子类型" CC816450280 , "机构名称" CC1548889882 ,
+"渠道来源" C397943381 , "申请金额" C2047963331 , (IS_HEKH) C1933911260 , "申请提款金额" CC1597603499 ,
+"一类户成功还款笔数" C1038155204 , "分行" CC2125023795 , "贷款用途" CC1120841952 , "KB码分类" CC1935613902 ,
+"推荐人编码" C1070234612 , "推荐人名称" C1059662620 , (OUTERID) CC1283978621 , "二类户成功还款笔数" CC703931720 ,
+"二类户成功提款笔数" C1771041456 , (OUTERSOURCE) CC580097661 , "机构编码" CC1538317890 , "贷款期限" CC1124245349 ,
+"一类户成功提款笔数" CC781838916 , "推荐人所属支行编码" C1567735801 , "成功提款金额" C1954592458 , (CID) C762083051 ,
+"统计口径" C21383184 , "推荐人代码" C1058376833 , "贷款城市" CC1128460264 , "分行编码" CC2006216510 ,
+"渠道来源编码" C203684682 , "子产品分类" C517742450 , "审批笔数" CC24877953 , "区域" CC2125112114 ,
+"业务品种" C941837056 , "审批通过笔数" CC1403497422 , "方案编号" CC1888320445 , "切换日期" C2001817886 ,
+"统计日期" C25873751 , "获客渠道编码" CC1493940662 , "审批通过金额" CC1397497310 , "成功提款笔数" C1948592346 ,
+"切换维度" C2007915462 FROM  (
+select
+  DATA_TYPE               AS 统计口径
+  ,case when '6'=1 then coalesce(CITY_DESC_CN,'未知')
+        when '6'=2 then coalesce(BRANCH03_NAME,'未知')
+          when '6'=3 then coalesce(CHANNEL_SOURCE,'未知')
+      when '6'=4 then coalesce(SOURCE,'未知')
+      when '6'=5 then coalesce(OUTERSOURCE,'未知')
+      when '6'=6 then coalesce(OUTERID,'未知')
+      when '6'=7 then coalesce(CID,'未知')
+      when '6'=8 then coalesce(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知')
+      end AS 切换维度
+    ,case when '1'=1 then  DATA_DATE
+          else TO_CHAR( TO_DATE(('2019-12-12') ,'yyyy-MM-dd'),'yyyyMMdd')||'-'||TO_CHAR( TO_DATE( ('2019-12-13'),'yyyy-MM-dd'),'yyyyMMdd')
+           end as 切换日期
+  ,to_date(DATA_DATE,'YYYY-MM-DD')              AS 统计日期
+  ,JJ_CHANNEL             AS KB码分类
+  ,REC_NO                 AS 推荐人代码
+  ,CHANNEL_SOURCE         AS 渠道来源编码
+  ,CHANNEL_SOURCE_NAME    AS 渠道来源
+  ,SOURCE                 AS 获客渠道编码
+  ,SOURCE_NAME            AS 获客渠道
+  ,CITY_DESC_CN           AS 贷款城市
+  ,ORG_ID                 AS 机构编码
+  ,ORG_NAME               AS 机构名称
+  ,BRANCH03_NO            AS 分行编码
+  ,BRANCH03_NAME          AS 分行
+  ,BRANCH02_NAME          AS 区域
+  ,BUSINESSTYPE           AS 业务品种
+  ,BUSINESSSUBTYPE        AS 业务子类型
+  ,SCHEMENO               AS 方案编号
+  ,PURPOSE_NAME           AS 贷款用途
+  ,LOANTERM               AS 贷款期限
+  ,SQ_NUM                 AS 申请笔数
+  ,SQ_AMT                 AS 申请金额
+  ,SP_NUM                 AS 审批笔数
+  ,SP_TG_NUM              AS 审批通过笔数
+  ,SP_TG_AMT              AS 审批通过金额
+  ,SQ_TK_NUM              AS 申请提款笔数
+  ,SQ_TK_AMT              AS 申请提款金额
+  ,TK_NUM                 AS 成功提款笔数
+  ,TK_AMT                 AS 成功提款金额
+
+    ,CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END  推荐人编码
+    ,SALERNAME  推荐人名称
+    ,SALERNAME_BRANCH03_NO     推荐人所属支行编码
+    ,SALERNAME_BRANCH03_NAME   推荐人所属支行名称
+
+  ,YLH_TK_NUM 一类户成功提款笔数
+    ,ELH_TK_NUM 二类户成功提款笔数
+    ,YLH_HK_NUM 一类户成功还款笔数
+    ,ELH_HK_NUM 二类户成功还款笔数
+
+  ,OUTERSOURCE -- 获客路径
+    ,OUTERID -- 外媒参数一级渠道
+    ,CID -- 外媒参数二级渠道
+
+  ,IS_HEKH -- 是否核额客户
+  ,PRODUCT_NAME 子产品分类
+from BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ
+where data_dt = (select max(data_dt) from BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ)
+and to_date(DATA_DATE,'YYYY-MM-DD')>=TO_DATE(('2019-12-12'),'yyyy-MM-dd')
+AND to_date(DATA_DATE,'YYYY-MM-DD') <=TO_DATE(('2019-12-13'),'yyyy-MM-dd')) T_T1150656837 )  T_T1396198938 )  T_T1396198938
+
+WHERE  (  (C21383184) IN ('企划口径') ) )  T_T_T1396198938  INNER JOIN   (  SELECT  SUM((C2041963219)) C_2 ,  SUM((CC24877953)) C_3 ,  SUM((CC1403497422)) C_4 ,  SUM((CC1397497310)) C_5 ,  SUM((CC1603603611)) C_6 ,  SUM((CC1597603499)) C_7 ,  SUM((C1948592346)) C_8 ,  SUM((C1954592458)) C_9,(C2001817886) C2001817886__tablecol_ , (C2007915462) C2007915462__tablecol_ FROM  (  SELECT "申请笔数" C2041963219 , "申请提款笔数" CC1603603611 , "申请提款金额" CC1597603499 , "成功提款金额" C1954592458 , "统计口径" C21383184 , "审批笔数" CC24877953 , "审批通过笔数" CC1403497422 , "切换日期" C2001817886 , "审批通过金额" CC1397497310 , "成功提款笔数" C1948592346 , "切换维度" C2007915462 FROM  ( select
+  DATA_TYPE               AS 统计口径
+  ,case when '6'=1 then coalesce(CITY_DESC_CN,'未知')
+        when '6'=2 then coalesce(BRANCH03_NAME,'未知')
+          when '6'=3 then coalesce(CHANNEL_SOURCE,'未知')
+      when '6'=4 then coalesce(SOURCE,'未知')
+      when '6'=5 then coalesce(OUTERSOURCE,'未知')
+      when '6'=6 then coalesce(OUTERID,'未知')
+      when '6'=7 then coalesce(CID,'未知')
+      when '6'=8 then coalesce(CHANNEL_SOURCE_NAME||' '||SOURCE_NAME,'未知')
+      end AS 切换维度
+    ,case when '1'=1 then  DATA_DATE
+          else TO_CHAR( TO_DATE(
+ ('2019-12-12')
+ ,
+ 'yyyy-MM-dd'
+
+),'yyyyMMdd')||'-'||TO_CHAR( TO_DATE(
+ ('2019-12-13')
+ ,
+ 'yyyy-MM-dd'
+
+),'yyyyMMdd') end as 切换日期
+  ,to_date(DATA_DATE,'YYYY-MM-DD')              AS 统计日期
+  ,JJ_CHANNEL             AS KB码分类
+  ,REC_NO                 AS 推荐人代码
+  ,CHANNEL_SOURCE         AS 渠道来源编码
+  ,CHANNEL_SOURCE_NAME    AS 渠道来源
+  ,SOURCE                 AS 获客渠道编码
+  ,SOURCE_NAME            AS 获客渠道
+  ,CITY_DESC_CN           AS 贷款城市
+  ,ORG_ID                 AS 机构编码
+  ,ORG_NAME               AS 机构名称
+  ,BRANCH03_NO            AS 分行编码
+  ,BRANCH03_NAME          AS 分行
+  ,BRANCH02_NAME          AS 区域
+  ,BUSINESSTYPE           AS 业务品种
+  ,BUSINESSSUBTYPE        AS 业务子类型
+  ,SCHEMENO               AS 方案编号
+  ,PURPOSE_NAME           AS 贷款用途
+  ,LOANTERM               AS 贷款期限
+  ,SQ_NUM                 AS 申请笔数
+  ,SQ_AMT                 AS 申请金额
+  ,SP_NUM                 AS 审批笔数
+  ,SP_TG_NUM              AS 审批通过笔数
+  ,SP_TG_AMT              AS 审批通过金额
+  ,SQ_TK_NUM              AS 申请提款笔数
+  ,SQ_TK_AMT              AS 申请提款金额
+  ,TK_NUM                 AS 成功提款笔数
+  ,TK_AMT                 AS 成功提款金额
+    ,CASE WHEN SALERNAME IS NULL THEN NULL ELSE REC_NO_ZH END  推荐人编码
+    ,SALERNAME  推荐人名称
+    ,SALERNAME_BRANCH03_NO     推荐人所属支行编码
+    ,SALERNAME_BRANCH03_NAME   推荐人所属支行名称
+  ,YLH_TK_NUM 一类户成功提款笔数
+    ,ELH_TK_NUM 二类户成功提款笔数
+    ,YLH_HK_NUM 一类户成功还款笔数
+    ,ELH_HK_NUM 二类户成功还款笔数
+  ,OUTERSOURCE -- 获客路径
+    ,OUTERID -- 外媒参数一级渠道
+    ,CID -- 外媒参数二级渠道
+  ,IS_HEKH -- 是否核额客户
+  ,PRODUCT_NAME 子产品分类
+from BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ
+where data_dt = (select max(data_dt) from BRRPSDATA.XJ_RPT_D_PAZDXE_KJHZ)
+and to_date(DATA_DATE,'YYYY-MM-DD')>=   TO_DATE(('2019-12-12'),'yyyy-MM-dd')
+AND to_date(DATA_DATE,'YYYY-MM-DD') <=   TO_DATE( ('2019-12-13'),'yyyy-MM-dd'))  T_T1150656837 )  T_T1150656837
+WHERE  (  (C21383184) IN ('企划口径') )
+GROUP BY (C2001817886) , (C2007915462)   )  T_T_2571410
+ON T_T_T1396198938.C2001817886  =  T_T_2571410.C2001817886__tablecol_
+AND T_T_T1396198938.C2007915462  =  T_T_2571410.C2007915462__tablecol_   )  T_2571410

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package DataService;
+
+// The request message.
+message DataServiceRequest {
+    string sequence = 1;        // request unique
+    string servicetype = 2;     // 服务类型, 类型决定JSON数据结构定义
+    string json_string = 3;     // json 数据
+}
+
+// The response message
+message DataServiceResponse {
+    string sequence = 1;        // request unique
+    string servicetype = 2;     // 服务类型, 类型决定JSON数据结构定义
+    string handle_result = 3;   // 处理结果; SUCCESS, FAILED
+    string json_string = 4;     // json 数据
+}
+
+// The requesting service definition.
+service DataServiceRequester {
+    // Sends a requesting
+    rpc SendDataServiceRequest (DataServiceRequest) returns (DataServiceResponse) {}
+}
